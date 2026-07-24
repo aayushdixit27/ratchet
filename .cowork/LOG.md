@@ -443,3 +443,39 @@ Verify 5 checks: **1 FAIL (not monotonic), 2 FLAG (control flattened to cents), 
 **Task 2 — cheap tier "wired to strong only": misdiagnosis, real footgun found and killed.** The offending JSONL was a plain fixture-mode run made WITHOUT `source .env` — cold rows were fixture-strong too, degraded:false throughout. Env loading was manual; the adapter factory now auto-loads repo-root `.env` (stdlib, explicit env wins). Verified from a sterile shell: cheap=**gemini-3.1-flash-lite $0.000005**, memory=actian-live, publisher=senso-live(draft). **Lane A: re-run the candidate; no `fixture` string can now appear unless `.env` itself says fixture.**
 
 **Commits:** 96385b9 124f11a
+
+## [13:39] ALL-012 Lane C — done (all four items, both data states verified on screen)
+**Landed:** commit 2664a5a.
+1. **Hero is now LLM calls per verified fix**, two arms, labels unchanged. Same denominator
+   convention as cost (all attempts' calls / verified fixes) so the two metrics can't
+   disagree about what an iteration cost. On fixture golden: ratchet **4.3 → 1.0**, control
+   **5.0 → 8.0** — the control line RISES in calls (retries), which is a stronger fact than
+   flat and renders unmissably. No hardcoded source: `?golden=1` reads whatever is in
+   `runs/golden/` at 14:15; `?src=&control=&transfer=` override for anything else.
+2. **Cost tile** shows the range (`$0.426 →$0.029` on golden) and, when rows carry
+   `rate_diff_per_mtok`, adds `Pioneer routing spread saved $X vs list` — computed as
+   Σ(rate_diff × tokens actually routed). Verified against `runs/candidate/` (shows $0.167).
+3. **`no baseline yet`** renders (muted, not green) for any class with warm uses and zero
+   `saved_usd`. Never a computed fallback, per brief.
+4. **ACME → GLOBEX banner** built and proven: fires on any warm verified row where
+   `corpus_from != target`, read from the main src OR `runs/<base>/transfer.jsonl`
+   (fetch 404s harmlessly until it exists). Org names come from the data's own
+   origin_app→origin_org map — nothing typed in. Tested with a temporary fixture row
+   (deleted, never committed): banner reads "ACME → GLOBEX — a pattern verified on tasker
+   just fixed jotting's first run — warm, $0.030, similarity 0.81."
+
+**Metric:** renderer-only; goldens untouched by me.
+
+**Deviated:** none.
+
+**Blocked/next:**
+- **Lane A: the banner lights up the moment `runs/golden/transfer.jsonl` exists** (or point
+  me at another filename/param). Requirement on the rows: `corpus_from`, `target`,
+  `origin_org` populated, warm+verified. Everything else is derived.
+- **For the 14:15 decision:** dashboard is indifferent to which golden wins — verified
+  rendering BOTH the fixture golden (4-call cold) and the candidate live run (1-call cold,
+  real model names, rate_diff present). Whoever swaps `runs/golden/` needs no Lane C change.
+- Candidate run still shows `pioneer/fixture-fast` on cheap tier (Lane B ALL-012 item 2) —
+  visible in my candidate render; will disappear from screen automatically once fixed + regen.
+
+**Commits:** 2664a5a
