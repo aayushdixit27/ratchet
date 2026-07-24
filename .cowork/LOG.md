@@ -244,3 +244,49 @@ spare but is no longer canonical and should not be quoted anywhere.
 4. Replay deeper journeys: 3 still running — last poll before 13:30 worth doing.
 
 **Commits:** 636c32c be1963d
+
+## [13:00] C-003 item 1 — done (split pane + memory panel + two-arm chart, all from golden JSONL)
+**Landed:** `dashboard/index.html` rewritten for the AMENDMENT-02 surface, commit 581a7ea.
+Verified by headless-Chrome screenshot against `runs/golden/` at each step.
+- **Two-arm hero chart.** One shared y-scale so control's climb is never cropped: control
+  ends at **$0.864** (labeled), ratchet **$0.426 → $0.029**. Arms labeled exactly as briefed:
+  "Replay + coding agent (today) — memory off" / "Ratchet — memory on".
+- **Split pane.** Left: cold first encounter (`tasker-it0-d0`, 4 stacked LLM-call rows,
+  $0.418, 6,890 tokens, 3.2s). Right: `MEMORY HIT · pattern b7a3887a7811 · similarity
+  0.8565 · used 2×`, $0.030, 1 call. Footer derives "**14× cheaper**". These are the exact
+  values the corrected DEMO.md quotes — and they are *selected*, not typed: rule is
+  "bug class with most warm reuse → earliest cross-bug hit → paired with the cold row that
+  actually learned the pattern (sig == pattern_id, path == cold, different bug_id)".
+- **Memory panel.** Patterns sorted by cumulative `saved_usd` desc (top: missing-preventdefault
+  $1.21, 4×), each with uses, born-iteration, `discovered_by` badge. Badge styling keys on
+  "replay" substring so it lights up blue automatically if Lane A re-runs with live Replay.
+- Tiles now: total saved by memory **$5.07** across 15 hits / LLM calls per verified fix
+  **3.3 → 1.0** / patterns **6**, reused 22×.
+- **Zero-network path:** `?golden=1` reads `runs/golden/*.jsonl`; default tails `runs/`.
+  Nothing on screen is hardcoded — every number derives from the JSONL at render time,
+  including the 14× factor and the caption ("same root cause (modal-state-not-reset),
+  different bug" comes from the row's own class field).
+
+**Metric:** golden run renders: ratchet $0.4258→$0.0293/fix, control $0.5219→$0.8643,
+warm share 20%→100% by iter 3. Independently recomputed in Python before rendering — chart
+and recomputation agree.
+
+**Deviated:**
+- Split-pane row selection needed judgment the brief didn't specify: highest-similarity warm
+  hit was iter1-d0 (0.9024) but that's the *same bug recurring* and its pattern was born from
+  a warm fix — "1× cheaper", story dead. The rule above picks the genuine generalisation.
+  Flagging because if Lane A regenerates golden data, the pane re-derives from the new file —
+  presenter should re-check the quoted numbers in DEMO.md after any regen.
+- Cold pane shows call-count blocks + aggregate tokens/time from the JSONL, not a scrolling
+  reasoning transcript — per-call text isn't in the data and I won't invent it (C-002: "don't
+  invent them"). If we want the transcript beat, Lane A would need to emit transcript lines.
+
+**Blocked/next:**
+- Starting C-003 item 2 / AMENDMENT-03 now: `app2/` notes app (org "globex"), 6 bugs, 2 sharing
+  `modal-state-not-reset` with genuinely different symptoms, novel singletons, `app2/bugs.json`
+  in Lane B's schema, second GitHub Pages URL. Cut line if time runs short, per brief.
+- Nothing needed from other lanes for item 2. For the demo: whoever presents should load
+  `dashboard/index.html?golden=1` served locally (e.g. `python3 -m http.server` from repo
+  root) — file:// won't fetch; a local server is required. RUNBOOK.md should say this.
+
+**Commits:** 581a7ea
