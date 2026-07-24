@@ -1,8 +1,30 @@
 {
   "project_id": "proj-ratchet-mrzbmsos",
-  "fetched_at": "2026-07-24T12:25",
+  "fetched_at": "2026-07-24T12:37",
   "source": "replay-live verified",
   "bugs": [
+    {
+      "id": "bug-mrzbwnr6-7cmb",
+      "title": "Edit task modal (#modal-edit) renders on page load without \"hidden\" class, blocking all interaction with the task list",
+      "root_cause": "The #modal-edit div in the initial HTML lacks the 'hidden' class, so it renders as a full-viewport fixed overlay from page load (Evaluate confirms: classList='modal', hasHidden=false, display='flex', position='fixed', zIndex='50', 1280\u00d7720 at top:0 left:0).\nBecause the overlay covers the entire viewport at z-index:50 with position:fixed, it intercepts all pointer events on the task list beneath it. InspectElement confirms #modal-edit obstructs the center point of #task-list.\nPlaywright's click on the first task's Edit button (selector: #task-list > li:nth-of-type(1) > button:nth-of-type(1)) times out after 15000ms with 29 retry attempts, each reporting '#modal-edit intercepts pointer events'.",
+      "repro": [
+        "1. Navigate to the Tasker app",
+        "2. Open the edit modal for the first task in the list by clicking its edit button"
+      ],
+      "bug_class": "unclassified",
+      "raw": {
+        "source": "replay-live",
+        "provenance": "replay-qa",
+        "severity": "high",
+        "status": "open",
+        "replay_recording_id": "825ca73b-a9d7-41ba-b234-9bc10b139360",
+        "polish_category": null,
+        "description": "The #modal-edit dialog div in the initial HTML lacks the \"hidden\" class, so it is rendered as a full-viewport fixed overlay (position:fixed, z-index:50, 1280\u00d7720, display:flex, visibility:visible, opacity:1) from the moment the page loads. This invisible-to-the-user overlay intercepts every pointer event on the underlying task list, making it impossible to click any task's Edit button. The openEdit function (app.js line 175) removes \"hidden\" to show the modal, and closeModal (line 263) adds \"hidden\" to hide it \u2014 but since the initial HTML never includes \"hidden\", the modal is active immediately on page load without any user action.",
+        "judge_approved": true,
+        "journey_name": "Edit a task's title, notes, and priority then verify changes persist",
+        "discovered_at": "2026-07-24T19:24:09.137Z"
+      }
+    },
     {
       "id": "bug-mrzbq4us-w9k6",
       "title": "Toast overlay #toast covers and intercepts #btn-settings button",
