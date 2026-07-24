@@ -16,7 +16,7 @@ Do not start `evolve()` until wow #1 has run end-to-end twice with nobody touchi
 
 Right now three correct pieces are being built and **nobody owns the join**. That's the classic way to be at 90% at 16:00 with nothing to show.
 
-By **12:45** this must be true: `python -m ratchet.run --iterations 5 --mode fixture` writes JSONL, and `dashboard/index.html` opened in a browser shows a line that moves. Fake numbers are fine. Ugly is fine. Broken styling is fine. **Joined is not optional.**
+By **12:45** this must be true: `python3 -m ratchet.run --iterations 5 --mode fixture` writes JSONL, and `dashboard/index.html` opened in a browser shows a line that moves. Fake numbers are fine. Ugly is fine. Broken styling is fine. **Joined is not optional.**
 
 - **Lane A owns the join.** If Lane C's dashboard isn't reading your file, say so in a handoff immediately — don't work around it, and don't edit their files.
 - **Lane C:** the dashboard moves ahead of the fixture app polish. A public URL and a chart that renders beat a beautiful broken app.

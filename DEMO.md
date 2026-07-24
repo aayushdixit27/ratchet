@@ -8,6 +8,9 @@
 
 ---
 
+**⚠ NUMBERS RE-PULLED 14:35 — verify against the live render before speaking any of them.**
+**Current golden:** ratchet calls/fix `4.25 → 3.5 → 2.75 → 1.0 → 1.0`; control `5 → 5 → 6 → 5 → 8`. Cost tile `$1.69 → $0.029`, ~`$22.96` saved, 7 patterns. **All `[READ]`, none `[FIXED]` — golden may change again before 14:50.**
+
 **0:00 – 0:25 · Maya** (no screen, just talk)
 > "Maya is the only person on a four-person team who cares about QA. There's no QA hire. She ships an AI-built internal tool most Fridays."
 > "She points Replay at the deploy, gets root-caused bugs back, pastes them into her coding agent, ships."
@@ -61,4 +64,4 @@ One target app plus one transfer app, not arbitrary repos. Fixture fallbacks beh
 Product first, code second. Problem statement and non-goals before any code. A pre-mortem naming five failure modes with an owned mitigation each. Then the check most teams skip: *is the problem real*, answered with Gartner, CodeRabbit and GitClear data. Then three parallel build lanes with strict file ownership, and a separate session holding the plan and reviewing every diff against the judging criteria.
 
 ## Failure drill
-Wifi dies → `python -m ratchet.run --demo`, zero network, replays from `runs/golden/`. Docker down → `RATCHET_MEMORY_MODE=fixture`, say so. Everything dies → play the screen recording and narrate. See `RUNBOOK.md`.
+Wifi dies → `python3 -m ratchet.run --demo`, zero network, replays from `runs/golden/`. Docker down → `RATCHET_MEMORY_MODE=fixture`, say so. Everything dies → play the screen recording and narrate. See `RUNBOOK.md`.

@@ -200,6 +200,7 @@
   },
   "active": "8f45a109203685f3",
   "lastOpenFiles": [
+    "src/adapters/live_senso.py.tmp.24716.3b1d191470d1",
     "runs/router_errors.jsonl",
     "src/adapters/__pycache__/matrix_check.cpython-313.pyc",
     "src/adapters/matrix_check.py",
@@ -213,7 +214,6 @@
     "runs/golden-fixture/ratchet.jsonl",
     "runs/golden-fixture",
     "app2/BUGS.md",
-    "app2/bugs.json",
     "RUNBOOK.md",
     "USER-STORY.md",
     "cited.md"

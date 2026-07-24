@@ -147,14 +147,64 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:9fa805fa7e62 -->
 ## `9fa805fa7e62` — filter-state-lost-on-mutation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.767+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:33:42.921+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **2×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
++function syncFilterChips() {
++  document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
++    chip.classList.toggle('is-active', chip.dataset.filter === activeFilter);
++  });
++}
++
++function setActiveFilter(filter) {
++  activeFilter = filter;
++  syncFilterChips();
++  render();
++}
+
+ function addTask() {
+   // existing task creation logic...
+
+-  activeFilter = 'all';
+-  render();
++  setActiveFilter('all');
+ }
+
+ function toggleTask(id) {
+   // existing task toggle logic...
+
+-  activeFilter = 'all';
+-  render();
++  setActiveFilter('all');
+ }
+
+-document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
+-  chip.addEventListener('click', () => {
+-    activeFilter = chip.dataset.filter;
+-    render();
+-  });
+-});
++document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
++  chip.addEventListener('click', () => {
++    setActiveFilter(chip.dataset.filter);
++  });
++});
+```
+
+If `render()` rebuilds or replaces the filter chips, call `syncFilterChips()` at the end of `render()` as well:
+
+```diff
+ function render() {
+   // existing render logic...
++
++  syncFilterChips();
+ }
+```
+
+This keeps the UI chip state synchronized whenever `activeFilter` is changed programmatically by `addTask()` or `toggleTask()`.
 
 **Code hint:** `addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync`
 
@@ -164,9 +214,59 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "9fa805fa7e62",
   "bug_class": "filter-state-lost-on-mutation",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
+  "strategy": "```diff
++function syncFilterChips() {
++  document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
++    chip.classList.toggle('is-active', chip.dataset.filter === activeFilter);
++  });
++}
++
++function setActiveFilter(filter) {
++  activeFilter = filter;
++  syncFilterChips();
++  render();
++}
+
+ function addTask() {
+   // existing task creation logic...
+
+-  activeFilter = 'all';
+-  render();
++  setActiveFilter('all');
+ }
+
+ function toggleTask(id) {
+   // existing task toggle logic...
+
+-  activeFilter = 'all';
+-  render();
++  setActiveFilter('all');
+ }
+
+-document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
+-  chip.addEventListener('click', () => {
+-    activeFilter = chip.dataset.filter;
+-    render();
+-  });
+-});
++document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
++  chip.addEventListener('click', () => {
++    setActiveFilter(chip.dataset.filter);
++  });
++});
+```
+
+If `render()` rebuilds or replaces the filter chips, call `syncFilterChips()` at the end of `render()` as well:
+
+```diff
+ function render() {
+   // existing render logic...
++
++  syncFilterChips();
+ }
+```
+
+This keeps the UI chip state synchronized whenever `activeFilter` is changed programmatically by `addTask()` or `toggleTask()`.",
   "code_hint": "addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync",
   "verified": true,
   "uses": 2,
@@ -174,7 +274,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.767+00:00",
+  "verified_at": "2026-07-24T21:33:42.921+00:00",
   "verification_count": 2,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -186,16 +286,38 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:7e406ab2999c -->
 ## `7e406ab2999c` — missing-preventdefault (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.784+00:00 (4× re-verified)
-Learned on **tasker** (acme) at iteration 4 · reused **4×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:33:25.542+00:00 (2× re-verified)
+Learned on **tasker** (acme) at iteration 1 · reused **2×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+diff --git a/src/app.js b/src/app.js
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,10 +1,13 @@
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const newTaskInput = document.querySelector('#new-task');
++  const title = newTaskInput.value.trim();
+ 
+-  if (title.length === 0) {
++  // Reject empty or whitespace-only task titles.
++  if (title.length === 0) {
++    newTaskInput.value = '';
+     return;
+   }
+ 
+-  tasks.push({ title });
++  tasks.push({ title });
+ 
+   renderTasks();
+ }
+```
 
-**Code hint:** `edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere`
+This fixes the missing input validation by trimming the `#new-task` value before checking its length, preventing whitespace-only tasks from being added and ensuring stored task titles do not include leading/trailing whitespace.
+
+**Code hint:** `addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim`
 
 <details><summary>machine-readable</summary>
 
@@ -203,19 +325,41 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "7e406ab2999c",
   "bug_class": "missing-preventdefault",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
-  "code_hint": "edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere",
+  "strategy": "```diff
+diff --git a/src/app.js b/src/app.js
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,10 +1,13 @@
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const newTaskInput = document.querySelector('#new-task');
++  const title = newTaskInput.value.trim();
+ 
+-  if (title.length === 0) {
++  // Reject empty or whitespace-only task titles.
++  if (title.length === 0) {
++    newTaskInput.value = '';
+     return;
+   }
+ 
+-  tasks.push({ title });
++  tasks.push({ title });
+ 
+   renderTasks();
+ }
+```
+
+This fixes the missing input validation by trimming the `#new-task` value before checking its length, preventing whitespace-only tasks from being added and ensuring stored task titles do not include leading/trailing whitespace.",
+  "code_hint": "addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim",
   "verified": true,
-  "uses": 4,
+  "uses": 2,
   "score": 0.9,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.784+00:00",
-  "verification_count": 4,
-  "born_at_iteration": 4,
+  "verified_at": "2026-07-24T21:33:25.542+00:00",
+  "verification_count": 2,
+  "born_at_iteration": 1,
   "saved_usd": 0.0,
   "origin_app": "tasker",
   "origin_org": "acme"

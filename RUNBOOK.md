@@ -9,7 +9,7 @@ docker start vectorai               # container persists; it just needs starting
 docker ps | grep vectorai           # confirm
 
 # 2. Sanity: the loop runs offline, from golden
-python -m ratchet.run --demo
+python3 -m ratchet.run --demo
 ```
 - `ENGINE_NOT_INITIALIZED` for the first ~10 seconds after the container starts is **expected** — the loop backs off and retries. Don't panic, don't restart it.
 - If Docker will not start: run with `RATCHET_MEMORY_MODE=fixture`. Retrieval scores match live to four decimal places, so the curve is identical. **Say so if asked; don't hide it.**
@@ -27,7 +27,7 @@ Follow `DEMO.md` exactly. Maya first, 25 seconds, no screen.
 ## If something breaks
 | Breaks | Do this |
 |---|---|
-| Wifi dies | `python -m ratchet.run --demo` — zero network, replays from `runs/golden/` |
+| Wifi dies | `python3 -m ratchet.run --demo` — zero network, replays from `runs/golden/` |
 | Docker/Actian down | `RATCHET_MEMORY_MODE=fixture`, say it out loud |
 | Replay slow or 500s | Skip the live scan beat, use the cached bugs. **Never re-explore live** — it takes minutes |
 | Dashboard blank | Check it's reading `runs/golden/`, not a half-written live run |
