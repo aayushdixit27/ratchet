@@ -46,91 +46,72 @@ def _stable_unit(*parts: str) -> float:
 
 # --------------------------------------------------------------------------- QA
 
-_BUGS_MD_FIELDS = {
-    "root_cause": "root_cause",
-    "root cause": "root_cause",
-    "class": "bug_class",
-    "bug_class": "bug_class",
-    "selector": "selector",
-    "repro": "repro",
-}
+def _bugs_from_json(data: dict, source: str) -> list[Bug]:
+    """Load Lane C's canonical `app/bugs.json`.
 
+    Schema (theirs, v1): each bug has id, class, severity, selectors[], symptom,
+    repro[], root_cause, fix_strategy, file, symbol. Everything beyond the
+    contract's fields is preserved in `Bug.raw` — Lane A gets `fix_strategy`
+    and `severity` for free, and nothing is lost in translation.
 
-def _parse_bugs_md(text: str) -> list[Bug]:
-    """Forgiving parser for Lane C's `app/BUGS.md`.
-
-    Expects blocks like:
-
-        ## BUG-01 — Title of the bug
-        - class: state-not-reset-on-unmount
-        - selector: #edit-task-modal
-        - root_cause: Modal keeps local form state after unmount...
-        - repro:
-          1. Open task and click Edit
-          2. Close without saving
-
-    Anything it cannot understand is skipped rather than raised.
+    `root_cause` is copied verbatim: it is the semantic key the whole retrieval
+    thesis rests on.
     """
-    bugs: list[Bug] = []
-    blocks = re.split(r"^##\s+", text, flags=re.M)[1:]
-    for block in blocks:
-        lines = block.splitlines()
-        header = lines[0].strip()
-        m = re.match(r"([A-Za-z]+[-_]?\d+)\s*[—\-:–]\s*(.+)", header)
-        if m:
-            bug_id, title = m.group(1).strip(), m.group(2).strip()
-        else:
-            bug_id, title = header.split()[0] if header else "BUG-?", header
-        fields: dict[str, object] = {}
-        repro: list[str] = []
-        collecting_repro = False
-        for line in lines[1:]:
-            stripped = line.strip().lstrip("-*").strip()
-            if not stripped:
-                continue
-            kv = re.match(r"([A-Za-z_ ]+):\s*(.*)$", stripped)
-            key = kv.group(1).strip().lower() if kv else None
-            if key in _BUGS_MD_FIELDS:
-                collecting_repro = _BUGS_MD_FIELDS[key] == "repro"
-                if collecting_repro:
-                    val = kv.group(2).strip()
-                    if val:
-                        repro.append(val)
-                else:
-                    fields[_BUGS_MD_FIELDS[key]] = kv.group(2).strip()
-            elif collecting_repro:
-                repro.append(re.sub(r"^\d+[.)]\s*", "", stripped))
-        root_cause = str(fields.get("root_cause") or title)
-        bug_class = str(fields.get("bug_class") or "unclassified")
-        selector = fields.get("selector") or None
-        bugs.append(Bug(
-            id=bug_id,
-            title=title,
-            root_cause=root_cause,
-            selector=str(selector) if selector else None,
-            repro=repro,
-            bug_class=bug_class,
-            raw={"source": "app/BUGS.md"},
+    out: list[Bug] = []
+    for b in data.get("bugs", []):
+        selectors = b.get("selectors") or ([b["selector"]] if b.get("selector") else [])
+        symptom = b.get("symptom") or b.get("title") or b.get("id", "")
+        out.append(Bug(
+            id=b["id"],
+            # first sentence of the symptom reads as a title without duplicating it
+            title=symptom.split(". ")[0].strip().rstrip(".") or b["id"],
+            root_cause=b["root_cause"],
+            selector=selectors[0] if selectors else None,
+            repro=list(b.get("repro", [])),
+            bug_class=b.get("class") or b.get("bug_class") or "unclassified",
+            raw={**b, "source": source, "selectors": selectors},
         ))
-    return bugs
+    return out
+
+
+def _looks_usable(bugs: list[Bug]) -> bool:
+    """Reject a parse that produced structurally wrong data.
+
+    Learned the hard way: a lenient loader that returns three garbage rows is
+    worse than one that falls back to the seed, because the loop runs happily
+    on nonsense and nobody notices until the demo.
+    """
+    if len(bugs) < 3:
+        return False
+    if any(not b.id or not b.root_cause for b in bugs):
+        return False
+    if sum(1 for b in bugs if b.bug_class == "unclassified") > len(bugs) // 2:
+        return False
+    from collections import Counter
+    # the whole demo needs at least one class with repeats
+    return Counter(b.bug_class for b in bugs).most_common(1)[0][1] >= 2
 
 
 class FixtureQA:
     """Replay QA stand-in.
 
-    Reads `app/BUGS.md` if Lane C has written one, otherwise the local seed.
-    Always yields 8 bugs, 3 of which share `state-not-reset-on-unmount` — that
-    shared class is what makes memory retention visible by iteration 3.
+    Reads Lane C's canonical `app/bugs.json` if present, otherwise the local
+    seed. Either way: 8 bugs, 3 of which share one class — that shared class is
+    what makes memory retention visible by iteration 3.
     """
 
     backend = "fixture"
     degraded = False
     degrade_reason: str | None = None
 
-    def __init__(self, bugs_md: Path | None = None, seed: Path | None = None):
-        self._bugs_md = bugs_md or (REPO_ROOT / "app" / "BUGS.md")
+    def __init__(self, bugs_json: Path | None = None, seed: Path | None = None):
+        # Lane C owns app/bugs.json and declares it the machine-readable ground
+        # truth; prefer it, and keep our own seed purely as an offline backstop
+        # for when app/ is missing.
+        self._bugs_json = bugs_json or (REPO_ROOT / "app" / "bugs.json")
         self._seed = seed or (SEED_DIR / "bugs.json")
         self._ledger = state_dir() / "patches.json"
+        self.source = "unloaded"
 
     # -- Protocol ----------------------------------------------------------
     def scan(self, url: str) -> list[Bug]:
@@ -168,126 +149,35 @@ class FixtureQA:
             return set()
 
     def _load(self) -> list[Bug]:
-        if self._bugs_md.exists():
+        if self._bugs_json.exists():
             try:
-                parsed = _parse_bugs_md(self._bugs_md.read_text())
-                if len(parsed) >= 3:
+                parsed = _bugs_from_json(
+                    json.loads(self._bugs_json.read_text()), "app/bugs.json")
+                if _looks_usable(parsed):
+                    self.source = "app/bugs.json"
                     return parsed
             except Exception:
                 pass  # fall through to the seed — never crash the loop
-        data = json.loads(self._seed.read_text())
-        return [
-            Bug(
-                id=b["id"],
-                title=b["title"],
-                root_cause=b["root_cause"],
-                selector=b.get("selector"),
-                repro=list(b.get("repro", [])),
-                bug_class=b["bug_class"],
-                raw={"source": "seed"},
-            )
-            for b in data["bugs"]
-        ]
+        self.source = "seed"
+        return _bugs_from_json(json.loads(self._seed.read_text()), "seed")
 
 
 # ----------------------------------------------------------------------- Memory
 
-_STOP = {
-    "the", "a", "an", "is", "are", "was", "were", "and", "or", "but", "not",
-    "to", "of", "in", "on", "at", "it", "its", "this", "that", "with", "for",
-    "from", "by", "as", "be", "been", "has", "have", "had", "does", "do", "did",
-    "after", "before", "when", "then", "so", "no", "never", "always",
-}
-
-
-def _tokens(text: str) -> set[str]:
-    words = re.findall(r"[a-z0-9]+", text.lower())
-    return {w for w in words if w not in _STOP and len(w) > 2}
-
-
-# A hand-built concept lexicon standing in for an embedding model. Each concept
-# is the vocabulary a root cause of that class actually uses. Mapping text onto
-# these axes is what lets a pattern learned from bug #1 match bug #7 — the
-# "semantic matching on root cause" claim in PRODUCT.md §8 — without shipping a
-# model download into a demo that has to survive dead wifi.
-_CONCEPTS: dict[str, set[str]] = {
-    "state_lifecycle": {
-        "state", "unmount", "unmounted", "mount", "mounts", "mounted", "remount",
-        "remounts", "reset", "resets", "stale", "retain", "retains", "retained",
-        "keeps", "keep", "kept", "persist", "persists", "initialise", "initialised",
-        "initialize", "initialized", "local", "draft", "reopen", "reopened",
-        "cleared", "clear", "previous", "previously", "leftover", "copy",
-        "working", "dialog", "modal", "drawer", "wizard", "close", "closed",
-        "cancelling", "cancel", "prefilled", "between",
-    },
-    "async_error": {
-        "async", "await", "promise", "rejected", "rejection", "swallow",
-        "swallows", "swallowed", "catch", "caught", "error", "errors", "fetch",
-        "optimistic", "optimistically", "rollback", "silently", "silent",
-        "request", "response", "fails", "failed", "failure", "network", "handler",
-    },
-    "validation": {
-        "validate", "validates", "validating", "validation", "required", "empty",
-        "blank", "guard", "guards", "submit", "submits", "field", "fields",
-        "input", "accepts", "accepted", "string", "form", "constraint",
-    },
-    "a11y": {
-        "aria", "label", "labels", "labelled", "unlabelled", "accessible",
-        "accessibility", "screen", "reader", "announce", "announces", "announced",
-        "placeholder", "assistive", "labelledby", "semantics", "role",
-    },
-    "concurrency": {
-        "race", "races", "racing", "double", "twice", "duplicate", "duplicates",
-        "reentry", "entry", "flight", "concurrent", "concurrently", "disabled",
-        "enabled", "posts", "post", "queue", "debounce", "idempotent", "second",
-    },
-    "routing": {
-        "route", "routes", "routed", "link", "links", "anchor", "href", "url",
-        "path", "prefix", "404", "navigation", "navigate", "registered", "page",
-        "redirect", "header", "renders",
-    },
-}
-
-
-def _concept_vector(tokens: set[str]) -> dict[str, float]:
-    vec: dict[str, float] = {}
-    for concept, vocab in _CONCEPTS.items():
-        hits = len(tokens & vocab)
-        if hits:
-            # sub-linear: three strong signals shouldn't triple-count
-            vec[concept] = hits ** 0.7
-    return vec
-
-
-def _cosine(va: dict[str, float], vb: dict[str, float]) -> float:
-    shared = set(va) & set(vb)
-    if not shared:
-        return 0.0
-    dot = sum(va[k] * vb[k] for k in shared)
-    na = sum(v * v for v in va.values()) ** 0.5
-    nb = sum(v * v for v in vb.values()) ** 0.5
-    return dot / (na * nb) if na and nb else 0.0
-
-
 def _similarity(a: str, b: str) -> float:
-    """Concept-vector cosine blended with literal token overlap.
+    """Cosine over the same vectors Actian indexes.
 
-    Not a real embedding, but it separates 'modal keeps state after unmount'
-    from 'link points at the wrong route' with the margin a real embedding
-    gives — same-class root causes land ~0.7-0.9, cross-class below ~0.35 —
-    so Lane A's threshold logic is exercised against realistic scores.
+    Deliberately identical to the live path: FixtureMemory and ActianMemory
+    must score the same pair the same way, or Lane A's retrieval threshold
+    would silently mean two different things in fixture vs live mode — and we
+    would only find out on stage.
     """
-    ta, tb = _tokens(a), _tokens(b)
-    if not ta or not tb:
-        return 0.0
-    concept = _cosine(_concept_vector(ta), _concept_vector(tb))
-    inter = ta & tb
-    coverage = len(inter) / min(len(ta), len(tb)) if inter else 0.0
-    return round(min(1.0, 0.72 * concept + 0.28 * coverage), 4)
+    from .embed import cosine, embed
+    return round(max(0.0, cosine(embed(a), embed(b))), 4)
 
 
 class FixtureMemory:
-    """Actian VectorAI stand-in — token-overlap similarity, JSON-backed.
+    """Actian VectorAI stand-in — same embedding + cosine, JSON-backed.
 
     Persists across process boundaries so retention survives a restart mid-demo.
     """
