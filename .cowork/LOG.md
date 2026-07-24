@@ -224,3 +224,23 @@ spare but is no longer canonical and should not be quoted anywhere.
 3. Architect: B-007's seeded-corpus framing is adopted on my side; nothing in the adapters labels fixture data as live.
 
 **Commits:** e87921a 709077e
+
+## [12:48] B-009 — done. ACTIAN IS LIVE. Three sponsors genuinely live.
+**Landed:**
+- **Actian VectorAI DB running and primary.** `actian-vectorai-client` + `actian/vectorai:latest` container (gRPC 6574, data in gitignored `local_data/`). Beyond the guide: sync client needs explicit `connect()` (the `with` form hid it), no `PayloadSchema` in this SDK build → schema via `extra_params_json` with plain fallback, protobuf runtime bump, ENGINE_NOT_INITIALIZED backoff per gotcha #1, and one live-discovered fix: **HNSW `limit=1` returns empty for low-similarity queries that `limit=10` finds** — adapter over-fetches to 10 and truncates.
+- **Score parity with the fixture to four decimals** on every test query — same `embed()` vectors, same cosine, so the 0.55 warm threshold provably means the same thing in fixture and live mode. Provenance fields survive the DB round-trip. Seeded modal root cause warm-hits at **0.842 through the real gRPC search**.
+- **Full curve run with `memory=actian-live` + `publisher=senso-live`: $0.4258 → $0.0293, shape unchanged.** `RATCHET_MEMORY_MODE=live` is on in `.env`. Golden untouched.
+- **Anti-disqualifier on record:** Memory protocol exists since 87deb31 (11:21), fixture documented as wifi-fallback from the start — the "swapped in a vector DB at the last hour" rule does not apply to us and git proves it.
+- Replay live count now **4 open + 1 judge-rejected** (their own judge filters!). 🆕 bug is seeded BUG-04 (counter) discovered live at **0.4912 — 0.06 under the warm threshold.** Modal-state family not yet surfaced; 3 test runs still in flight.
+
+**Metric:** curve verified this round with two live backends in the loop: it0 $0.4258 → it4 $0.0293 (6.9%), warm 0.25→1.00.
+
+**Deviated:** nothing material. Filterable-payload schema is best-effort (unknown server support in this build) — loop filters client-side anyway.
+
+**Blocked/next:**
+1. **Live count: Replay ✅ Senso ✅ Actian ✅ = 3, Tool Use criterion cleared with evidence.** Pioneer would make 4 — still needs a fresh key from the Pro workspace (12:38 entry).
+2. **0.4912 near-miss decision for the Architect:** Replay's live re-discovery of the seeded counter bug scores 0.06 under threshold. Options: leave it (honest cold, still a good beat), or Lane A lowers threshold to 0.45 (re-probe cross-class margin first — nearest non-mate was 0.42 on seeded data, that's tight). My take: DON'T touch the threshold for one bug; a false warm hit on stage is fatal, a cold near-miss is a good story about honesty.
+3. **Demo op note:** Docker Desktop + vectorai container must be running before the demo; add `docker start vectorai` to the demo runbook cold-start (Lane C/Architect).
+4. Replay deeper journeys: 3 still running — last poll before 13:30 worth doing.
+
+**Commits:** 4bd4643 0b45459
