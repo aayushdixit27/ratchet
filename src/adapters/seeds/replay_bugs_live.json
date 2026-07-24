@@ -1,8 +1,30 @@
 {
   "project_id": "proj-ratchet-mrzbmsos",
-  "fetched_at": "2026-07-24T12:37",
+  "fetched_at": "2026-07-24T12:45",
   "source": "replay-live verified",
   "bugs": [
+    {
+      "id": "bug-mrzceiuz-wr97",
+      "title": "Remaining-tasks counter displays one fewer than actual undone task count due to stale -1 adjustment",
+      "root_cause": "The render() function computes remaining = undone_tasks - 1, producing 2 for 3 undone tasks, and displays that incorrect value in the #counter element.\nThe counter element displays \"2 tasks remaining\" while 3 undone tasks are visible in the list, confirming the off-by-one error is present in the rendered UI.",
+      "repro": [
+        "1. Navigate to the Tasker app",
+        "2. Delete the first task shown in the task list by clicking its delete button"
+      ],
+      "bug_class": "unclassified",
+      "raw": {
+        "source": "replay-live",
+        "provenance": "replay-qa",
+        "severity": "high",
+        "status": "open",
+        "replay_recording_id": "d7f378f0-7fe4-4fa5-baf1-253a7b8cd630",
+        "polish_category": null,
+        "description": "The Tasker app's remaining-tasks counter (span#counter) displays a count that is always one less than the actual number of undone tasks. With 3 undone tasks visible in the list, the counter shows \\\"2 tasks remaining\\\". This off-by-one error means the counter never matches the true number of active tasks.",
+        "judge_approved": true,
+        "journey_name": "Delete multiple existing tasks sequentially and verify the remaining-tasks count decrements after each deletion, then add a new task to confirm the app still functions",
+        "discovered_at": "2026-07-24T19:38:02.557Z"
+      }
+    },
     {
       "id": "bug-mrzbwnr6-7cmb",
       "title": "Edit task modal (#modal-edit) renders on page load without \"hidden\" class, blocking all interaction with the task list",

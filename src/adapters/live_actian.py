@@ -45,8 +45,12 @@ class ActianMemory(Degradable):
         if self.degraded:
             return self._fixture.search(text, k)
         try:
+            # HNSW recall artifact observed live: limit=1 can return [] for
+            # low-similarity queries that limit=10 finds at 0.29. Over-fetch
+            # and truncate — with a corpus of dozens this costs nothing and
+            # makes small-k search reliable.
             results = self._client.points.search(
-                self._collection, vector=embed(text), limit=k)
+                self._collection, vector=embed(text), limit=max(k, 10))[:k]
             out: list[tuple[Pattern, float]] = []
             for r in results:
                 payload = getattr(r, "payload", None) or {}
