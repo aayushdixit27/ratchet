@@ -324,29 +324,37 @@
   }
 
   function patternTable(recs) {
-    var pat = {};
+    // One row per BUG CLASS (the unit a judge thinks in), aggregated honestly:
+    // uses  = count of warm verified rows of that class in the log
+    // saved = sum of saved_usd over those rows
+    // nPatterns = distinct pattern vectors backing the class (shown if > 1)
+    var cls = {}, patCount = {};
     recs.forEach(function (r) {
       if (r.event || r.arm !== 'ratchet') return;
-      if (r.path === 'warm' && r.patternId) {
-        var p = pat[r.patternId] || (pat[r.patternId] = { id: r.patternId, cls: r.cls, saved: 0, uses: 0, born: Infinity, by: r.discoveredBy });
-        p.saved += r.saved;
-        p.uses = Math.max(p.uses, r.uses || 0);
-        p.cls = p.cls || r.cls;
+      if (r.path === 'warm' && r.verified && r.patternId) {
+        var c = cls[r.cls] || (cls[r.cls] = { cls: r.cls, saved: 0, uses: 0, born: Infinity, by: r.discoveredBy, ids: {} });
+        c.saved += r.saved;
+        c.uses += 1;
+        c.ids[r.patternId] = true;
       }
     });
-    // born = earliest verified row whose sig IS the pattern (cold or warm —
-    // a verified warm fix also persists a pattern), fallback born_at_iteration.
+    // born = earliest verified fix of that class that persisted a pattern
+    // (a verified warm fix persists one too), fallback born_at_iteration.
     recs.forEach(function (r) {
-      if (r.event || !r.sig || !pat[r.sig]) return;
-      if (r.verified) pat[r.sig].born = Math.min(pat[r.sig].born, r.iteration);
-      if (pat[r.sig].by === undefined) pat[r.sig].by = r.discoveredBy;
+      if (r.event || !r.cls || !cls[r.cls]) return;
+      if (r.verified) cls[r.cls].born = Math.min(cls[r.cls].born, r.iteration);
+      if (cls[r.cls].by === undefined) cls[r.cls].by = r.discoveredBy;
     });
-    var list = Object.keys(pat).map(function (k) {
-      var p = pat[k];
-      if (!isFinite(p.born) && isFinite(p.bornAt)) p.born = p.bornAt;
-      return p;
+    var list = Object.keys(cls).map(function (k) {
+      var c = cls[k];
+      c.nPatterns = Object.keys(c.ids).length;
+      return c;
     });
     list.sort(function (a, b) { return b.saved - a.saved; });
+    // Distinct pattern vectors overall — the tiles report this number.
+    var all = {};
+    list.forEach(function (c) { Object.keys(c.ids).forEach(function (id) { all[id] = true; }); });
+    list.totalPatterns = Object.keys(all).length;
     return list;
   }
 
@@ -550,8 +558,8 @@
 
       var name = document.createElement('span');
       name.className = 'mname';
-      name.textContent = p.cls || p.id;
-      name.title = p.id;
+      name.textContent = p.cls;
+      name.title = Object.keys(p.ids).join(', ');
 
       var badge = document.createElement('span');
       var by = String(p.by || 'ratchet');
@@ -568,7 +576,8 @@
 
       var born = document.createElement('span');
       born.className = 'mborn';
-      born.textContent = isFinite(p.born) ? 'born iter ' + p.born : '';
+      born.textContent = (isFinite(p.born) ? 'born iter ' + p.born : '') +
+        (p.nPatterns > 1 ? ' · ' + p.nPatterns + ' patterns' : '');
 
       li.appendChild(name);
       li.appendChild(badge);
@@ -598,7 +607,7 @@
       var coldH = (b.cold / total) * plotH;
       svg.appendChild(el('rect', { x: bx, y: T, width: bw, height: coldH, fill: 'var(--cold)', rx: 3 }));
       svg.appendChild(el('rect', { x: bx, y: T + coldH, width: bw, height: plotH - coldH, fill: 'var(--warm)', rx: 3 }));
-      svg.appendChild(el('text', { x: cx, y: T - 7, class: 'ptlbl', 'text-anchor': 'middle' }, Math.round((b.warm / total) * 100) + '%'));
+      svg.appendChild(el('text', { x: cx, y: T - 7, class: 'ptlbl', 'text-anchor': 'middle', style: 'fill: var(--warm)' }, Math.round((b.warm / total) * 100) + '% warm'));
       svg.appendChild(el('text', { x: cx, y: H - B + 26, class: 'axlbl', 'text-anchor': 'middle' }, 'iter ' + b.iter));
     });
     svg.appendChild(el('line', { x1: L, y1: T + plotH, x2: W - R, y2: T + plotH, class: 'ax' }));
@@ -625,10 +634,9 @@
         withCalls.length > 1 ? 'was <b>' + was.toFixed(1) + '</b> at iteration 0' : '&nbsp;';
     }
 
-    document.getElementById('t-patterns').textContent = String(patterns.length);
-    var reused = patterns.reduce(function (a, p) { return a + p.uses; }, 0);
+    document.getElementById('t-patterns').textContent = String(patterns.totalPatterns || 0);
     document.getElementById('t-patterns-sub').innerHTML =
-      patterns.length ? 'reused <b>' + reused + '</b> times' : '&nbsp;';
+      patterns.length ? 'covering <b>' + patterns.length + '</b> bug classes' : '&nbsp;';
   }
 
   function drawPolicy(recs) {
