@@ -64,7 +64,6 @@ class PioneerRouter(Degradable):
         # and set both in .env.
         self._cheap = env("PIONEER_CHEAP_MODEL")
         self._strong = env("PIONEER_STRONG_MODEL")
-        self._adaptive = (os.getenv("PIONEER_ADAPTIVE", "true").lower() != "false")
         if not self._key:
             self._degrade("PIONEER_API_KEY not set")
         elif not self._cheap or not self._strong:
@@ -86,21 +85,14 @@ class PioneerRouter(Degradable):
             return text, u
 
         model = self._cheap if tier == "cheap" else self._strong
+        payload = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "stream": False,
+            "max_tokens": int(os.getenv("PIONEER_MAX_TOKENS", "1200")),
+        }
         try:
-            body = request_json(
-                f"{self._base}/chat/completions",
-                method="POST",
-                payload={
-                    "model": model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    # Pioneer's router: let it pick a cheaper equivalent model as
-                    # it learns our traffic. This is the "improve inference" leg
-                    # of the stack — turning it off would defeat the point.
-                    "adaptive": self._adaptive,
-                    "max_tokens": int(os.getenv("PIONEER_MAX_TOKENS", "1200")),
-                },
-                headers={"X-API-Key": self._key},   # per docs.pioneer.ai — NOT Bearer
-            )
+            body = self._post(payload)
             return self._parse(body, model, tier)
         except Exception as e:
             self._degrade(f"{type(e).__name__}: {e}")
@@ -110,6 +102,21 @@ class PioneerRouter(Degradable):
             return text, u
 
     # -- internals ---------------------------------------------------------
+    def _post(self, payload: dict) -> dict:
+        """POST with self-healing auth: console says Bearer, docs say
+        X-API-Key (they disagree — observed 12:34). Try Bearer first; on a
+        401/403 retry once with the other header before giving up."""
+        from .http import HttpError
+        url = f"{self._base}/chat/completions"
+        try:
+            return request_json(url, method="POST", payload=payload,
+                                headers={"Authorization": f"Bearer {self._key}"})
+        except HttpError as e:
+            if e.status not in (401, 403):
+                raise
+            return request_json(url, method="POST", payload=payload,
+                                headers={"X-API-Key": self._key})
+
     def _parse(self, body: dict, requested_model: str, tier: str) -> tuple[str, dict]:
         choices = body.get("choices") or []
         if not choices:
