@@ -73,6 +73,26 @@
   .tile .sub b { color: var(--ink); font-weight: 700; }
   .v.good { color: var(--warm); }
   .v.hero { color: var(--hero); }
+  .v.range { font-size: 42px; }
+  .v.range .arrow { color: var(--muted); font-size: 30px; padding: 0 4px; }
+  .v.range .to { color: var(--warm); }
+
+  /* ---------------- transfer banner — the loudest thing on screen ------- */
+  .transfer-banner {
+    margin: 10px 0 2px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--warm);
+    background: linear-gradient(90deg, rgba(46,230,168,0.16), rgba(86,160,255,0.12));
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  }
+  .transfer-banner .orgs {
+    font-size: 40px; font-weight: 900; letter-spacing: 0.04em; color: var(--warm);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .transfer-banner .orgs .arr { color: var(--hero); padding: 0 6px; }
+  .transfer-banner .what { font-size: 21px; color: var(--ink); }
+  .transfer-banner .what b { color: var(--hero); }
 
   /* ---------------- panels ---------------- */
   .panel {
@@ -169,13 +189,15 @@
 
   <header>
     <span class="brand">RATCHET</span>
-    <span class="tagline">cost per verified fix &mdash; it only turns one way</span>
+    <span class="tagline">calls per verified fix &mdash; it only turns one way</span>
     <span class="live"><span id="dot" class="dot stale"></span><span id="live-text">waiting for runs/</span></span>
   </header>
 
   <div id="synthetic" class="synthetic-banner" style="display:none">
     SYNTHETIC DEMO DATA &mdash; not from runs/
   </div>
+
+  <div id="transfer-banner" class="transfer-banner" style="display:none"></div>
 
   <div id="policy-strip" class="policy-strip" style="display:none"></div>
 
@@ -186,9 +208,9 @@
       <div id="t-saved-sub" class="sub">&nbsp;</div>
     </div>
     <div class="tile">
-      <div class="k">LLM calls per verified fix</div>
-      <div id="t-steps" class="v">&mdash;</div>
-      <div id="t-steps-sub" class="sub">&nbsp;</div>
+      <div class="k">Cost per verified fix</div>
+      <div id="t-cost" class="v range">&mdash;</div>
+      <div id="t-cost-sub" class="sub">&nbsp;</div>
     </div>
     <div class="tile">
       <div class="k">Patterns in memory</div>
@@ -198,8 +220,8 @@
   </div>
 
   <div class="panel hero-panel">
-    <h2>Cost per verified fix, by iteration &mdash; two arms, same bugs, same model</h2>
-    <p class="lede">Memory off, every run starts from zero. Memory on, <em>the line bends.</em></p>
+    <h2>LLM calls per verified fix, by iteration &mdash; two arms, same bugs</h2>
+    <p class="lede">Memory off, every run starts from zero. Memory on, <em>it stops calling the model.</em></p>
     <div id="hero-chart"></div>
     <div class="legend">
       <span><span class="swline" style="background:var(--cold)"></span>Replay + coding agent (today) &mdash; memory off</span>
@@ -282,6 +304,11 @@
       model:     pick(r, 'model'),
       discoveredBy: pick(r, 'discovered_by'),
       bornAt:    num(pick(r, 'born_at_iteration'), NaN),
+      target:    pick(r, 'target'),
+      corpusFrom: pick(r, 'corpus_from'),
+      originApp: pick(r, 'origin_app'),
+      originOrg: pick(r, 'origin_org'),
+      rateDiff:  pick(r, 'rate_diff_per_mtok'),
       event:     pick(r, 'event', 'type', 'kind'),
       note:      pick(r, 'note', 'message', 'detail')
     };
@@ -307,18 +334,16 @@
       if (!byIter[it]) { byIter[it] = { iter: it, cost: 0, ver: 0, warm: 0, cold: 0, calls: 0, callsN: 0 }; order.push(it); }
       var b = byIter[it];
       b.cost += r.cost;
+      if (isFinite(r.llmCalls)) b.calls += r.llmCalls; // ALL attempts, same denominator as cost
       if (r.path === 'warm') b.warm++;
       else if (r.path === 'cold') b.cold++;
-      if (r.verified) {
-        b.ver++;
-        if (isFinite(r.llmCalls)) { b.calls += r.llmCalls; b.callsN++; }
-      }
+      if (r.verified) b.ver++;
     });
     order.sort(function (a, b) { return a - b; });
     return order.map(function (i) {
       var b = byIter[i];
-      b.cpf = b.ver > 0 ? b.cost / b.ver : null;
-      b.meanCalls = b.callsN > 0 ? b.calls / b.callsN : null;
+      b.cpf = b.ver > 0 ? b.cost / b.ver : null;   // $ per verified fix
+      b.cpv = b.ver > 0 ? b.calls / b.ver : null;  // LLM calls per verified fix
       return b;
     });
   }
@@ -391,10 +416,15 @@
 
   /* ---------- hero: two lines ------------------------------------------ */
 
+  function fmtCalls(v) {
+    if (v === null || v === undefined || !isFinite(v)) return '—';
+    return (Math.round(v * 10) / 10).toFixed(1);
+  }
+
   function drawHero(host, ratchetIters, controlIters) {
     host.innerHTML = '';
-    var rp = ratchetIters.filter(function (b) { return b.cpf !== null; });
-    var cp = controlIters.filter(function (b) { return b.cpf !== null; });
+    var rp = ratchetIters.filter(function (b) { return b.cpv !== null; });
+    var cp = controlIters.filter(function (b) { return b.cpv !== null; });
     if (rp.length === 0 && cp.length === 0) {
       host.innerHTML = '<div class="empty-note">Waiting for the first verified fix.</div>';
       return;
@@ -403,8 +433,8 @@
     var W = 1000, H = 240, L = 100, R = 34, T = 30, B = 44;
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
 
-    // Scale covers BOTH arms — the control line climbing must never be cropped.
-    var all = rp.concat(cp).map(function (p) { return p.cpf; });
+    // Scale covers BOTH arms — the control line must never be cropped.
+    var all = rp.concat(cp).map(function (p) { return p.cpv; });
     var top = niceScale(Math.max.apply(null, all)).top;
 
     var iterSet = {};
@@ -421,7 +451,7 @@
     for (var g = 0; g <= DIVS; g++) {
       var gv = (top * g) / DIVS, gy = y(gv);
       svg.appendChild(el('line', { x1: L, y1: gy, x2: W - R, y2: gy, stroke: '#1a2130', 'stroke-width': 1 }));
-      svg.appendChild(el('text', { x: L - 14, y: gy + 6, class: 'axlbl', 'text-anchor': 'end' }, money(gv)));
+      svg.appendChild(el('text', { x: L - 14, y: gy + 6, class: 'axlbl', 'text-anchor': 'end' }, fmtCalls(gv)));
     }
     svg.appendChild(el('line', { x1: L, y1: H - B, x2: W - R, y2: H - B, class: 'ax' }));
     iters.forEach(function (it) {
@@ -430,17 +460,17 @@
 
     function line(pts, color, width, labelEnds, labelBelowFirst) {
       if (!pts.length) return;
-      var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p.iter) + ' ' + y(p.cpf); }).join(' ');
+      var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p.iter) + ' ' + y(p.cpv); }).join(' ');
       svg.appendChild(el('path', { d: d, fill: 'none', stroke: color, 'stroke-width': width, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
       pts.forEach(function (p, i) {
-        svg.appendChild(el('circle', { cx: x(p.iter), cy: y(p.cpf), r: 7, fill: color }));
+        svg.appendChild(el('circle', { cx: x(p.iter), cy: y(p.cpv), r: 7, fill: color }));
         if (!labelEnds || i === 0 || i === pts.length - 1) {
           var anchor = i === 0 ? 'start' : (i === pts.length - 1 ? 'end' : 'middle');
           var dx = i === 0 ? 8 : (i === pts.length - 1 ? -8 : 0);
           // Ratchet starts just below control at iter 0 — drop its first
           // label under the point so the two never collide.
           var dy = (labelBelowFirst && i === 0) ? 30 : -15;
-          svg.appendChild(el('text', { x: x(p.iter) + dx, y: y(p.cpf) + dy, class: 'ptlbl', 'text-anchor': anchor }, money(p.cpf)));
+          svg.appendChild(el('text', { x: x(p.iter) + dx, y: y(p.cpv) + dy, class: 'ptlbl', 'text-anchor': anchor }, fmtCalls(p.cpv)));
         }
       });
     }
@@ -567,8 +597,15 @@
       badge.textContent = by;
 
       var saved = document.createElement('span');
-      saved.className = 'msaved';
-      saved.textContent = 'saved ' + money(p.saved);
+      if (p.saved < 0.0005 && p.uses > 0) {
+        // Class never paid a cold price, so there is no honest baseline to
+        // claim savings against. Never a computed fallback (ALL-012 §3).
+        saved.className = 'mborn';
+        saved.textContent = 'no baseline yet';
+      } else {
+        saved.className = 'msaved';
+        saved.textContent = 'saved ' + money(p.saved);
+      }
 
       var uses = document.createElement('span');
       uses.className = 'muses';
@@ -623,15 +660,25 @@
     var warmN = ratchetRecs.filter(function (r) { return r.path === 'warm' && r.verified; }).length;
     document.getElementById('t-saved-sub').innerHTML = warmN ? 'across <b>' + warmN + '</b> memory hits' : '&nbsp;';
 
-    var withCalls = ratchetIters.filter(function (b) { return b.meanCalls !== null; });
-    if (withCalls.length) {
-      var now = withCalls[withCalls.length - 1].meanCalls;
-      var was = withCalls[0].meanCalls;
-      var t = document.getElementById('t-steps');
-      t.textContent = now.toFixed(1);
-      t.className = 'v' + (now < was ? ' good' : '');
-      document.getElementById('t-steps-sub').innerHTML =
-        withCalls.length > 1 ? 'was <b>' + was.toFixed(1) + '</b> at iteration 0' : '&nbsp;';
+    var withCost = ratchetIters.filter(function (b) { return b.cpf !== null; });
+    if (withCost.length) {
+      var first = withCost[0].cpf, last = withCost[withCost.length - 1].cpf;
+      document.getElementById('t-cost').innerHTML =
+        money(first) + '<span class="arrow">&rarr;</span><span class="to">' + money(last) + '</span>';
+      // Pioneer's routing spread, when the telemetry is in the rows:
+      // rate_diff_per_mtok × tokens actually routed = dollars the router saved.
+      var routed = 0, any = false;
+      ratchetRecs.forEach(function (r) {
+        if (r.event || r.arm !== 'ratchet' || !r.rateDiff) return;
+        var rd = r.rateDiff;
+        if (isFinite(r.tokensIn) && isFinite(num(rd.input, NaN))) {
+          routed += (num(rd.input, 0) * r.tokensIn + num(rd.output, 0) * r.tokensOut) / 1e6;
+          any = true;
+        }
+      });
+      document.getElementById('t-cost-sub').innerHTML = any
+        ? 'Pioneer routing spread saved <b>' + money(routed) + '</b> vs list'
+        : 'iteration 0 &rarr; iteration ' + withCost[withCost.length - 1].iter;
     }
 
     document.getElementById('t-patterns').textContent = String(patterns.totalPatterns || 0);
@@ -649,9 +696,41 @@
       last.iteration + (last.note ? ' &mdash; ' + String(last.note) : '');
   }
 
+  /* ---------- transfer banner --------------------------------------------- */
+
+  function drawTransfer(allRecs) {
+    var el = document.getElementById('transfer-banner');
+    // A transfer row: warm, verified, fixed with a corpus built from a
+    // DIFFERENT app than the one under test.
+    var transfers = allRecs.filter(function (r) {
+      return !r.event && r.path === 'warm' && r.verified &&
+        r.corpusFrom && r.target && r.corpusFrom !== r.target;
+    });
+    if (!transfers.length) { el.style.display = 'none'; return; }
+
+    // app → org map, learned from the data itself.
+    var appOrg = {};
+    allRecs.forEach(function (r) {
+      if (r.originApp && r.originOrg) appOrg[r.originApp] = r.originOrg;
+    });
+
+    var t = transfers[0]; // earliest transfer hit — the first-run beat
+    var fromOrg = (appOrg[t.corpusFrom] || t.corpusFrom);
+    var toOrg = (t.originOrg || appOrg[t.target] || t.target);
+    el.style.display = '';
+    el.innerHTML =
+      '<span class="orgs">' + String(fromOrg).toUpperCase() +
+        '<span class="arr">&rarr;</span>' + String(toOrg).toUpperCase() + '</span>' +
+      '<span class="what">a pattern verified on <b>' + t.corpusFrom + '</b> just fixed <b>' +
+        t.target + '</b>&rsquo;s first run &mdash; warm, ' + money(t.cost) +
+        (t.similarity ? ', similarity ' + t.similarity.toFixed(2) : '') +
+        '. Different company. Zero prior contact.</span>';
+  }
+
   /* ---------- main draw --------------------------------------------------- */
 
-  function draw(ratchetRecs, controlRecs, live) {
+  function draw(ratchetRecs, controlRecs, live, transferRecs) {
+    transferRecs = transferRecs || [];
     var ratchetIters = perIteration(ratchetRecs.filter(function (r) { return r.arm === 'ratchet'; }));
     var controlIters = perIteration(controlRecs.filter(function (r) { return r.arm === 'control'; }));
     var patterns = patternTable(ratchetRecs);
@@ -662,6 +741,7 @@
     drawMemory(patterns);
     drawPaths(document.getElementById('path-chart'), ratchetIters);
     drawPolicy(ratchetRecs);
+    drawTransfer(ratchetRecs.concat(transferRecs));
 
     var dot = document.getElementById('dot');
     var txt = document.getElementById('live-text');
@@ -707,14 +787,17 @@
       .catch(function () { return ''; });
   }
 
+  var TRANSFER = params.get('transfer') || BASE + 'transfer.jsonl';
+
   function tick() {
-    Promise.all([fetchText(SRC), fetchText(CONTROL)]).then(function (texts) {
-      var sig = texts[0].length + ':' + texts[1].length + ':' + texts[0].slice(-120);
+    Promise.all([fetchText(SRC), fetchText(CONTROL), fetchText(TRANSFER)]).then(function (texts) {
+      var sig = texts[0].length + ':' + texts[1].length + ':' + texts[2].length + ':' + texts[0].slice(-120);
       if (sig === lastSig) return;
       lastSig = sig;
       var ratchet = parse(texts[0]);
       var control = parse(texts[1]);
-      draw(ratchet, control, ratchet.length > 0 || control.length > 0);
+      var transfer = parse(texts[2]); // 404s harmlessly until Lane A lands it
+      draw(ratchet, control, ratchet.length > 0 || control.length > 0, transfer);
     });
   }
 
