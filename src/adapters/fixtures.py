@@ -92,11 +92,20 @@ def _looks_usable(bugs: list[Bug]) -> bool:
     return Counter(b.bug_class for b in bugs).most_common(1)[0][1] >= 2
 
 
+# App registry for AMD-03's cross-org story. Lane C owns both bugs.json files;
+# "tasker" (acme) is the app the corpus is learned on, "app2" (globex) is the
+# never-seen app whose first run should warm-hit from transferred patterns.
+APP_SOURCES: dict[str, Path] = {
+    "tasker": REPO_ROOT / "app" / "bugs.json",
+    "app2": REPO_ROOT / "app2" / "bugs.json",
+}
+
+
 class FixtureQA:
     """Replay QA stand-in.
 
-    Reads Lane C's canonical `app/bugs.json` if present, otherwise the local
-    seed. Either way: 8 bugs, 3 of which share one class — that shared class is
+    Reads Lane C's canonical bugs.json for the selected app, otherwise the
+    local seed. For tasker: 8 bugs, 3 sharing one class — that shared class is
     what makes memory retention visible by iteration 3.
     """
 
@@ -104,13 +113,16 @@ class FixtureQA:
     degraded = False
     degrade_reason: str | None = None
 
-    def __init__(self, bugs_json: Path | None = None, seed: Path | None = None):
-        # Lane C owns app/bugs.json and declares it the machine-readable ground
-        # truth; prefer it, and keep our own seed purely as an offline backstop
-        # for when app/ is missing.
-        self._bugs_json = bugs_json or (REPO_ROOT / "app" / "bugs.json")
+    def __init__(self, bugs_json: Path | None = None, seed: Path | None = None,
+                 app: str | None = None):
+        # Lane C owns the bugs.json files and declares them the machine-readable
+        # ground truth; prefer them, keep our seed purely as an offline backstop.
+        self.app = (app or os.getenv("RATCHET_TARGET_APP") or "tasker").strip().lower()
+        self._bugs_json = bugs_json or APP_SOURCES.get(self.app, APP_SOURCES["tasker"])
         self._seed = seed or (SEED_DIR / "bugs.json")
-        self._ledger = state_dir() / "patches.json"
+        # per-app patch ledger — app2's fixes must never bleed into tasker's
+        self._ledger = state_dir() / (
+            "patches.json" if self.app == "tasker" else f"patches_{self.app}.json")
         self.source = "unloaded"
 
     # -- Protocol ----------------------------------------------------------
@@ -158,12 +170,12 @@ class FixtureQA:
             return set()
 
     def _load(self) -> list[Bug]:
+        rel = f"{self._bugs_json.parent.name}/bugs.json"
         if self._bugs_json.exists():
             try:
-                parsed = _bugs_from_json(
-                    json.loads(self._bugs_json.read_text()), "app/bugs.json")
+                parsed = _bugs_from_json(json.loads(self._bugs_json.read_text()), rel)
                 if _looks_usable(parsed):
-                    self.source = "app/bugs.json"
+                    self.source = rel
                     return parsed
             except Exception:
                 pass  # fall through to the seed — never crash the loop
@@ -298,8 +310,11 @@ class FixtureRouter:
 
 CITED_HEADER = """# cited.md — RATCHET's verified fix-pattern corpus
 
-Every entry below was written by the agent after a fix was **verified** by QA.
-Iteration N is cheaper than N-1 because of the rows on this page.
+Every entry below was written by an agent after its fix was **verified** —
+nothing lands here on a hunch. This file is public on purpose: a pattern
+verified by one org makes another org's *first* run cheap. Iteration N is
+cheaper than N-1 because of the rows on this page, and you can point at the
+row that did it.
 
 <!-- machine-readable: each pattern is one `## sig` block with a JSON payload -->
 """
@@ -338,21 +353,30 @@ class FixturePublisher:
 
     @staticmethod
     def _render(p: Pattern, marker: str) -> str:
-        payload = json.dumps({
-            "sig": p.sig,
-            "bug_class": p.bug_class,
-            "strategy": p.strategy,
-            "code_hint": p.code_hint,
-            "verified": p.verified,
-            "uses": p.uses,
-            "score": p.score,
-        }, indent=2)
+        # Human-legible first (this file is opened on stage), JSON payload
+        # second (so other agents can consume it without parsing prose).
+        badge = "✅ verified" if p.verified else "⚠️ unverified"
+        provenance = (
+            f"Discovered by **{p.discovered_by}** · root cause from "
+            f"**{p.root_cause_source}** · fix verified by **{p.verified_by}**"
+            + (f" at {p.verified_at}" if p.verified_at else "")
+            + (f" ({p.verification_count}× re-verified)" if p.verification_count > 1 else "")
+        )
+        economics = (
+            f"Learned on **{p.origin_app}** ({p.origin_org}) at iteration "
+            f"{p.born_at_iteration} · reused **{p.uses}×**"
+            + (f" · has saved **${p.saved_usd:.2f}** in avoided reasoning"
+               if p.saved_usd > 0 else "")
+        )
+        payload = json.dumps({k: v for k, v in vars(p).items()}, indent=2)
         return (
             f"{marker}\n"
-            f"## `{p.sig}` — {p.bug_class}\n\n"
-            f"**Verified:** {'yes' if p.verified else 'no'} · **Reused:** {p.uses}x\n\n"
-            f"{p.strategy}\n\n"
-            f"```json\n{payload}\n```\n"
+            f"## `{p.sig}` — {p.bug_class} ({badge})\n\n"
+            f"{provenance}\n{economics}\n\n"
+            f"**Fix strategy:**\n\n{p.strategy}\n\n"
+            + (f"**Code hint:** `{p.code_hint}`\n\n" if p.code_hint else "")
+            + f"<details><summary>machine-readable</summary>\n\n"
+              f"```json\n{payload}\n```\n</details>\n"
         )
 
 

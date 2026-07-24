@@ -44,11 +44,15 @@ def _mode(which: str) -> str:
     return (os.getenv("RATCHET_MODE") or "fixture").strip().lower()
 
 
-def get_qa() -> QA:
+def get_qa(app: str | None = None) -> QA:
+    """`app` selects the bug source: "tasker" (default) or "app2" — the
+    never-seen app for the cross-org transfer beat. Also settable via
+    RATCHET_TARGET_APP. Live Replay scans whatever RATCHET_TARGET_URL points
+    at, so `app` only matters in fixture mode."""
     if _mode("qa") == "live":
         from .live_replay import ReplayQA
         return ReplayQA()
-    return FixtureQA()
+    return FixtureQA(app=app)
 
 
 def get_memory() -> Memory:

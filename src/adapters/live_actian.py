@@ -66,18 +66,12 @@ class ActianMemory(Degradable):
             return
         try:
             PointStruct = self._sdk["PointStruct"]
+            # vars(p) carries the whole dataclass — including provenance —
+            # so nothing is lost round-tripping through the live DB.
             self._client.points.upsert(self._collection, [PointStruct(
                 id=_point_id(p.sig),
                 vector=embed(f"{p.bug_class} {p.strategy} {p.code_hint or ''}"),
-                payload={
-                    "sig": p.sig,
-                    "bug_class": p.bug_class,
-                    "strategy": p.strategy,
-                    "code_hint": p.code_hint or "",
-                    "verified": bool(p.verified),
-                    "uses": int(p.uses),
-                    "score": float(p.score),
-                },
+                payload=dict(vars(p)),
             )])
         except Exception as e:
             self._degrade(f"upsert failed — {type(e).__name__}: {e}")
@@ -127,14 +121,10 @@ class ActianMemory(Degradable):
     @staticmethod
     def _to_pattern(payload: dict) -> Pattern | None:
         try:
-            return Pattern(
-                sig=payload["sig"],
-                bug_class=payload.get("bug_class", "unclassified"),
-                strategy=payload.get("strategy", ""),
-                code_hint=payload.get("code_hint") or None,
-                verified=bool(payload.get("verified", False)),
-                uses=int(payload.get("uses", 0)),
-                score=float(payload.get("score", 0.0)),
-            )
+            known = {f for f in Pattern.__dataclass_fields__}
+            kwargs = {k: v for k, v in payload.items() if k in known}
+            kwargs.setdefault("sig", payload["sig"])
+            kwargs["code_hint"] = payload.get("code_hint") or None
+            return Pattern(**kwargs)
         except Exception:
             return None
