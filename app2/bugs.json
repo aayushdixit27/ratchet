@@ -1,0 +1,110 @@
+{
+  "fixture": "jotting",
+  "version": 1,
+  "org": "globex",
+  "note": "Ground truth for FixtureQA and scoring. Not shown during the demo. App #2 for the cross-org transfer beat (AMENDMENT-03): J-01 and J-02 share the modal-state-not-reset class with Tasker (org acme) but wear completely different symptoms.",
+  "shared_class": "modal-state-not-reset",
+  "shared_class_count": 2,
+  "total": 6,
+  "bugs": [
+    {
+      "id": "J-01",
+      "class": "modal-state-not-reset",
+      "severity": "critical",
+      "selectors": ["#dlg-share", "#share-which", "#share-send", "[data-dismiss=\"dlg-share\"]"],
+      "symptom": "After cancelling one share dialog, sharing a different note sends the invite for the FIRST note — the dialog header names the wrong note and the recipient is granted access to a note the user never chose. Privacy breach.",
+      "repro": [
+        "Click Share on 'Call plumber re: kitchen tap'",
+        "Click Cancel (✕ or Cancel button)",
+        "Click Share on 'Q3 headcount notes'",
+        "Observe: dialog reads 'Sharing “Call plumber re: kitchen tap”'",
+        "Enter an email, click Send invite — the invite attaches to the plumber note"
+      ],
+      "root_cause": "openShare() seeds the scratch object with `shareCtx = shareCtx || {noteId, title}`, so it only initialises when null. The dismiss path (closeDialog) never nulls shareCtx; only sendShare() clears it. A cancelled share leaves the stale target alive for the next open.",
+      "fix_strategy": "reset-modal-owned-state-on-close",
+      "file": "app2/jotting.js",
+      "symbol": "openShare / closeDialog"
+    },
+    {
+      "id": "J-02",
+      "class": "modal-state-not-reset",
+      "severity": "medium",
+      "selectors": ["#dlg-tags", "#tag-name", "#tag-color", "#tag-create", "[data-dismiss=\"dlg-tags\"]"],
+      "symptom": "A tag you typed and then cancelled resurrects: reopening the tag manager shows the discarded name and color, and clicking Create makes the ghost tag you decided not to create.",
+      "repro": [
+        "Click 'Manage tags…', type 'temp-tag', pick Rose",
+        "Click Cancel",
+        "Click 'Manage tags…' again",
+        "Observe: 'temp-tag' and Rose are pre-filled as if never discarded",
+        "Click Create tag — the discarded tag is created"
+      ],
+      "root_cause": "openTags() seeds `tagDraft = tagDraft || {name:'', color:'amber'}`; the dismiss path never nulls tagDraft, only createTag() does. Identical latent defect to J-01: lazily-seeded dialog scratch state that close-without-confirm never clears.",
+      "fix_strategy": "reset-modal-owned-state-on-close",
+      "file": "app2/jotting.js",
+      "symbol": "openTags / closeDialog"
+    },
+    {
+      "id": "J-03",
+      "class": "case-sensitive-filter",
+      "severity": "medium",
+      "selectors": ["#search", "#notes-grid"],
+      "symptom": "Search is case-sensitive: searching 'miso' finds the recipe, searching 'Miso' with a different case than the note text finds nothing. Lowercase queries miss capitalised titles.",
+      "repro": [
+        "Switch to the Recipes notebook",
+        "Type 'miso' in search — the eggplant note matches (body contains 'miso')",
+        "Type 'MISO' — no results, #no-notes shows"
+      ],
+      "root_cause": "visible() filters with raw String.indexOf on title and body, no case normalisation on either side.",
+      "fix_strategy": "normalise-case-before-compare",
+      "file": "app2/jotting.js",
+      "symbol": "visible"
+    },
+    {
+      "id": "J-04",
+      "class": "stale-derived-state",
+      "severity": "low",
+      "selectors": ["#note-count", ".note-actions"],
+      "symptom": "The '<n> notes in <notebook>' pill does not update when a note is removed — it only corrects itself after an unrelated action like saving a note or switching notebooks.",
+      "repro": [
+        "Note the count pill (e.g. '2 notes in Work')",
+        "Click Remove on a Work note",
+        "Observe: the grid loses the card but the pill still says 2"
+      ],
+      "root_cause": "removeNote() calls persist() and renderNotes() but not renderCount(); saveNote() calls all three. Asymmetric re-render of derived state.",
+      "fix_strategy": "rerender-derived-state-on-every-mutation",
+      "file": "app2/jotting.js",
+      "symbol": "removeNote"
+    },
+    {
+      "id": "J-05",
+      "class": "closure-loop-capture",
+      "severity": "high",
+      "selectors": ["#notebook-list", ".nb-list li"],
+      "symptom": "Clicking ANY notebook in the sidebar empties the note grid and deselects every notebook. The app appears to lose all notes until reload.",
+      "repro": [
+        "Click 'Work' (or any notebook) in the left rail",
+        "Observe: grid goes empty, no notebook is highlighted, count pill reads 'undefined'"
+      ],
+      "root_cause": "renderNotebooks() binds click handlers inside a `for (var i ...)` loop and the handler reads notebooks[i] at click time. By then i === notebooks.length, so currentNotebook becomes undefined and nothing matches it.",
+      "fix_strategy": "capture-loop-variable-per-iteration",
+      "file": "app2/jotting.js",
+      "symbol": "renderNotebooks"
+    },
+    {
+      "id": "J-06",
+      "class": "unescaped-html-injection",
+      "severity": "high",
+      "selectors": ["#notes-grid", ".note-card h3", "#ed-title"],
+      "symptom": "Markup typed into a note title is rendered, not displayed: a title containing '<b>x</b>' shows bold text, and an <img onerror> title executes script. Stored XSS via note titles.",
+      "repro": [
+        "Create a new note titled: <img src=x onerror=\"document.title='pwned'\">",
+        "Save it",
+        "Observe: the browser tab title changes to 'pwned' — the payload executed"
+      ],
+      "root_cause": "renderNotes() builds each card with card.innerHTML = '<h3>' + n.title + '</h3>' — user-controlled title concatenated into HTML unescaped (body uses textContent and is safe; the title path is not).",
+      "fix_strategy": "escape-user-content-before-render",
+      "file": "app2/jotting.js",
+      "symbol": "renderNotes"
+    }
+  ]
+}

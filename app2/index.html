@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jotting — quick notes</title>
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<nav class="rail">
+  <div class="logo">✎ Jotting</div>
+  <button id="new-note-btn" class="rail-btn">+ New note</button>
+  <div class="rail-sec">Notebooks</div>
+  <ul id="notebook-list" class="nb-list"></ul>
+  <button id="manage-tags" class="rail-btn subtle">Manage tags…</button>
+</nav>
+
+<main class="content">
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search notes…" aria-label="Search notes">
+    <span id="note-count" class="count-pill"></span>
+  </div>
+  <div id="notes-grid" class="grid"></div>
+  <p id="no-notes" class="quiet" hidden>No notes match.</p>
+</main>
+
+<!-- share dialog -->
+<div id="dlg-share" class="overlay" hidden>
+  <div class="dlg">
+    <div class="dlg-top">
+      <strong>Share note</strong>
+      <button class="dlg-dismiss" data-dismiss="dlg-share" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dlg-mid">
+      <p id="share-which" class="quiet"></p>
+      <label>Recipient email
+        <input id="share-email" type="email" placeholder="name@example.com">
+      </label>
+      <label class="inline">
+        <input id="share-editable" type="checkbox"> Allow editing
+      </label>
+    </div>
+    <div class="dlg-btm">
+      <button class="ghost" data-dismiss="dlg-share">Cancel</button>
+      <button id="share-send" class="solid">Send invite</button>
+    </div>
+  </div>
+</div>
+
+<!-- tag manager dialog -->
+<div id="dlg-tags" class="overlay" hidden>
+  <div class="dlg">
+    <div class="dlg-top">
+      <strong>Manage tags</strong>
+      <button class="dlg-dismiss" data-dismiss="dlg-tags" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dlg-mid">
+      <label>New tag name
+        <input id="tag-name" type="text" placeholder="e.g. reading-list">
+      </label>
+      <label>Color
+        <select id="tag-color">
+          <option value="amber">Amber</option>
+          <option value="sky">Sky</option>
+          <option value="rose">Rose</option>
+          <option value="mint">Mint</option>
+        </select>
+      </label>
+      <div id="tag-preview" class="tag-chip amber">preview</div>
+    </div>
+    <div class="dlg-btm">
+      <button class="ghost" data-dismiss="dlg-tags">Cancel</button>
+      <button id="tag-create" class="solid">Create tag</button>
+    </div>
+  </div>
+</div>
+
+<!-- editor dialog -->
+<div id="dlg-editor" class="overlay" hidden>
+  <div class="dlg wide">
+    <div class="dlg-top">
+      <strong id="editor-heading">Edit note</strong>
+      <button class="dlg-dismiss" data-dismiss="dlg-editor" aria-label="Close dialog">✕</button>
+    </div>
+    <div class="dlg-mid">
+      <input id="ed-title" type="text" placeholder="Title" aria-label="Note title">
+      <textarea id="ed-body" rows="8" placeholder="Write…" aria-label="Note body"></textarea>
+    </div>
+    <div class="dlg-btm">
+      <span id="ed-count" class="quiet"></span>
+      <button class="ghost" data-dismiss="dlg-editor">Discard</button>
+      <button id="ed-save" class="solid">Save note</button>
+    </div>
+  </div>
+</div>
+
+<script src="jotting.js"></script>
+</body>
+</html>

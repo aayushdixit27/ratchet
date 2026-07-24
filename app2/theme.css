@@ -1,0 +1,94 @@
+/* Jotting — warm paper theme. (Different team, different taste.) */
+:root {
+  --paper: #faf6ef;
+  --card: #fffdf8;
+  --ink: #2b2620;
+  --dim: #8c8377;
+  --edge: #e7dfd2;
+  --brand: #b4552d;
+  --amber: #c98a12; --sky: #2f7fb6; --rose: #c2455a; --mint: #2e8f6e;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; display: flex; min-height: 100vh;
+  background: var(--paper); color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.rail {
+  width: 220px; padding: 18px 14px; border-right: 1px solid var(--edge);
+  display: flex; flex-direction: column; gap: 10px; background: var(--card);
+}
+.logo { font-size: 20px; font-weight: 700; color: var(--brand); margin-bottom: 6px; }
+.rail-btn {
+  font-family: inherit; font-size: 15px; padding: 8px 10px; cursor: pointer;
+  border: 1px solid var(--edge); border-radius: 6px; background: var(--paper); text-align: left;
+}
+.rail-btn.subtle { color: var(--dim); border-style: dashed; margin-top: auto; }
+.rail-sec { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+.nb-list { list-style: none; margin: 0; padding: 0; }
+.nb-list li {
+  padding: 6px 8px; border-radius: 5px; cursor: pointer; font-size: 15px;
+}
+.nb-list li:hover { background: var(--paper); }
+.nb-list li.sel { background: #f0e7d8; font-weight: 700; }
+
+.content { flex: 1; padding: 20px 26px; }
+.toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+#search {
+  flex: 1; max-width: 420px; font-family: inherit; font-size: 15px;
+  padding: 8px 12px; border: 1px solid var(--edge); border-radius: 6px; background: var(--card);
+}
+.count-pill {
+  font-size: 13px; color: var(--dim); border: 1px solid var(--edge);
+  border-radius: 999px; padding: 4px 12px; background: var(--card);
+}
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.note-card {
+  background: var(--card); border: 1px solid var(--edge); border-radius: 8px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;
+}
+.note-card h3 { margin: 0; font-size: 17px; }
+.note-card p { margin: 0; font-size: 14px; color: var(--dim); max-height: 60px; overflow: hidden; }
+.note-actions { display: flex; gap: 10px; margin-top: 4px; }
+.note-actions button {
+  font-family: inherit; font-size: 13px; cursor: pointer; color: var(--brand);
+  background: none; border: none; padding: 2px 0; text-decoration: underline;
+}
+.quiet { color: var(--dim); font-size: 14px; }
+
+.tag-chip {
+  display: inline-block; font-size: 12px; border-radius: 999px; padding: 3px 10px; color: #fff; margin-top: 6px;
+}
+.tag-chip.amber { background: var(--amber); } .tag-chip.sky { background: var(--sky); }
+.tag-chip.rose { background: var(--rose); } .tag-chip.mint { background: var(--mint); }
+
+/* dialogs */
+.overlay {
+  position: fixed; inset: 0; background: rgba(43, 38, 32, 0.35);
+  display: flex; align-items: center; justify-content: center; z-index: 40;
+}
+.overlay[hidden] { display: none; }
+.dlg {
+  background: var(--card); border-radius: 10px; width: 420px; max-width: calc(100vw - 30px);
+  border: 1px solid var(--edge); box-shadow: 0 14px 40px rgba(43, 38, 32, 0.25);
+}
+.dlg.wide { width: 560px; }
+.dlg-top { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--edge); }
+.dlg-dismiss { background: none; border: none; font-size: 15px; cursor: pointer; color: var(--dim); }
+.dlg-mid { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.dlg-mid label { font-size: 14px; color: var(--dim); display: flex; flex-direction: column; gap: 4px; }
+.dlg-mid label.inline { flex-direction: row; align-items: center; gap: 8px; color: var(--ink); }
+.dlg-mid input[type="text"], .dlg-mid input[type="email"], .dlg-mid input[type="search"],
+.dlg-mid textarea, .dlg-mid select {
+  font-family: inherit; font-size: 15px; padding: 8px 10px;
+  border: 1px solid var(--edge); border-radius: 6px; background: var(--paper); color: var(--ink);
+}
+.dlg-btm { display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--edge); }
+.dlg-btm .quiet { margin-right: auto; }
+.ghost, .solid {
+  font-family: inherit; font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer;
+}
+.ghost { background: none; border: 1px solid var(--edge); color: var(--ink); }
+.solid { background: var(--brand); border: 1px solid var(--brand); color: #fff; }
