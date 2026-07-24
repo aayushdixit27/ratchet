@@ -127,28 +127,35 @@ class PioneerRouter(Degradable):
                                    f"{self._max_spend}, calls {self._calls_made}/"
                                    f"{self._max_calls}")
             return text, u
-        # Transient failures (429s, timeouts on long generations) must cost ONE
-        # call, not the rest of the run: a permanent flip mid-run stitches
-        # fixture prices onto live ones and the curve lies. Observed live at
-        # 12:55 — one it1 failure fixture-priced 3 whole iterations. Degrade
-        # permanently only after 3 consecutive failures.
-        #
-        # 13:5x run: 2/15 warm rows still went fixture with 2 attempts and a
-        # 20s socket timeout — pioneer/auto sometimes routes the warm prompt
-        # to opus-class models, and a slow 1200-token generation can outlive
-        # 20s twice. So: 4 attempts, exponential backoff, and a per-call
-        # timeout long enough for a slow frontier generation.
+        # Transient failures (429s, timeouts when auto routes the warm prompt
+        # to an opus-class model whose 1200-token generation outlives a short
+        # socket timeout) must cost ONE call, not the rest of the run — a
+        # permanent flip mid-run stitches fixture prices onto live ones and
+        # the curve lies. So: up to 4 attempts with 1/2/4/8s backoff, all
+        # inside ONE hard wall-clock deadline (PIONEER_DEADLINE_S, default
+        # 90s — a hang during the live demo beat is unrecoverable, so the
+        # deadline is per completion, not per attempt). Past the deadline we
+        # fixture-price this call, flagged degraded, and degrade permanently
+        # only after 3 consecutive failures.
+        import time as _t
+        deadline = float(os.getenv("PIONEER_DEADLINE_S", "90"))
+        t0 = _t.monotonic()
         last_err: Exception | None = None
         for attempt in range(4):
+            remaining = deadline - (_t.monotonic() - t0)
+            if remaining <= 0:
+                break
             try:
-                body = self._post(payload)
+                body = self._post(payload, timeout=remaining)
                 self._calls_made += 1
                 self._consec_failures = 0
                 return self._parse(body, model, tier)
             except Exception as e:
                 last_err = e
-                import time as _t
-                _t.sleep(1.0 * 2 ** attempt)   # 1, 2, 4, 8s
+                backoff = 1.0 * 2 ** attempt   # 1, 2, 4, 8s
+                if (_t.monotonic() - t0) + backoff >= deadline:
+                    break
+                _t.sleep(backoff)
         self._consec_failures = getattr(self, "_consec_failures", 0) + 1
         if self._consec_failures >= 3:
             self._degrade(f"3 consecutive failures, last: "
@@ -182,15 +189,16 @@ class PioneerRouter(Degradable):
             pass  # diagnostics must never take down the call path
 
     # -- internals ---------------------------------------------------------
-    def _post(self, payload: dict) -> dict:
+    def _post(self, payload: dict, timeout: float | None = None) -> dict:
         """POST with self-healing auth: console says Bearer, docs say
         X-API-Key (they disagree — observed 12:34). Try Bearer first; on a
         401/403 retry once with the other header before giving up."""
         from .http import HttpError
         url = f"{self._base}/chat/completions"
         # Inference outlives the 20s default when auto routes to an opus-class
-        # model: give completions their own generous ceiling.
-        timeout = float(os.getenv("PIONEER_TIMEOUT", "75"))
+        # model: give completions their own ceiling, further clamped to the
+        # caller's remaining deadline budget.
+        timeout = min(float(os.getenv("PIONEER_TIMEOUT", "75")), timeout or 75.0)
         try:
             return request_json(url, method="POST", payload=payload,
                                 timeout=timeout,
