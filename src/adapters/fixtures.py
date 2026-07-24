@@ -130,6 +130,15 @@ class FixtureQA:
         self.record_patch(bug.id)
         return True
 
+    def mark_fixed(self, bug: Bug, ok: bool) -> None:
+        """Fixture verdict write-back: record (or un-record) the patch locally."""
+        if ok:
+            self.record_patch(bug.id)
+        else:
+            fixed = self._patched()
+            fixed.discard(bug.id)
+            self._ledger.write_text(json.dumps(sorted(fixed), indent=2))
+
     # -- Fixture-only extras (Lane A may ignore these) ----------------------
     def record_patch(self, bug_id: str) -> None:
         fixed = self._patched()

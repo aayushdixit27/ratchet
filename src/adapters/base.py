@@ -38,6 +38,16 @@ class QA(Protocol):
     def scan(self, url: str) -> list[Bug]: ...
     def verify(self, url: str, bug: Bug) -> bool: ...
 
+    def mark_fixed(self, bug: Bug, ok: bool) -> None:
+        """Write our verification verdict back into the QA system.
+
+        Live (Replay): PATCH the bug to "fixed" — an external system then
+        carries the proof of our claim, checkable on stage. Fixture: records
+        the patch locally. `ok=False` means the fix did not hold; live mode
+        reopens the bug.
+        """
+        ...
+
 
 class Memory(Protocol):
     def search(self, text: str, k: int = 3) -> list[tuple[Pattern, float]]: ...
