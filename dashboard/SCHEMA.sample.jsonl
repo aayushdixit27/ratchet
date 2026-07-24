@@ -1,0 +1,9 @@
+{"ts":"2026-07-24T11:40:00Z","iteration":0,"bug_id":"BUG-01","bug_class":"modal-state-not-reset","path":"cold","cost_usd":0.412,"steps":14,"verified":true}
+{"ts":"2026-07-24T11:41:00Z","iteration":0,"bug_id":"BUG-04","bug_class":"counter-off-by-one","path":"cold","cost_usd":0.288,"steps":11,"verified":true}
+{"ts":"2026-07-24T11:44:00Z","iteration":1,"bug_id":"BUG-02","bug_class":"modal-state-not-reset","path":"warm","cost_usd":0.061,"steps":4,"verified":true}
+{"ts":"2026-07-24T11:45:00Z","iteration":1,"bug_id":"BUG-06","bug_class":"missing-preventdefault","path":"cold","cost_usd":0.301,"steps":12,"verified":true}
+{"ts":"2026-07-24T11:48:00Z","iteration":2,"bug_id":"BUG-03","bug_class":"modal-state-not-reset","path":"warm","cost_usd":0.058,"steps":3,"verified":true}
+{"ts":"2026-07-24T11:49:00Z","iteration":2,"bug_id":"BUG-07","bug_class":"dead-control","path":"cold","cost_usd":0.244,"steps":9,"verified":true}
+{"ts":"2026-07-24T11:52:00Z","iteration":3,"bug_id":"BUG-05","bug_class":"filter-state-lost-on-mutation","path":"warm","cost_usd":0.071,"steps":4,"verified":true}
+{"ts":"2026-07-24T11:53:00Z","iteration":3,"event":"policy_rewrite","note":"promoted signature step to code"}
+{"ts":"2026-07-24T11:56:00Z","iteration":4,"bug_id":"BUG-08","bug_class":"missing-input-validation","path":"warm","cost_usd":0.049,"steps":3,"verified":true}
