@@ -28,149 +28,139 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Everything must fit one projector screen with no scrolling. */
-  .shell { padding: 12px 22px 16px; }
+  .shell { padding: 10px 20px 14px; }
 
   /* ---------------- header ---------------- */
   header {
     display: flex;
     align-items: baseline;
-    gap: 18px;
-    padding-bottom: 9px;
+    gap: 16px;
+    padding-bottom: 8px;
     border-bottom: 2px solid var(--line);
   }
-  .brand {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 0.10em;
-  }
-  .tagline { color: var(--muted); font-size: 17px; letter-spacing: 0.02em; }
+  .brand { font-size: 28px; font-weight: 800; letter-spacing: 0.10em; }
+  .tagline { color: var(--muted); font-size: 16px; letter-spacing: 0.02em; }
   .live {
     margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 17px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 9px;
+    font-size: 16px; color: var(--muted); letter-spacing: 0.04em;
   }
   .dot {
-    width: 13px; height: 13px; border-radius: 50%;
-    background: var(--warm);
-    box-shadow: 0 0 14px var(--warm);
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--warm); box-shadow: 0 0 12px var(--warm);
   }
   .dot.stale { background: var(--muted); box-shadow: none; }
 
-  /* ---------------- policy strip ---------------- */
   .policy-strip {
-    margin-top: 9px;
-    padding: 9px 15px;
+    margin-top: 8px;
+    padding: 8px 14px;
     background: rgba(86,160,255,0.09);
     border-left: 5px solid var(--accent);
     border-radius: 4px;
-    font-size: 19px;
-    color: var(--ink);
+    font-size: 18px;
   }
   .policy-strip b { color: var(--accent); }
 
   /* ---------------- stat tiles ---------------- */
-  .tiles {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin: 10px 0;
-  }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 9px 0; }
   .tile {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 11px 18px 13px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 9px 16px 11px;
   }
-  .tile .k {
-    font-size: 15px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .tile .v {
-    font-size: 62px;
-    font-weight: 800;
-    line-height: 1.02;
-    margin-top: 3px;
-    letter-spacing: -0.02em;
-  }
-  .tile .sub { font-size: 17px; color: var(--muted); margin-top: 3px; }
+  .tile .k { font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .tile .v { font-size: 52px; font-weight: 800; line-height: 1.02; margin-top: 2px; letter-spacing: -0.02em; }
+  .tile .sub { font-size: 16px; color: var(--muted); margin-top: 2px; }
   .tile .sub b { color: var(--ink); font-weight: 700; }
   .v.good { color: var(--warm); }
   .v.hero { color: var(--hero); }
 
   /* ---------------- panels ---------------- */
   .panel {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 11px 18px 9px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 9px 16px 8px;
   }
   .panel h2 {
-    margin: 0 0 3px;
-    font-size: 17px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
+    margin: 0 0 2px; font-size: 15px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); font-weight: 700;
   }
-  .panel .lede { font-size: 20px; color: var(--ink); margin: 0 0 4px; }
+  .panel .lede { font-size: 18px; color: var(--ink); margin: 0 0 3px; }
   .panel .lede em { color: var(--hero); font-style: normal; font-weight: 700; }
 
-  .hero-panel { margin-bottom: 14px; }
-  .grid2 { display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; }
+  .hero-panel { margin-bottom: 12px; }
+  .grid2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 12px; }
 
   svg { display: block; width: 100%; }
   .ax { stroke: var(--line); stroke-width: 2; }
-  .axlbl { fill: var(--muted); font-size: 17px; }
-  .ptlbl { fill: var(--ink); font-size: 20px; font-weight: 700; }
+  .axlbl { fill: var(--muted); font-size: 16px; }
+  .ptlbl { fill: var(--ink); font-size: 19px; font-weight: 700; }
 
-  /* ---------------- pattern list ---------------- */
-  .plist { list-style: none; margin: 0; padding: 0; max-height: 218px; overflow-y: auto; }
-  .plist li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 20px;
-  }
-  .plist li:last-child { border-bottom: none; }
-  .pname { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .puses {
-    background: rgba(46,230,168,0.14);
-    color: var(--warm);
-    border-radius: 999px;
-    padding: 3px 13px;
-    font-weight: 800;
-    font-size: 19px;
-  }
-  .pseen { color: var(--muted); font-size: 17px; white-space: nowrap; }
+  .legend { display: flex; gap: 18px; font-size: 17px; color: var(--muted); margin-top: 4px; flex-wrap: wrap; }
+  .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+  .swline { display: inline-block; width: 26px; height: 5px; border-radius: 3px; vertical-align: 3px; margin-right: 7px; }
 
-  .legend { display: flex; gap: 20px; font-size: 18px; color: var(--muted); margin-top: 6px; }
-  .swatch { display: inline-block; width: 15px; height: 15px; border-radius: 3px; vertical-align: -2px; margin-right: 7px; }
-
-  .empty-note {
-    color: var(--muted);
-    font-size: 20px;
-    padding: 26px 0;
+  /* ---------------- split pane ---------------- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .arm-col { border-radius: 8px; padding: 10px 14px 12px; border: 1px solid var(--line); }
+  .arm-col.cold-side { background: rgba(255,107,74,0.07); border-color: rgba(255,107,74,0.35); }
+  .arm-col.warm-side { background: rgba(46,230,168,0.07); border-color: rgba(46,230,168,0.35); }
+  .arm-tag { font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800; }
+  .cold-side .arm-tag { color: var(--cold); }
+  .warm-side .arm-tag { color: var(--warm); }
+  .arm-bug { font-size: 17px; color: var(--muted); margin: 2px 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .callstack { display: flex; flex-direction: column; gap: 5px; margin-bottom: 8px; }
+  .call {
+    border-radius: 5px; padding: 5px 10px; font-size: 15px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--ink); background: rgba(255,107,74,0.16);
+    border: 1px solid rgba(255,107,74,0.30);
   }
+  .warm-side .call { background: rgba(46,230,168,0.14); border-color: rgba(46,230,168,0.32); }
+  .hitline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 16.5px; color: var(--warm); font-weight: 700;
+    padding: 7px 10px; border-radius: 5px;
+    background: rgba(46,230,168,0.14); border: 1px solid rgba(46,230,168,0.32);
+    margin-bottom: 8px; line-height: 1.45;
+  }
+  .arm-cost { font-size: 44px; font-weight: 800; line-height: 1; }
+  .cold-side .arm-cost { color: var(--cold); }
+  .warm-side .arm-cost { color: var(--warm); }
+  .arm-meta { font-size: 15px; color: var(--muted); margin-top: 3px; }
+  .xfactor {
+    text-align: center; font-size: 20px; font-weight: 800; color: var(--hero);
+    margin-top: 6px; letter-spacing: 0.02em;
+  }
+
+  /* ---------------- memory panel ---------------- */
+  .mlist { list-style: none; margin: 2px 0 0; padding: 0; max-height: 320px; overflow-y: auto; }
+  .mlist li {
+    display: flex; align-items: center; gap: 9px;
+    padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 18px;
+  }
+  .mlist li:last-child { border-bottom: none; }
+  .mname { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .msaved { color: var(--warm); font-weight: 800; font-size: 19px; white-space: nowrap; }
+  .muses {
+    background: rgba(46,230,168,0.14); color: var(--warm); border-radius: 999px;
+    padding: 2px 10px; font-weight: 800; font-size: 16px; white-space: nowrap;
+  }
+  .mborn { color: var(--muted); font-size: 15px; white-space: nowrap; }
+  .mbadge {
+    font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 800;
+    border-radius: 4px; padding: 2px 7px; white-space: nowrap;
+  }
+  .mbadge.replay { background: rgba(86,160,255,0.16); color: var(--accent); border: 1px solid rgba(86,160,255,0.4); }
+  .mbadge.other  { background: rgba(138,151,171,0.14); color: var(--muted); border: 1px solid var(--line); }
+
+  /* ---------------- bottom row ---------------- */
+  .grid-bottom { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 12px; }
+
+  .empty-note { color: var(--muted); font-size: 18px; padding: 18px 0; }
   .empty-note code { color: var(--ink); }
 
   .synthetic-banner {
-    background: #4a2e00;
-    color: #ffce5c;
-    border: 1px solid #7a4d00;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 19px;
-    font-weight: 700;
-    margin-bottom: 14px;
+    background: #4a2e00; color: #ffce5c; border: 1px solid #7a4d00;
+    border-radius: 8px; padding: 8px 14px; font-size: 18px; font-weight: 700; margin: 8px 0 4px;
   }
 </style>
 </head>
@@ -180,23 +170,23 @@
   <header>
     <span class="brand">RATCHET</span>
     <span class="tagline">cost per verified fix &mdash; it only turns one way</span>
-    <span class="live"><span id="dot" class="dot stale"></span><span id="live-text">waiting for runs/ratchet.jsonl</span></span>
+    <span class="live"><span id="dot" class="dot stale"></span><span id="live-text">waiting for runs/</span></span>
   </header>
 
   <div id="synthetic" class="synthetic-banner" style="display:none">
-    SYNTHETIC DEMO DATA &mdash; not from runs/ratchet.jsonl
+    SYNTHETIC DEMO DATA &mdash; not from runs/
   </div>
 
   <div id="policy-strip" class="policy-strip" style="display:none"></div>
 
   <div class="tiles">
     <div class="tile">
-      <div class="k">Cost saved vs iteration 0</div>
+      <div class="k">Total saved by memory</div>
       <div id="t-saved" class="v good">$0.00</div>
       <div id="t-saved-sub" class="sub">&nbsp;</div>
     </div>
     <div class="tile">
-      <div class="k">Mean steps per fix</div>
+      <div class="k">LLM calls per verified fix</div>
       <div id="t-steps" class="v">&mdash;</div>
       <div id="t-steps-sub" class="sub">&nbsp;</div>
     </div>
@@ -208,27 +198,39 @@
   </div>
 
   <div class="panel hero-panel">
-    <h2>Cost per verified fix, by iteration</h2>
-    <p class="lede">Every point is one loop. The line goes down <em>because the agent wrote something down.</em></p>
+    <h2>Cost per verified fix, by iteration &mdash; two arms, same bugs, same model</h2>
+    <p class="lede">Memory off, every run starts from zero. Memory on, <em>the line bends.</em></p>
     <div id="hero-chart"></div>
+    <div class="legend">
+      <span><span class="swline" style="background:var(--cold)"></span>Replay + coding agent (today) &mdash; memory off</span>
+      <span><span class="swline" style="background:var(--hero)"></span>Ratchet &mdash; memory on</span>
+    </div>
   </div>
 
   <div class="grid2">
     <div class="panel">
-      <h2>Warm vs cold path share</h2>
-      <p class="lede">Warm = answered from memory. <em>Warm eats cold.</em></p>
+      <h2>Same bug class, cold vs warm</h2>
+      <p class="lede">Left: first encounter. Right: <em>it remembered.</em></p>
+      <div id="split-pane" class="split"></div>
+      <div id="xfactor" class="xfactor"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Memory &mdash; the asset</h2>
+      <p class="lede">Every pattern: what it has <em>saved so far.</em></p>
+      <ul id="mlist" class="mlist"></ul>
+      <div id="mlist-empty" class="empty-note">No patterns yet.</div>
+    </div>
+  </div>
+
+  <div class="grid-bottom">
+    <div class="panel">
+      <h2>Warm vs cold path share (Ratchet arm)</h2>
       <div id="path-chart"></div>
       <div class="legend">
         <span><span class="swatch" style="background:var(--warm)"></span>warm &mdash; memory hit</span>
         <span><span class="swatch" style="background:var(--cold)"></span>cold &mdash; full reasoning</span>
       </div>
-    </div>
-
-    <div class="panel">
-      <h2>Patterns learned</h2>
-      <p class="lede">Written once. Reused forever.</p>
-      <ul id="plist" class="plist"></ul>
-      <div id="plist-empty" class="empty-note">No patterns yet.</div>
     </div>
   </div>
 
@@ -238,17 +240,17 @@
 (function () {
   'use strict';
 
-  var params    = new URLSearchParams(location.search);
-  var SRC       = params.get('src') || '../runs/ratchet.jsonl';
+  var params = new URLSearchParams(location.search);
+  var GOLDEN = params.get('golden') === '1';
+  var BASE   = GOLDEN ? '../runs/golden/' : '../runs/';
+  var SRC     = params.get('src')     || BASE + 'ratchet.jsonl';
+  var CONTROL = params.get('control') || BASE + 'control.jsonl';
   var SYNTHETIC = params.get('demo') === '1';
-  var POLL_MS   = 2000;
+  var POLL_MS = 2000;
 
   var lastSig = null;
 
-  /* ---------- tolerant field access -------------------------------------
-   * Lane A owns the emitter; we accept the obvious aliases so a schema
-   * tweak on their side does not blank the projector on stage.
-   * -------------------------------------------------------------------- */
+  /* ---------- tolerant field access ------------------------------------ */
   function pick(o) {
     for (var i = 1; i < arguments.length; i++) {
       var k = arguments[i];
@@ -261,20 +263,33 @@
   function normalise(r) {
     return {
       iteration: num(pick(r, 'iteration', 'iter', 'loop', 'run'), 0),
+      arm:       String(pick(r, 'arm') || 'ratchet').toLowerCase(),
       cost:      num(pick(r, 'cost_usd', 'cost', 'usd', 'total_cost'), 0),
-      steps:     num(pick(r, 'steps', 'step_count', 'n_steps'), NaN),
-      path:      String(pick(r, 'path', 'route', 'mode', 'lane') || '').toLowerCase(),
-      verified:  pick(r, 'verified', 'is_verified', 'fix_verified') === true,
+      saved:     num(pick(r, 'saved_usd'), 0),
+      llmCalls:  num(pick(r, 'llm_calls', 'steps', 'step_count'), NaN),
+      path:      String(pick(r, 'path', 'route', 'mode') || '').toLowerCase(),
+      verified:  pick(r, 'verified', 'is_verified') === true,
       bugId:     pick(r, 'bug_id', 'bug', 'id'),
-      cls:       pick(r, 'bug_class', 'class', 'pattern_class', 'signature_class', 'pattern_id'),
+      cls:       pick(r, 'bug_class', 'class', 'pattern_class'),
+      sig:       pick(r, 'sig', 'signature'),
+      patternId: pick(r, 'pattern_id'),
+      similarity:num(pick(r, 'similarity', 'top_score'), 0),
+      uses:      num(pick(r, 'uses'), 0),
+      tokensIn:  num(pick(r, 'tokens_in'), NaN),
+      tokensOut: num(pick(r, 'tokens_out'), NaN),
+      wallMs:    num(pick(r, 'wall_ms'), NaN),
+      attempt:   num(pick(r, 'attempt'), 1),
+      model:     pick(r, 'model'),
+      discoveredBy: pick(r, 'discovered_by'),
+      bornAt:    num(pick(r, 'born_at_iteration'), NaN),
       event:     pick(r, 'event', 'type', 'kind'),
-      note:      pick(r, 'note', 'message', 'detail', 'diff_summary')
+      note:      pick(r, 'note', 'message', 'detail')
     };
   }
 
   function parse(text) {
     var out = [];
-    text.split('\n').forEach(function (line) {
+    String(text || '').split('\n').forEach(function (line) {
       line = line.trim();
       if (!line) return;
       try { out.push(normalise(JSON.parse(line))); } catch (e) { /* partial write; skip */ }
@@ -284,55 +299,62 @@
 
   /* ---------- aggregation ---------------------------------------------- */
 
-  function aggregate(recs) {
+  function perIteration(recs) {
     var byIter = {}, order = [];
-    var patterns = {};
-    var policyEvents = [];
-
     recs.forEach(function (r) {
-      if (r.event && String(r.event).indexOf('policy') !== -1) {
-        policyEvents.push(r);
-        return;
-      }
-
+      if (r.event) return;
       var it = r.iteration;
-      if (!byIter[it]) {
-        byIter[it] = { iter: it, cost: 0, warm: 0, cold: 0, fixes: 0, stepsSum: 0, stepsN: 0 };
-        order.push(it);
-      }
+      if (!byIter[it]) { byIter[it] = { iter: it, cost: 0, ver: 0, warm: 0, cold: 0, calls: 0, callsN: 0 }; order.push(it); }
       var b = byIter[it];
       b.cost += r.cost;
       if (r.path === 'warm') b.warm++;
       else if (r.path === 'cold') b.cold++;
       if (r.verified) {
-        b.fixes++;
-        if (isFinite(r.steps)) { b.stepsSum += r.steps; b.stepsN++; }
-      }
-
-      if (r.cls) {
-        var p = patterns[r.cls];
-        if (!p) p = patterns[r.cls] = { name: r.cls, uses: 0, firstSeen: it };
-        if (it < p.firstSeen) p.firstSeen = it;
-        if (r.path === 'warm') p.uses++;
+        b.ver++;
+        if (isFinite(r.llmCalls)) { b.calls += r.llmCalls; b.callsN++; }
       }
     });
-
     order.sort(function (a, b) { return a - b; });
-
-    var iters = order.map(function (i) {
+    return order.map(function (i) {
       var b = byIter[i];
-      b.cpf = b.fixes > 0 ? b.cost / b.fixes : null;
-      b.meanSteps = b.stepsN > 0 ? b.stepsSum / b.stepsN : null;
+      b.cpf = b.ver > 0 ? b.cost / b.ver : null;
+      b.meanCalls = b.callsN > 0 ? b.calls / b.callsN : null;
       return b;
     });
-
-    var plist = Object.keys(patterns).map(function (k) { return patterns[k]; });
-    plist.sort(function (a, b) { return b.uses - a.uses || a.firstSeen - b.firstSeen; });
-
-    return { iters: iters, patterns: plist, policyEvents: policyEvents };
   }
 
-  /* ---------- charts ---------------------------------------------------- */
+  function patternTable(recs) {
+    var pat = {};
+    recs.forEach(function (r) {
+      if (r.event || r.arm !== 'ratchet') return;
+      if (r.path === 'warm' && r.patternId) {
+        var p = pat[r.patternId] || (pat[r.patternId] = { id: r.patternId, cls: r.cls, saved: 0, uses: 0, born: Infinity, by: r.discoveredBy });
+        p.saved += r.saved;
+        p.uses = Math.max(p.uses, r.uses || 0);
+        p.cls = p.cls || r.cls;
+      }
+    });
+    // born = earliest verified row whose sig IS the pattern (cold or warm —
+    // a verified warm fix also persists a pattern), fallback born_at_iteration.
+    recs.forEach(function (r) {
+      if (r.event || !r.sig || !pat[r.sig]) return;
+      if (r.verified) pat[r.sig].born = Math.min(pat[r.sig].born, r.iteration);
+      if (pat[r.sig].by === undefined) pat[r.sig].by = r.discoveredBy;
+    });
+    var list = Object.keys(pat).map(function (k) {
+      var p = pat[k];
+      if (!isFinite(p.born) && isFinite(p.bornAt)) p.born = p.bornAt;
+      return p;
+    });
+    list.sort(function (a, b) { return b.saved - a.saved; });
+    return list;
+  }
+
+  function policyEvents(recs) {
+    return recs.filter(function (r) { return r.event && String(r.event).indexOf('policy') !== -1; });
+  }
+
+  /* ---------- svg helpers ----------------------------------------------- */
 
   var NS = 'http://www.w3.org/2000/svg';
   function el(tag, attrs, text) {
@@ -346,8 +368,6 @@
     return v >= 1 ? '$' + v.toFixed(2) : '$' + v.toFixed(3);
   }
 
-  // Pick a gridline step of 1/2/2.5/5 × 10^k so the axis labels read as clean
-  // money from across the room, not as $0.726. Always 4 divisions.
   var DIVS = 4;
   function niceScale(max) {
     if (!(max > 0)) return { top: 1, step: 0.25 };
@@ -361,239 +381,338 @@
     return { top: step * DIVS, step: step };
   }
 
-  function drawHero(host, iters) {
+  /* ---------- hero: two lines ------------------------------------------ */
+
+  function drawHero(host, ratchetIters, controlIters) {
     host.innerHTML = '';
-    var pts = iters.filter(function (b) { return b.cpf !== null; });
-    if (pts.length === 0) {
-      host.innerHTML = '<div class="empty-note">Waiting for the first verified fix. Start the loop &mdash; <code>python -m ratchet.loop</code>.</div>';
+    var rp = ratchetIters.filter(function (b) { return b.cpf !== null; });
+    var cp = controlIters.filter(function (b) { return b.cpf !== null; });
+    if (rp.length === 0 && cp.length === 0) {
+      host.innerHTML = '<div class="empty-note">Waiting for the first verified fix.</div>';
       return;
     }
 
-    var W = 1000, H = 250, L = 104, R = 34, T = 28, B = 46;
+    var W = 1000, H = 240, L = 100, R = 34, T = 30, B = 44;
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
 
-    var max = Math.max.apply(null, pts.map(function (p) { return p.cpf; }));
-    var top = niceScale(max).top;
+    // Scale covers BOTH arms — the control line climbing must never be cropped.
+    var all = rp.concat(cp).map(function (p) { return p.cpf; });
+    var top = niceScale(Math.max.apply(null, all)).top;
 
-    var x = function (i) {
-      return pts.length === 1 ? (L + (W - L - R) / 2)
-                              : L + (i * (W - L - R)) / (pts.length - 1);
+    var iterSet = {};
+    rp.concat(cp).forEach(function (p) { iterSet[p.iter] = true; });
+    var iters = Object.keys(iterSet).map(Number).sort(function (a, b) { return a - b; });
+    var minIt = iters[0], maxIt = iters[iters.length - 1];
+
+    var x = function (it) {
+      return maxIt === minIt ? (L + (W - L - R) / 2)
+        : L + ((it - minIt) * (W - L - R)) / (maxIt - minIt);
     };
     var y = function (v) { return T + (1 - v / top) * (H - T - B); };
 
-    // horizontal gridlines
     for (var g = 0; g <= DIVS; g++) {
-      var gv = (top * g) / DIVS;
-      var gy = y(gv);
+      var gv = (top * g) / DIVS, gy = y(gv);
       svg.appendChild(el('line', { x1: L, y1: gy, x2: W - R, y2: gy, stroke: '#1a2130', 'stroke-width': 1 }));
       svg.appendChild(el('text', { x: L - 14, y: gy + 6, class: 'axlbl', 'text-anchor': 'end' }, money(gv)));
     }
-
     svg.appendChild(el('line', { x1: L, y1: H - B, x2: W - R, y2: H - B, class: 'ax' }));
-
-    // baseline reference from iteration 0
-    var base = pts[0].cpf;
-    svg.appendChild(el('line', {
-      x1: L, y1: y(base), x2: W - R, y2: y(base),
-      stroke: '#4b5567', 'stroke-width': 2, 'stroke-dasharray': '8 8'
-    }));
-
-    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(i) + ' ' + y(p.cpf); }).join(' ');
-    svg.appendChild(el('path', {
-      d: d, fill: 'none', stroke: 'var(--hero)', 'stroke-width': 6,
-      'stroke-linejoin': 'round', 'stroke-linecap': 'round'
-    }));
-
-    pts.forEach(function (p, i) {
-      svg.appendChild(el('circle', { cx: x(i), cy: y(p.cpf), r: 9, fill: 'var(--hero)' }));
-      // Anchor the end labels inward so they never collide with the y-axis
-      // labels or run off the right edge.
-      var anchor = i === 0 ? 'start' : (i === pts.length - 1 ? 'end' : 'middle');
-      var dx = i === 0 ? 10 : (i === pts.length - 1 ? -10 : 0);
-      svg.appendChild(el('text', {
-        x: x(i) + dx, y: y(p.cpf) - 19, class: 'ptlbl', 'text-anchor': anchor
-      }, money(p.cpf)));
-      svg.appendChild(el('text', {
-        x: x(i), y: H - B + 28, class: 'axlbl', 'text-anchor': 'middle'
-      }, 'iter ' + p.iter));
+    iters.forEach(function (it) {
+      svg.appendChild(el('text', { x: x(it), y: H - B + 26, class: 'axlbl', 'text-anchor': 'middle' }, 'iter ' + it));
     });
+
+    function line(pts, color, width, labelEnds, labelBelowFirst) {
+      if (!pts.length) return;
+      var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p.iter) + ' ' + y(p.cpf); }).join(' ');
+      svg.appendChild(el('path', { d: d, fill: 'none', stroke: color, 'stroke-width': width, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
+      pts.forEach(function (p, i) {
+        svg.appendChild(el('circle', { cx: x(p.iter), cy: y(p.cpf), r: 7, fill: color }));
+        if (!labelEnds || i === 0 || i === pts.length - 1) {
+          var anchor = i === 0 ? 'start' : (i === pts.length - 1 ? 'end' : 'middle');
+          var dx = i === 0 ? 8 : (i === pts.length - 1 ? -8 : 0);
+          // Ratchet starts just below control at iter 0 — drop its first
+          // label under the point so the two never collide.
+          var dy = (labelBelowFirst && i === 0) ? 30 : -15;
+          svg.appendChild(el('text', { x: x(p.iter) + dx, y: y(p.cpf) + dy, class: 'ptlbl', 'text-anchor': anchor }, money(p.cpf)));
+        }
+      });
+    }
+
+    line(cp, 'var(--cold)', 4, true, false);   // control: label ends only
+    line(rp, 'var(--hero)', 6, false, true);   // ratchet: label every point — it's the hero
 
     host.appendChild(svg);
   }
 
-  function drawPaths(host, iters) {
-    host.innerHTML = '';
-    var bars = iters.filter(function (b) { return (b.warm + b.cold) > 0; });
-    if (bars.length === 0) {
-      host.innerHTML = '<div class="empty-note">No path data yet.</div>';
+  /* ---------- split pane ------------------------------------------------ */
+
+  function drawSplit(recs) {
+    var host = document.getElementById('split-pane');
+    var xf = document.getElementById('xfactor');
+    host.innerHTML = ''; xf.textContent = '';
+
+    var rows = recs.filter(function (r) { return !r.event && r.arm === 'ratchet'; });
+    var warms = rows.filter(function (r) { return r.path === 'warm' && r.verified && r.patternId; });
+    if (!warms.length) {
+      host.innerHTML = '<div class="empty-note">No warm hit yet — the split appears at the first memory hit.</div>';
       return;
     }
 
-    var W = 620, H = 196, L = 20, R = 20, T = 26, B = 42;
-    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
-
-    var plotH = H - T - B;
-    var slot  = (W - L - R) / bars.length;
-    var bw    = Math.min(78, slot * 0.62);
-
-    bars.forEach(function (b, i) {
-      var total = b.warm + b.cold;
-      var cx = L + slot * i + slot / 2;
-      var bx = cx - bw / 2;
-
-      var coldH = (b.cold / total) * plotH;
-      var warmH = (b.warm / total) * plotH;
-
-      svg.appendChild(el('rect', { x: bx, y: T, width: bw, height: coldH, fill: 'var(--cold)', rx: 3 }));
-      svg.appendChild(el('rect', { x: bx, y: T + coldH, width: bw, height: warmH, fill: 'var(--warm)', rx: 3 }));
-
-      var pct = Math.round((b.warm / total) * 100);
-      svg.appendChild(el('text', { x: cx, y: T - 8, class: 'ptlbl', 'text-anchor': 'middle' }, pct + '%'));
-      svg.appendChild(el('text', { x: cx, y: H - B + 30, class: 'axlbl', 'text-anchor': 'middle' }, 'iter ' + b.iter));
+    // Prefer a hit that GENERALISED: the matched pattern was learned on a
+    // different bug (cross-modal), and that origin row exists in the log.
+    // That is the demo's story — same root cause, different clothes.
+    function originOf(w) {
+      // Origin must be a COLD verified fix of a DIFFERENT bug — full price
+      // paid once, then generalised. That contrast is the whole beat.
+      var o = rows.filter(function (r) {
+        return r.sig === w.patternId && r.verified && r.path === 'cold' && r.bugId !== w.bugId;
+      });
+      return o.length ? o[0] : null;
+    }
+    var cross = warms.filter(function (w) { return originOf(w); });
+    var pool = cross.length ? cross : warms;
+    // Prefer the bug class with the most warm reuse (the class where memory
+    // is earning hardest), then the EARLIEST cross-bug hit in it — the first
+    // time memory generalised. Stable, and it's the row the story is about.
+    var clsCount = {};
+    warms.forEach(function (w) { clsCount[w.cls] = (clsCount[w.cls] || 0) + 1; });
+    var bestCls = null;
+    pool.forEach(function (w) {
+      if (bestCls === null || (clsCount[w.cls] || 0) > (clsCount[bestCls] || 0)) bestCls = w.cls;
+    });
+    var inCls = pool.filter(function (w) { return w.cls === bestCls; });
+    var warm = inCls.reduce(function (a, b) {
+      return (b.iteration < a.iteration) ? b : a;
     });
 
-    svg.appendChild(el('line', { x1: L, y1: T + plotH, x2: W - R, y2: T + plotH, class: 'ax' }));
-    host.appendChild(svg);
+    // Cold side: the row where this exact pattern was learned; fall back to
+    // the earliest cold verified fix of the same class.
+    var cold = originOf(warm);
+    if (!cold) {
+      var colds = rows.filter(function (r) { return r.path === 'cold' && r.verified && r.cls === warm.cls; });
+      cold = colds.length ? colds[0] : null;
+    }
+
+    function fmtMs(ms) { return isFinite(ms) ? (ms >= 1000 ? (ms / 1000).toFixed(1) + 's' : ms + 'ms') : '—'; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    var left = document.createElement('div');
+    left.className = 'arm-col cold-side';
+    if (cold) {
+      var callsHtml = '';
+      var n = isFinite(cold.llmCalls) ? cold.llmCalls : 0;
+      for (var i = 1; i <= n; i++) callsHtml += '<div class="call">LLM call ' + i + ' / ' + n + ' &middot; ' + esc(cold.model || '') + '</div>';
+      left.innerHTML =
+        '<div class="arm-tag">COLD &middot; first encounter</div>' +
+        '<div class="arm-bug">' + esc(cold.bugId) + ' &middot; iter ' + cold.iteration + '</div>' +
+        '<div class="callstack">' + callsHtml + '</div>' +
+        '<div class="arm-cost">' + money(cold.cost) + '</div>' +
+        '<div class="arm-meta">' + n + ' LLM calls &middot; ' +
+          (isFinite(cold.tokensIn) ? (cold.tokensIn + cold.tokensOut).toLocaleString() + ' tokens &middot; ' : '') +
+          fmtMs(cold.wallMs) + (cold.attempt > 1 ? ' &middot; attempt ' + cold.attempt : '') + '</div>';
+    } else {
+      left.innerHTML = '<div class="arm-tag">COLD</div><div class="empty-note">No cold row for class ' + esc(warm.cls) + '</div>';
+    }
+
+    var right = document.createElement('div');
+    right.className = 'arm-col warm-side';
+    right.innerHTML =
+      '<div class="arm-tag">WARM &middot; ' + esc(warm.cls) + '</div>' +
+      '<div class="arm-bug">' + esc(warm.bugId) + ' &middot; iter ' + warm.iteration + '</div>' +
+      '<div class="hitline">MEMORY HIT &middot; pattern ' + esc(warm.patternId) +
+        '<br>similarity ' + warm.similarity.toFixed(4).replace(/0+$/, '').replace(/\.$/, '') +
+        ' &middot; used ' + warm.uses + '&times;</div>' +
+      '<div class="arm-cost">' + money(warm.cost) + '</div>' +
+      '<div class="arm-meta">' + (isFinite(warm.llmCalls) ? warm.llmCalls : 1) + ' LLM call &middot; ' +
+        (isFinite(warm.tokensIn) ? (warm.tokensIn + warm.tokensOut).toLocaleString() + ' tokens &middot; ' : '') +
+        fmtMs(warm.wallMs) + ' &middot; verified</div>';
+
+    host.appendChild(left);
+    host.appendChild(right);
+
+    if (cold && warm.cost > 0) {
+      var sameBug = cold.bugId === warm.bugId;
+      xf.textContent = (cold.cost / warm.cost).toFixed(0) + '× cheaper — ' +
+        (sameBug ? 'the same bug, remembered' : 'same root cause (' + warm.cls + '), different bug');
+    }
   }
 
-  function drawPatterns(agg) {
-    var ul = document.getElementById('plist');
-    var empty = document.getElementById('plist-empty');
+  /* ---------- memory panel ---------------------------------------------- */
+
+  function drawMemory(patterns) {
+    var ul = document.getElementById('mlist');
+    var empty = document.getElementById('mlist-empty');
     ul.innerHTML = '';
-    if (agg.patterns.length === 0) { empty.style.display = ''; return; }
+    if (!patterns.length) { empty.style.display = ''; return; }
     empty.style.display = 'none';
 
-    agg.patterns.forEach(function (p) {
+    patterns.forEach(function (p) {
       var li = document.createElement('li');
 
       var name = document.createElement('span');
-      name.className = 'pname';
-      name.textContent = p.name;
+      name.className = 'mname';
+      name.textContent = p.cls || p.id;
+      name.title = p.id;
+
+      var badge = document.createElement('span');
+      var by = String(p.by || 'ratchet');
+      badge.className = 'mbadge ' + (by.indexOf('replay') !== -1 ? 'replay' : 'other');
+      badge.textContent = by;
+
+      var saved = document.createElement('span');
+      saved.className = 'msaved';
+      saved.textContent = 'saved ' + money(p.saved);
 
       var uses = document.createElement('span');
-      uses.className = 'puses';
+      uses.className = 'muses';
       uses.textContent = p.uses + '×';
 
-      var seen = document.createElement('span');
-      seen.className = 'pseen';
-      seen.textContent = 'first seen iter ' + p.firstSeen;
+      var born = document.createElement('span');
+      born.className = 'mborn';
+      born.textContent = isFinite(p.born) ? 'born iter ' + p.born : '';
 
       li.appendChild(name);
+      li.appendChild(badge);
       li.appendChild(uses);
-      li.appendChild(seen);
+      li.appendChild(born);
+      li.appendChild(saved);
       ul.appendChild(li);
     });
   }
 
-  function drawTiles(agg) {
-    var iters = agg.iters.filter(function (b) { return b.cpf !== null; });
+  /* ---------- path bars -------------------------------------------------- */
 
-    // cost saved: what iteration 0's unit price would have cost for every fix since
-    var saved = 0, savedFixes = 0;
-    if (iters.length > 0) {
-      var base = iters[0].cpf;
-      for (var i = 1; i < iters.length; i++) {
-        saved += (base - iters[i].cpf) * iters[i].fixes;
-        savedFixes += iters[i].fixes;
-      }
-    }
-    document.getElementById('t-saved').textContent = money(Math.max(0, saved));
-    document.getElementById('t-saved-sub').innerHTML = iters.length > 1
-      ? 'across <b>' + savedFixes + '</b> fixes since iteration 0'
-      : '&nbsp;';
+  function drawPaths(host, iters) {
+    host.innerHTML = '';
+    var bars = iters.filter(function (b) { return (b.warm + b.cold) > 0; });
+    if (!bars.length) { host.innerHTML = '<div class="empty-note">No path data yet.</div>'; return; }
 
-    var withSteps = agg.iters.filter(function (b) { return b.meanSteps !== null; });
-    if (withSteps.length > 0) {
-      var now = withSteps[withSteps.length - 1].meanSteps;
-      var was = withSteps[0].meanSteps;
+    var W = 1000, H = 150, L = 20, R = 20, T = 24, B = 38;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
+    var plotH = H - T - B;
+    var slot = (W - L - R) / bars.length;
+    var bw = Math.min(110, slot * 0.6);
+
+    bars.forEach(function (b, i) {
+      var total = b.warm + b.cold;
+      var cx = L + slot * i + slot / 2, bx = cx - bw / 2;
+      var coldH = (b.cold / total) * plotH;
+      svg.appendChild(el('rect', { x: bx, y: T, width: bw, height: coldH, fill: 'var(--cold)', rx: 3 }));
+      svg.appendChild(el('rect', { x: bx, y: T + coldH, width: bw, height: plotH - coldH, fill: 'var(--warm)', rx: 3 }));
+      svg.appendChild(el('text', { x: cx, y: T - 7, class: 'ptlbl', 'text-anchor': 'middle' }, Math.round((b.warm / total) * 100) + '%'));
+      svg.appendChild(el('text', { x: cx, y: H - B + 26, class: 'axlbl', 'text-anchor': 'middle' }, 'iter ' + b.iter));
+    });
+    svg.appendChild(el('line', { x1: L, y1: T + plotH, x2: W - R, y2: T + plotH, class: 'ax' }));
+    host.appendChild(svg);
+  }
+
+  /* ---------- tiles & strip ---------------------------------------------- */
+
+  function drawTiles(ratchetRecs, ratchetIters, patterns) {
+    var saved = 0;
+    ratchetRecs.forEach(function (r) { if (!r.event && r.arm === 'ratchet') saved += r.saved; });
+    document.getElementById('t-saved').textContent = money(saved);
+    var warmN = ratchetRecs.filter(function (r) { return r.path === 'warm' && r.verified; }).length;
+    document.getElementById('t-saved-sub').innerHTML = warmN ? 'across <b>' + warmN + '</b> memory hits' : '&nbsp;';
+
+    var withCalls = ratchetIters.filter(function (b) { return b.meanCalls !== null; });
+    if (withCalls.length) {
+      var now = withCalls[withCalls.length - 1].meanCalls;
+      var was = withCalls[0].meanCalls;
       var t = document.getElementById('t-steps');
       t.textContent = now.toFixed(1);
       t.className = 'v' + (now < was ? ' good' : '');
       document.getElementById('t-steps-sub').innerHTML =
-        withSteps.length > 1 ? 'was <b>' + was.toFixed(1) + '</b> at iteration 0' : '&nbsp;';
+        withCalls.length > 1 ? 'was <b>' + was.toFixed(1) + '</b> at iteration 0' : '&nbsp;';
     }
 
-    document.getElementById('t-patterns').textContent = String(agg.patterns.length);
-    var reused = agg.patterns.reduce(function (a, p) { return a + p.uses; }, 0);
+    document.getElementById('t-patterns').textContent = String(patterns.length);
+    var reused = patterns.reduce(function (a, p) { return a + p.uses; }, 0);
     document.getElementById('t-patterns-sub').innerHTML =
-      agg.patterns.length ? 'reused <b>' + reused + '</b> times' : '&nbsp;';
+      patterns.length ? 'reused <b>' + reused + '</b> times' : '&nbsp;';
   }
 
-  function drawPolicy(agg) {
+  function drawPolicy(recs) {
     var strip = document.getElementById('policy-strip');
-    if (agg.policyEvents.length === 0) { strip.style.display = 'none'; return; }
-    var last = agg.policyEvents[agg.policyEvents.length - 1];
+    var evs = policyEvents(recs);
+    if (!evs.length) { strip.style.display = 'none'; return; }
+    var last = evs[evs.length - 1];
     strip.style.display = '';
     strip.innerHTML = '<b>SLOW LOOP:</b> agent rewrote its own policy.yaml at iteration ' +
       last.iteration + (last.note ? ' &mdash; ' + String(last.note) : '');
   }
 
-  function draw(recs, live) {
-    var agg = aggregate(recs);
-    drawTiles(agg);
-    drawHero(document.getElementById('hero-chart'), agg.iters);
-    drawPaths(document.getElementById('path-chart'), agg.iters);
-    drawPatterns(agg);
-    drawPolicy(agg);
+  /* ---------- main draw --------------------------------------------------- */
+
+  function draw(ratchetRecs, controlRecs, live) {
+    var ratchetIters = perIteration(ratchetRecs.filter(function (r) { return r.arm === 'ratchet'; }));
+    var controlIters = perIteration(controlRecs.filter(function (r) { return r.arm === 'control'; }));
+    var patterns = patternTable(ratchetRecs);
+
+    drawTiles(ratchetRecs, ratchetIters, patterns);
+    drawHero(document.getElementById('hero-chart'), ratchetIters, controlIters);
+    drawSplit(ratchetRecs);
+    drawMemory(patterns);
+    drawPaths(document.getElementById('path-chart'), ratchetIters);
+    drawPolicy(ratchetRecs);
 
     var dot = document.getElementById('dot');
     var txt = document.getElementById('live-text');
     if (live) {
       dot.className = 'dot';
-      var last = agg.iters.length ? agg.iters[agg.iters.length - 1].iter : 0;
-      txt.textContent = recs.length + ' events · iteration ' + last;
+      var last = ratchetIters.length ? ratchetIters[ratchetIters.length - 1].iter : 0;
+      txt.textContent = ratchetRecs.length + '+' + controlRecs.length + ' events · iteration ' + last + (GOLDEN ? ' · golden' : '');
     } else {
       dot.className = 'dot stale';
       txt.textContent = 'waiting for ' + SRC;
     }
   }
 
-  /* ---------- synthetic mode (?demo=1) — clearly labelled -------------- */
-  function syntheticRecords() {
-    var classes = ['modal-state-not-reset', 'counter-off-by-one', 'filter-state-lost-on-mutation',
-                   'missing-preventdefault', 'dead-control', 'missing-input-validation'];
-    var recs = [], id = 0;
+  /* ---------- synthetic mode (?demo=1) — clearly labelled ----------------- */
+  function syntheticRecords(arm) {
+    var classes = ['modal-state-not-reset', 'counter-off-by-one', 'dead-control'];
+    var recs = [];
     var costs = [0.42, 0.31, 0.18, 0.11, 0.07];
     for (var it = 0; it < 5; it++) {
-      var n = 2;
-      for (var j = 0; j < n; j++) {
-        var warm = it > 0 && (it + j) % 3 !== 0;
-        recs.push({
-          iteration: it,
-          bug_id: 'BUG-0' + ((id++ % 8) + 1),
-          bug_class: classes[(it + j) % classes.length],
+      for (var j = 0; j < 2; j++) {
+        var warm = arm === 'ratchet' && it > 0 && (it + j) % 3 !== 0;
+        recs.push(normalise({
+          iteration: it, arm: arm,
+          bug_id: 'BUG-' + it + '-' + j, bug_class: classes[(it + j) % classes.length],
+          sig: 'sig' + it + j, pattern_id: warm ? 'sig00' : null,
+          similarity: warm ? 0.87 : 0, uses: warm ? it + 1 : null,
           path: warm ? 'warm' : 'cold',
-          cost_usd: costs[it] * (warm ? 0.55 : 1.35),
-          steps: Math.max(2, 12 - it * 2 + j),
-          verified: true
-        });
+          cost_usd: (arm === 'control' ? costs[0] : costs[it]) * (warm ? 0.25 : 1.1),
+          saved_usd: warm ? 0.3 : 0, llm_calls: warm ? 1 : 4,
+          tokens_in: 5000, tokens_out: 1400, wall_ms: warm ? 800 : 3200,
+          verified: true, discovered_by: 'synthetic', model: 'synthetic'
+        }));
       }
     }
-    recs.push({ iteration: 3, event: 'policy_rewrite', note: 'promoted signature step to code' });
-    return recs.map(normalise);
+    return recs;
   }
 
-  /* ---------- poll ------------------------------------------------------ */
+  /* ---------- poll --------------------------------------------------------- */
+
+  function fetchText(url) {
+    return fetch(url + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .catch(function () { return ''; });
+  }
 
   function tick() {
-    if (SYNTHETIC) return;
-    fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (r) {
-        if (!r.ok) throw new Error(String(r.status));
-        return r.text();
-      })
-      .then(function (text) {
-        var sig = text.length + ':' + text.slice(-160);
-        if (sig === lastSig) return;
-        lastSig = sig;
-        draw(parse(text), true);
-      })
-      .catch(function () { draw([], false); });
+    Promise.all([fetchText(SRC), fetchText(CONTROL)]).then(function (texts) {
+      var sig = texts[0].length + ':' + texts[1].length + ':' + texts[0].slice(-120);
+      if (sig === lastSig) return;
+      lastSig = sig;
+      var ratchet = parse(texts[0]);
+      var control = parse(texts[1]);
+      draw(ratchet, control, ratchet.length > 0 || control.length > 0);
+    });
   }
 
   if (SYNTHETIC) {
     document.getElementById('synthetic').style.display = '';
-    draw(syntheticRecords(), true);
+    draw(syntheticRecords('ratchet'), syntheticRecords('control'), true);
     document.getElementById('live-text').textContent = 'synthetic';
   } else {
     tick();
