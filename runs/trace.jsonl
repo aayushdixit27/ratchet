@@ -126,3 +126,563 @@
 {"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
 {"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
 {"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 0, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 0, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 0, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 1, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 1, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 1, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 1, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 1, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 2, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 2, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 2, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 2, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 2, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 3, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 3, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 3, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 3, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 3, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 3, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-01", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "localize", "output": "element #modal-settings"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-02", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "localize", "output": "element #modal-confirm"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 4, "bug_id": "BUG-03", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "localize", "output": "element #counter"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 4, "bug_id": "BUG-04", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "localize", "output": "element .chip[data-filter]"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation"}
+{"iteration": 4, "bug_id": "BUG-05", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "localize", "output": "element #edit-form"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 4, "bug_id": "BUG-06", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "localize", "output": "element #toast-close"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 4, "bug_id": "BUG-07", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "localize", "output": "element #new-task"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 4, "bug_id": "BUG-08", "arm": "control", "step": "self_review", "output": "approve no issues found"}

@@ -134,6 +134,11 @@ def run_arm(
     pol = load_policy()
     warm_threshold = float(pol.warm_threshold)
 
+    # Honest provenance: label data by where it actually came from. "replay-qa"
+    # only when QA resolved to a live backend; "fixture" otherwise. Never fake it.
+    qa_backend = bundle.backends.get("qa", "fixture")
+    source = "replay-qa" if qa_backend not in ("fixture", "fixture(degraded)") else "fixture"
+
     # running per-class mean cold cost, for saved_usd accounting (Amendment-02 #2)
     cold_costs: dict[str, list[float]] = {}
     per_iter = []
@@ -206,6 +211,8 @@ def run_arm(
                 "wall_ms": 800 * calls,  # modelled, deterministic
                 "verified": bool(ok), "memory_hit": warm, "top_score": top_score,
                 "degraded": degraded, "model": usage.get("model", "unknown"),
+                "discovered_by": arm, "root_cause_source": source,
+                "born_at_iteration": it,
             }
             _append_jsonl(jsonl_path, record)
 
