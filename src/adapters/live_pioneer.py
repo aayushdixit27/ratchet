@@ -58,11 +58,23 @@ class PioneerRouter(Degradable):
         self._fixture = FixtureRouter()
         self._base = (env("PIONEER_BASE_URL") or DEFAULT_BASE).rstrip("/")
         self._key = env("PIONEER_API_KEY")
-        self._cheap = env("PIONEER_CHEAP_MODEL") or "gemma"
-        self._strong = env("PIONEER_STRONG_MODEL") or "claude-sonnet-5"
+        # Model IDs are namespaced (e.g. "fastino/gliner2-base-v1"). There are
+        # no safe defaults — list them with
+        #   curl -H "X-API-Key: $PIONEER_API_KEY" https://api.pioneer.ai/v1/models
+        # and set both in .env.
+        self._cheap = env("PIONEER_CHEAP_MODEL")
+        self._strong = env("PIONEER_STRONG_MODEL")
         self._adaptive = (os.getenv("PIONEER_ADAPTIVE", "true").lower() != "false")
         if not self._key:
             self._degrade("PIONEER_API_KEY not set")
+        elif not self._cheap or not self._strong:
+            self._degrade("PIONEER_CHEAP_MODEL / PIONEER_STRONG_MODEL not set — "
+                          "curl /v1/models with your key and put two real IDs in .env")
+        elif self._cheap == self._strong:
+            # The one place a wrong config silently produces a lying chart:
+            # if warm and cold hit the same model, the cost story is fake.
+            self._degrade(f"cheap and strong both resolve to '{self._cheap}' — "
+                          "the warm/cold cost gap would be fabricated; refusing")
         else:
             self.backend = "pioneer-live"
 
@@ -87,7 +99,7 @@ class PioneerRouter(Degradable):
                     "adaptive": self._adaptive,
                     "max_tokens": int(os.getenv("PIONEER_MAX_TOKENS", "1200")),
                 },
-                headers={"Authorization": f"Bearer {self._key}"},
+                headers={"X-API-Key": self._key},   # per docs.pioneer.ai — NOT Bearer
             )
             return self._parse(body, model, tier)
         except Exception as e:
