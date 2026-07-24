@@ -55,6 +55,25 @@ class SensoPublisher(Degradable):
                           "senso prompts create --data '{...}' and put the prompt_id in .env")
         else:
             self.backend = f"senso-live({self._mode})"
+        self._consec_failures = 0
+
+    def _cli_run(self, args: list[str], timeout: float) -> subprocess.CompletedProcess:
+        """Run the senso CLI, retrying once if the child is signal-killed.
+
+        With Actian's gRPC client active in-process, forking the node CLI
+        occasionally SIGTRAPs the child (observed live 14:29, exit -5) and
+        always sprays gRPC fork-handler noise onto its stderr. The kill is
+        transient — retry once; and strip the noise so a real error message
+        survives into degrade_reason."""
+        out = subprocess.run(args, capture_output=True, text=True, timeout=timeout,
+                             env={**os.environ, "SENSO_API_KEY": self._key})
+        if out.returncode < 0:   # killed by signal — transient fork casualty
+            out = subprocess.run(args, capture_output=True, text=True, timeout=timeout,
+                                 env={**os.environ, "SENSO_API_KEY": self._key})
+        out.stderr = "\n".join(
+            l for l in (out.stderr or "").splitlines()
+            if not (l.startswith("I0") or "fork_posix" in l or "ev_poll_posix" in l))
+        return out
 
     def publish(self, p: Pattern) -> str:
         # Local cited.md is written unconditionally — it is the demo artifact.
@@ -72,20 +91,26 @@ class SensoPublisher(Degradable):
             "summary": p.strategy[:280],
         })
         try:
-            out = subprocess.run(
+            out = self._cli_run(
                 [self._cli, "engine", verb, "--data", payload,
                  "--output", "json", "--quiet", "--no-update-check"],
-                capture_output=True, text=True, timeout=30,
-                env={**os.environ, "SENSO_API_KEY": self._key},
-            )
+                timeout=30)
             if out.returncode != 0:
                 raise RuntimeError(out.stderr.strip()[:200] or f"exit {out.returncode}")
             # stdout may carry a banner line before the JSON — find the brace.
             body = out.stdout[out.stdout.index("{"):]
             content_id = json.loads(body).get("content_id")
+            self._consec_failures = 0
             return f"senso://content/{content_id}" if content_id else local_url
         except Exception as e:
-            self._degrade(f"engine {verb} failed — {type(e).__name__}: {e}")
+            # One flaky publish must not kill the live Senso beat for the rest
+            # of the run (same lesson as the router: no permanent flip on a
+            # single transient). This call falls back to the local artifact;
+            # degrade for good only after 3 consecutive failures.
+            self._consec_failures += 1
+            if self._consec_failures >= 3:
+                self._degrade(f"engine {verb} failed {self._consec_failures}x — "
+                              f"{type(e).__name__}: {e}")
             return local_url
 
     def _question_for(self, bug_class: str) -> str:
@@ -102,16 +127,14 @@ class SensoPublisher(Degradable):
         if bug_class in cache:
             return cache[bug_class]
         try:
-            out = subprocess.run(
+            out = self._cli_run(
                 [self._cli, "prompts", "create", "--data", json.dumps({
                     "question_text": (
                         f"What is the verified fix pattern for web app bugs of "
                         f"class '{bug_class}'?"),
                     "type": "consideration",
                 }), "--output", "json", "--quiet", "--no-update-check"],
-                capture_output=True, text=True, timeout=20,
-                env={**os.environ, "SENSO_API_KEY": self._key},
-            )
+                timeout=20)
             pid = json.loads(out.stdout[out.stdout.index("{"):]).get("prompt_id")
             if pid:
                 cache[bug_class] = pid
