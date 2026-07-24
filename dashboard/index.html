@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RATCHET — live</title>
+<style>
+  :root {
+    --bg:      #07090d;
+    --panel:   #101520;
+    --line:    #1e2634;
+    --ink:     #f4f7fb;
+    --muted:   #8a97ab;
+    --warm:    #2ee6a8;
+    --cold:    #ff6b4a;
+    --hero:    #ffd43b;
+    --accent:  #56a0ff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell { padding: 18px 26px 26px; }
+
+  /* ---------------- header ---------------- */
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--line);
+  }
+  .brand {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+  }
+  .tagline { color: var(--muted); font-size: 17px; letter-spacing: 0.02em; }
+  .live {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 17px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .dot {
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--warm);
+    box-shadow: 0 0 14px var(--warm);
+  }
+  .dot.stale { background: var(--muted); box-shadow: none; }
+
+  /* ---------------- policy strip ---------------- */
+  .policy-strip {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(86,160,255,0.09);
+    border-left: 5px solid var(--accent);
+    border-radius: 4px;
+    font-size: 19px;
+    color: var(--ink);
+  }
+  .policy-strip b { color: var(--accent); }
+
+  /* ---------------- stat tiles ---------------- */
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .tile {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px 18px;
+  }
+  .tile .k {
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tile .v {
+    font-size: 76px;
+    font-weight: 800;
+    line-height: 1.02;
+    margin-top: 6px;
+    letter-spacing: -0.02em;
+  }
+  .tile .sub { font-size: 18px; color: var(--muted); margin-top: 4px; }
+  .tile .sub b { color: var(--ink); font-weight: 700; }
+  .v.good { color: var(--warm); }
+  .v.hero { color: var(--hero); }
+
+  /* ---------------- panels ---------------- */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px 12px;
+  }
+  .panel h2 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .panel .lede { font-size: 21px; color: var(--ink); margin: 0 0 10px; }
+  .panel .lede em { color: var(--hero); font-style: normal; font-weight: 700; }
+
+  .hero-panel { margin-bottom: 16px; }
+  .grid2 { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; }
+
+  svg { display: block; width: 100%; }
+  .ax { stroke: var(--line); stroke-width: 2; }
+  .axlbl { fill: var(--muted); font-size: 17px; }
+  .ptlbl { fill: var(--ink); font-size: 20px; font-weight: 700; }
+
+  /* ---------------- pattern list ---------------- */
+  .plist { list-style: none; margin: 0; padding: 0; max-height: 300px; overflow-y: auto; }
+  .plist li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 21px;
+  }
+  .plist li:last-child { border-bottom: none; }
+  .pname { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .puses {
+    background: rgba(46,230,168,0.14);
+    color: var(--warm);
+    border-radius: 999px;
+    padding: 3px 13px;
+    font-weight: 800;
+    font-size: 19px;
+  }
+  .pseen { color: var(--muted); font-size: 17px; white-space: nowrap; }
+
+  .legend { display: flex; gap: 20px; font-size: 18px; color: var(--muted); margin-top: 6px; }
+  .swatch { display: inline-block; width: 15px; height: 15px; border-radius: 3px; vertical-align: -2px; margin-right: 7px; }
+
+  .empty-note {
+    color: var(--muted);
+    font-size: 20px;
+    padding: 26px 0;
+  }
+  .empty-note code { color: var(--ink); }
+
+  .synthetic-banner {
+    background: #4a2e00;
+    color: #ffce5c;
+    border: 1px solid #7a4d00;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header>
+    <span class="brand">RATCHET</span>
+    <span class="tagline">cost per verified fix &mdash; it only turns one way</span>
+    <span class="live"><span id="dot" class="dot stale"></span><span id="live-text">waiting for runs/ratchet.jsonl</span></span>
+  </header>
+
+  <div id="synthetic" class="synthetic-banner" style="display:none">
+    SYNTHETIC DEMO DATA &mdash; not from runs/ratchet.jsonl
+  </div>
+
+  <div id="policy-strip" class="policy-strip" style="display:none"></div>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">Cost saved vs iteration 0</div>
+      <div id="t-saved" class="v good">$0.00</div>
+      <div id="t-saved-sub" class="sub">&nbsp;</div>
+    </div>
+    <div class="tile">
+      <div class="k">Mean steps per fix</div>
+      <div id="t-steps" class="v">&mdash;</div>
+      <div id="t-steps-sub" class="sub">&nbsp;</div>
+    </div>
+    <div class="tile">
+      <div class="k">Patterns in memory</div>
+      <div id="t-patterns" class="v hero">0</div>
+      <div id="t-patterns-sub" class="sub">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="panel hero-panel">
+    <h2>Cost per verified fix, by iteration</h2>
+    <p class="lede">Every point is one loop. The line goes down <em>because the agent wrote something down.</em></p>
+    <div id="hero-chart"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>Warm vs cold path share</h2>
+      <p class="lede">Warm = answered from memory. <em>Warm eats cold.</em></p>
+      <div id="path-chart"></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--warm)"></span>warm &mdash; memory hit</span>
+        <span><span class="swatch" style="background:var(--cold)"></span>cold &mdash; full reasoning</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Patterns learned</h2>
+      <p class="lede">Written once. Reused forever.</p>
+      <ul id="plist" class="plist"></ul>
+      <div id="plist-empty" class="empty-note">No patterns yet.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var params    = new URLSearchParams(location.search);
+  var SRC       = params.get('src') || '../runs/ratchet.jsonl';
+  var SYNTHETIC = params.get('demo') === '1';
+  var POLL_MS   = 2000;
+
+  var lastSig = null;
+
+  /* ---------- tolerant field access -------------------------------------
+   * Lane A owns the emitter; we accept the obvious aliases so a schema
+   * tweak on their side does not blank the projector on stage.
+   * -------------------------------------------------------------------- */
+  function pick(o) {
+    for (var i = 1; i < arguments.length; i++) {
+      var k = arguments[i];
+      if (o[k] !== undefined && o[k] !== null) return o[k];
+    }
+    return undefined;
+  }
+  function num(v, d) { var n = Number(v); return isFinite(n) ? n : d; }
+
+  function normalise(r) {
+    return {
+      iteration: num(pick(r, 'iteration', 'iter', 'loop', 'run'), 0),
+      cost:      num(pick(r, 'cost_usd', 'cost', 'usd', 'total_cost'), 0),
+      steps:     num(pick(r, 'steps', 'step_count', 'n_steps'), NaN),
+      path:      String(pick(r, 'path', 'route', 'mode', 'lane') || '').toLowerCase(),
+      verified:  pick(r, 'verified', 'is_verified', 'fix_verified') === true,
+      bugId:     pick(r, 'bug_id', 'bug', 'id'),
+      cls:       pick(r, 'bug_class', 'class', 'pattern_class', 'signature_class', 'pattern_id'),
+      event:     pick(r, 'event', 'type', 'kind'),
+      note:      pick(r, 'note', 'message', 'detail', 'diff_summary')
+    };
+  }
+
+  function parse(text) {
+    var out = [];
+    text.split('\n').forEach(function (line) {
+      line = line.trim();
+      if (!line) return;
+      try { out.push(normalise(JSON.parse(line))); } catch (e) { /* partial write; skip */ }
+    });
+    return out;
+  }
+
+  /* ---------- aggregation ---------------------------------------------- */
+
+  function aggregate(recs) {
+    var byIter = {}, order = [];
+    var patterns = {};
+    var policyEvents = [];
+
+    recs.forEach(function (r) {
+      if (r.event && String(r.event).indexOf('policy') !== -1) {
+        policyEvents.push(r);
+        return;
+      }
+
+      var it = r.iteration;
+      if (!byIter[it]) {
+        byIter[it] = { iter: it, cost: 0, warm: 0, cold: 0, fixes: 0, stepsSum: 0, stepsN: 0 };
+        order.push(it);
+      }
+      var b = byIter[it];
+      b.cost += r.cost;
+      if (r.path === 'warm') b.warm++;
+      else if (r.path === 'cold') b.cold++;
+      if (r.verified) {
+        b.fixes++;
+        if (isFinite(r.steps)) { b.stepsSum += r.steps; b.stepsN++; }
+      }
+
+      if (r.cls) {
+        var p = patterns[r.cls];
+        if (!p) p = patterns[r.cls] = { name: r.cls, uses: 0, firstSeen: it };
+        if (it < p.firstSeen) p.firstSeen = it;
+        if (r.path === 'warm') p.uses++;
+      }
+    });
+
+    order.sort(function (a, b) { return a - b; });
+
+    var iters = order.map(function (i) {
+      var b = byIter[i];
+      b.cpf = b.fixes > 0 ? b.cost / b.fixes : null;
+      b.meanSteps = b.stepsN > 0 ? b.stepsSum / b.stepsN : null;
+      return b;
+    });
+
+    var plist = Object.keys(patterns).map(function (k) { return patterns[k]; });
+    plist.sort(function (a, b) { return b.uses - a.uses || a.firstSeen - b.firstSeen; });
+
+    return { iters: iters, patterns: plist, policyEvents: policyEvents };
+  }
+
+  /* ---------- charts ---------------------------------------------------- */
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function money(v) {
+    if (v === null || v === undefined || !isFinite(v)) return '—';
+    return v >= 1 ? '$' + v.toFixed(2) : '$' + v.toFixed(3);
+  }
+
+  function drawHero(host, iters) {
+    host.innerHTML = '';
+    var pts = iters.filter(function (b) { return b.cpf !== null; });
+    if (pts.length === 0) {
+      host.innerHTML = '<div class="empty-note">Waiting for the first verified fix. Start the loop &mdash; <code>python -m ratchet.loop</code>.</div>';
+      return;
+    }
+
+    var W = 1000, H = 380, L = 108, R = 40, T = 34, B = 56;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
+
+    var max = Math.max.apply(null, pts.map(function (p) { return p.cpf; }));
+    var top = max * 1.28 || 1;
+
+    var x = function (i) {
+      return pts.length === 1 ? (L + (W - L - R) / 2)
+                              : L + (i * (W - L - R)) / (pts.length - 1);
+    };
+    var y = function (v) { return T + (1 - v / top) * (H - T - B); };
+
+    // horizontal gridlines
+    for (var g = 0; g <= 3; g++) {
+      var gv = (top * g) / 3;
+      var gy = y(gv);
+      svg.appendChild(el('line', { x1: L, y1: gy, x2: W - R, y2: gy, stroke: '#1a2130', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: L - 14, y: gy + 6, class: 'axlbl', 'text-anchor': 'end' }, money(gv)));
+    }
+
+    svg.appendChild(el('line', { x1: L, y1: H - B, x2: W - R, y2: H - B, class: 'ax' }));
+
+    // baseline reference from iteration 0
+    var base = pts[0].cpf;
+    svg.appendChild(el('line', {
+      x1: L, y1: y(base), x2: W - R, y2: y(base),
+      stroke: '#4b5567', 'stroke-width': 2, 'stroke-dasharray': '8 8'
+    }));
+
+    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(i) + ' ' + y(p.cpf); }).join(' ');
+    svg.appendChild(el('path', {
+      d: d, fill: 'none', stroke: 'var(--hero)', 'stroke-width': 6,
+      'stroke-linejoin': 'round', 'stroke-linecap': 'round'
+    }));
+
+    pts.forEach(function (p, i) {
+      svg.appendChild(el('circle', { cx: x(i), cy: y(p.cpf), r: 9, fill: 'var(--hero)' }));
+      svg.appendChild(el('text', {
+        x: x(i), y: y(p.cpf) - 20, class: 'ptlbl', 'text-anchor': 'middle'
+      }, money(p.cpf)));
+      svg.appendChild(el('text', {
+        x: x(i), y: H - B + 30, class: 'axlbl', 'text-anchor': 'middle'
+      }, 'iter ' + p.iter));
+    });
+
+    host.appendChild(svg);
+  }
+
+  function drawPaths(host, iters) {
+    host.innerHTML = '';
+    var bars = iters.filter(function (b) { return (b.warm + b.cold) > 0; });
+    if (bars.length === 0) {
+      host.innerHTML = '<div class="empty-note">No path data yet.</div>';
+      return;
+    }
+
+    var W = 620, H = 280, L = 20, R = 20, T = 26, B = 46;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', height: H });
+
+    var plotH = H - T - B;
+    var slot  = (W - L - R) / bars.length;
+    var bw    = Math.min(78, slot * 0.62);
+
+    bars.forEach(function (b, i) {
+      var total = b.warm + b.cold;
+      var cx = L + slot * i + slot / 2;
+      var bx = cx - bw / 2;
+
+      var coldH = (b.cold / total) * plotH;
+      var warmH = (b.warm / total) * plotH;
+
+      svg.appendChild(el('rect', { x: bx, y: T, width: bw, height: coldH, fill: 'var(--cold)', rx: 3 }));
+      svg.appendChild(el('rect', { x: bx, y: T + coldH, width: bw, height: warmH, fill: 'var(--warm)', rx: 3 }));
+
+      var pct = Math.round((b.warm / total) * 100);
+      svg.appendChild(el('text', { x: cx, y: T - 8, class: 'ptlbl', 'text-anchor': 'middle' }, pct + '%'));
+      svg.appendChild(el('text', { x: cx, y: H - B + 30, class: 'axlbl', 'text-anchor': 'middle' }, 'iter ' + b.iter));
+    });
+
+    svg.appendChild(el('line', { x1: L, y1: T + plotH, x2: W - R, y2: T + plotH, class: 'ax' }));
+    host.appendChild(svg);
+  }
+
+  function drawPatterns(agg) {
+    var ul = document.getElementById('plist');
+    var empty = document.getElementById('plist-empty');
+    ul.innerHTML = '';
+    if (agg.patterns.length === 0) { empty.style.display = ''; return; }
+    empty.style.display = 'none';
+
+    agg.patterns.forEach(function (p) {
+      var li = document.createElement('li');
+
+      var name = document.createElement('span');
+      name.className = 'pname';
+      name.textContent = p.name;
+
+      var uses = document.createElement('span');
+      uses.className = 'puses';
+      uses.textContent = p.uses + '×';
+
+      var seen = document.createElement('span');
+      seen.className = 'pseen';
+      seen.textContent = 'first seen iter ' + p.firstSeen;
+
+      li.appendChild(name);
+      li.appendChild(uses);
+      li.appendChild(seen);
+      ul.appendChild(li);
+    });
+  }
+
+  function drawTiles(agg) {
+    var iters = agg.iters.filter(function (b) { return b.cpf !== null; });
+
+    // cost saved: what iteration 0's unit price would have cost for every fix since
+    var saved = 0, savedFixes = 0;
+    if (iters.length > 0) {
+      var base = iters[0].cpf;
+      for (var i = 1; i < iters.length; i++) {
+        saved += (base - iters[i].cpf) * iters[i].fixes;
+        savedFixes += iters[i].fixes;
+      }
+    }
+    document.getElementById('t-saved').textContent = money(Math.max(0, saved));
+    document.getElementById('t-saved-sub').innerHTML = iters.length > 1
+      ? 'across <b>' + savedFixes + '</b> fixes since iteration 0'
+      : '&nbsp;';
+
+    var withSteps = agg.iters.filter(function (b) { return b.meanSteps !== null; });
+    if (withSteps.length > 0) {
+      var now = withSteps[withSteps.length - 1].meanSteps;
+      var was = withSteps[0].meanSteps;
+      var t = document.getElementById('t-steps');
+      t.textContent = now.toFixed(1);
+      t.className = 'v' + (now < was ? ' good' : '');
+      document.getElementById('t-steps-sub').innerHTML =
+        withSteps.length > 1 ? 'was <b>' + was.toFixed(1) + '</b> at iteration 0' : '&nbsp;';
+    }
+
+    document.getElementById('t-patterns').textContent = String(agg.patterns.length);
+    var reused = agg.patterns.reduce(function (a, p) { return a + p.uses; }, 0);
+    document.getElementById('t-patterns-sub').innerHTML =
+      agg.patterns.length ? 'reused <b>' + reused + '</b> times' : '&nbsp;';
+  }
+
+  function drawPolicy(agg) {
+    var strip = document.getElementById('policy-strip');
+    if (agg.policyEvents.length === 0) { strip.style.display = 'none'; return; }
+    var last = agg.policyEvents[agg.policyEvents.length - 1];
+    strip.style.display = '';
+    strip.innerHTML = '<b>SLOW LOOP:</b> agent rewrote its own policy.yaml at iteration ' +
+      last.iteration + (last.note ? ' &mdash; ' + String(last.note) : '');
+  }
+
+  function draw(recs, live) {
+    var agg = aggregate(recs);
+    drawTiles(agg);
+    drawHero(document.getElementById('hero-chart'), agg.iters);
+    drawPaths(document.getElementById('path-chart'), agg.iters);
+    drawPatterns(agg);
+    drawPolicy(agg);
+
+    var dot = document.getElementById('dot');
+    var txt = document.getElementById('live-text');
+    if (live) {
+      dot.className = 'dot';
+      var last = agg.iters.length ? agg.iters[agg.iters.length - 1].iter : 0;
+      txt.textContent = recs.length + ' events · iteration ' + last;
+    } else {
+      dot.className = 'dot stale';
+      txt.textContent = 'waiting for ' + SRC;
+    }
+  }
+
+  /* ---------- synthetic mode (?demo=1) — clearly labelled -------------- */
+  function syntheticRecords() {
+    var classes = ['modal-state-not-reset', 'counter-off-by-one', 'filter-state-lost-on-mutation',
+                   'missing-preventdefault', 'dead-control', 'missing-input-validation'];
+    var recs = [], id = 0;
+    var costs = [0.42, 0.31, 0.18, 0.11, 0.07];
+    for (var it = 0; it < 5; it++) {
+      var n = 2;
+      for (var j = 0; j < n; j++) {
+        var warm = it > 0 && (it + j) % 3 !== 0;
+        recs.push({
+          iteration: it,
+          bug_id: 'BUG-0' + ((id++ % 8) + 1),
+          bug_class: classes[(it + j) % classes.length],
+          path: warm ? 'warm' : 'cold',
+          cost_usd: costs[it] * (warm ? 0.55 : 1.35),
+          steps: Math.max(2, 12 - it * 2 + j),
+          verified: true
+        });
+      }
+    }
+    recs.push({ iteration: 3, event: 'policy_rewrite', note: 'promoted signature step to code' });
+    return recs.map(normalise);
+  }
+
+  /* ---------- poll ------------------------------------------------------ */
+
+  function tick() {
+    if (SYNTHETIC) return;
+    fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.text();
+      })
+      .then(function (text) {
+        var sig = text.length + ':' + text.slice(-160);
+        if (sig === lastSig) return;
+        lastSig = sig;
+        draw(parse(text), true);
+      })
+      .catch(function () { draw([], false); });
+  }
+
+  if (SYNTHETIC) {
+    document.getElementById('synthetic').style.display = '';
+    draw(syntheticRecords(), true);
+    document.getElementById('live-text').textContent = 'synthetic';
+  } else {
+    tick();
+    setInterval(tick, POLL_MS);
+  }
+})();
+</script>
+</body>
+</html>
