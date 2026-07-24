@@ -1,14 +1,6 @@
-.env
-.env.*
-!.env.example
-node_modules/
 __pycache__/
-.venv/
-venv/
 *.pyc
-.DS_Store
-notes/raw/*.JPG
-notes/raw/*.m4a
-dist/
+*.egg-info/
+.ratchet/
 build/
-.pytest_cache/
+dist/

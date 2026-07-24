@@ -11,6 +11,10 @@ Built with the frameworks in `product_findings_july_23_2026.md`, applied in orde
 
 The Actian rep said the quiet part on stage this morning: *"every agent, every time, is just reinventing the wheel — and that's very lossy."* The failure mode is **state, not intelligence**. A smarter model does not fix this. Memory does.
 
+## 1b. Is it real? — see `EVIDENCE.md`
+
+Validated before building, not assumed. Headlines: **Gartner (Jun 2026) predicts AI coding cost per developer exceeds developer salary by 2028**; AI-authored PRs carry **1.7× more issues**; teams burn **20–30% of sprint capacity** on AI-traced bugs by day 90; and critically, a study found **vulnerabilities rose 37.6% after five iterations of unmemoried AI self-improvement** — looping without retention makes things *worse*, which is the control condition for our demo. The market gap is named in print: memory layers and evolution engines are separate products and "the winning stack will combine them — but it doesn't exist yet." Nobody is doing it for QA.
+
 ## 2. Desired outcome (Torres: behaviour change, not a feature list)
 
 > Cost and steps to reach zero P1 bugs on a release **falls on every run** — and no human ever writes a rule.

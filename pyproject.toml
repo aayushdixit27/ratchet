@@ -1,0 +1,19 @@
+[project]
+name = "ratchet"
+version = "0.1.0"
+description = "A QA agent whose cost per verified fix declines every run — it remembers, it publishes, it rewrites its own policy."
+requires-python = ">=3.10"
+dependencies = []   # zero runtime deps by design: the fixture loop must run on a cold, offline machine
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+# Both `ratchet` (Lane A) and `adapters` (Lane B) live under src/ and become
+# top-level importable after `pip install -e .`. This is what makes
+# `python -m ratchet.run` and `import adapters` both work.

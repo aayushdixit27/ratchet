@@ -1,0 +1,17 @@
+# RATCHET policy — THE AGENT EDITS THIS FILE.
+# evolve() (the slow loop) rewrites it in place when it finds an LLM step whose
+# output has been effectively deterministic across >=3 occurrences. The before/
+# after diff lands in policy_history/. This file's drift from its it-0 state is
+# the evidence that the agent improved itself, unattended.
+# warm_threshold 0.55: same-class root causes score 0.62-0.90, cross-class well
+# below, so a pattern is reused only for its own bug class, never a wrong one.
+warm_threshold: 0.55
+evolve_every: 2
+cold_path_steps:
+  - localize
+  - hypothesize
+  - synthesize_patch
+  - self_review
+warm_path_steps:
+  - apply_known
+deterministic_rules: {}

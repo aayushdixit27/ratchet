@@ -32,3 +32,13 @@ notes/raw/         kickoff transcript + slide photos
 runs/              JSONL metrics per loop iteration — the demo evidence
 src/               your code
 ```
+
+---
+## Lanes
+You will be told at session start: **"You are Lane A"** (or B, or C). Run `/brief A`. Ownership boundaries are in `.cowork/PROTOCOL.md` and they are strict — one writer per file tree, no reaching across. If you need something in another lane's tree, ask for it in your handoff.
+
+## Git
+**You own all git writes.** The Architect (Cowork) is read-only on git — it reaches this folder over a mount that can't delete files, so its commits leave lock files behind. If you hit `Unable to create '.git/index.lock'`, just `rm -f .git/index.lock` and carry on.
+
+## Product doc
+`PRODUCT.md` is binding. Sections 5 (non-goals) and 6 (pre-mortem) are not suggestions — they are the reason we ship by 16:00.
