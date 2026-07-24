@@ -19,6 +19,32 @@ Per-adapter override, useful for demoing one live integration at a time:
 from __future__ import annotations
 
 import os
+from pathlib import Path
+
+
+def _load_dotenv() -> None:
+    """Auto-load repo-root .env (stdlib, no dependency). Explicit env wins.
+
+    Added 13:22 after the mode-flag footgun bit twice: running the loop
+    without `source .env` silently produced fixture records that looked like
+    a wiring bug ('cheap tier still fixture-fast'). Every entrypoint now sees
+    the same keys and mode flags regardless of how it was launched.
+    """
+    env_file = Path(__file__).resolve().parents[2] / ".env"
+    try:
+        for line in env_file.read_text().splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            k, v = k.strip(), v.strip().strip('"').strip("'")
+            if k and v and k not in os.environ:
+                os.environ[k] = v
+    except FileNotFoundError:
+        pass  # no .env = pure fixture mode, by design
+
+
+_load_dotenv()
 
 from .base import Bug, Pattern, QA, Memory, Router, Publisher, Tracer, usage
 from .fixtures import (
