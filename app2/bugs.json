@@ -50,9 +50,8 @@
       "selectors": ["#search", "#notes-grid"],
       "symptom": "Search is case-sensitive: searching 'miso' finds the recipe, searching 'Miso' with a different case than the note text finds nothing. Lowercase queries miss capitalised titles.",
       "repro": [
-        "Switch to the Recipes notebook",
-        "Type 'miso' in search — the eggplant note matches (body contains 'miso')",
-        "Type 'MISO' — no results, #no-notes shows"
+        "In Inbox, type 'Miso' in search — the groceries note matches (body contains 'Miso paste')",
+        "Type 'miso' — no results, #no-notes shows, despite the note being about miso"
       ],
       "root_cause": "visible() filters with raw String.indexOf on title and body, no case normalisation on either side.",
       "fix_strategy": "normalise-case-before-compare",
@@ -66,8 +65,8 @@
       "selectors": ["#note-count", ".note-actions"],
       "symptom": "The '<n> notes in <notebook>' pill does not update when a note is removed — it only corrects itself after an unrelated action like saving a note or switching notebooks.",
       "repro": [
-        "Note the count pill (e.g. '2 notes in Work')",
-        "Click Remove on a Work note",
+        "In Inbox, note the count pill reads '2 notes in Inbox'",
+        "Click Remove on either Inbox note",
         "Observe: the grid loses the card but the pill still says 2"
       ],
       "root_cause": "removeNote() calls persist() and renderNotes() but not renderCount(); saveNote() calls all three. Asymmetric re-render of derived state.",
@@ -83,7 +82,7 @@
       "symptom": "Clicking ANY notebook in the sidebar empties the note grid and deselects every notebook. The app appears to lose all notes until reload.",
       "repro": [
         "Click 'Work' (or any notebook) in the left rail",
-        "Observe: grid goes empty, no notebook is highlighted, count pill reads 'undefined'"
+        "Observe: grid goes empty ('No notes match.' shows), and no notebook is highlighted"
       ],
       "root_cause": "renderNotebooks() binds click handlers inside a `for (var i ...)` loop and the handler reads notebooks[i] at click time. By then i === notebooks.length, so currentNotebook becomes undefined and nothing matches it.",
       "fix_strategy": "capture-loop-variable-per-iteration",

@@ -25,6 +25,7 @@
 
   function seed() {
     return [
+      { id: 'n0', nb: 'Inbox', title: 'Groceries for the weekend', body: 'Miso paste, eggplant, short-grain rice, decent coffee.' },
       { id: 'n1', nb: 'Inbox', title: 'Call plumber re: kitchen tap', body: 'Dripping again. Ask about the washer they replaced in March.' },
       { id: 'n2', nb: 'Work', title: 'Q3 headcount notes', body: 'Two backend reqs approved, one design pending finance.' },
       { id: 'n3', nb: 'Work', title: 'Retro action items', body: 'Rotate on-call weekly. Write the deploy runbook. Fewer meetings.' },
