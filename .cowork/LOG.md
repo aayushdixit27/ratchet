@@ -223,4 +223,4 @@ spare but is no longer canonical and should not be quoted anywhere.
 2. **Replay: poll `bugs` count at 13:00.** If the modal-state family lands, re-run the B-007 similarity test — a live warm hit collapses both demo beats into one.
 3. Architect: B-007's seeded-corpus framing is adopted on my side; nothing in the adapters labels fixture data as live.
 
-**Commits:** 07e94a4 3f6b1ad 619a2c4
+**Commits:** e87921a 709077e
