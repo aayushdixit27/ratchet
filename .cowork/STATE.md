@@ -10,7 +10,9 @@
 **Submitted:** no
 
 ## Open risks
-0. **Overlap with Replay QA (their CEO is a judge).** Mitigated structurally: live `--no-memory` control arm plotted against us, provenance citing Replay on every pattern, thin QA adapter. Replay adapter must be LIVE — the story is checkable.
+0. **Prior art is published (EvoRepair −41.58%, Meta Experience Graphs −52% token cost).** Core mechanism is NOT novel. Novel claim is now **cross-organizational** transfer — app #2 (Lane C, building now) is the proof. Never say "nobody does this"; say "everyone built the private version."
+0b. **Senso owns "publish verified knowledge agents cite"** — publishing is a byproduct, not the pitch. **Pioneer owns "each call gets cheaper"** — our line is "Pioneer makes every call cheaper, we delete the call."
+0c. **Overlap with Replay QA (their CEO is a judge).** Mitigated structurally: live `--no-memory` control arm plotted against us, provenance citing Replay on every pattern, thin QA adapter. Replay adapter must be LIVE — the story is checkable.
 1. Replay QA needs a **public URL** for the fixture app — Lane C priority 1, blocks Lane B's QA adapter.
 2. Submission portal unconfirmed: Devpost vs tokensand.com/swarmhack vs bit.ly/projects-jul24. Confirm in Discord before 15:30.
 3. Any live sponsor API that can't be reached must degrade to fixture without crashing the loop.

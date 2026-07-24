@@ -1,7 +1,26 @@
-# POSITIONING — "Replay finds. We remember."
+# POSITIONING — "Replay finds. We remember — across company lines."
+*Rewritten 11:45 after adversarial prior-art research found three collisions. The build barely changes; the pitch changes a lot.*
 
 ## The one sentence
-> **Replay's unit of output is a bug report, and their run count is one. Ours is a verified fix-pattern, and our metric only exists across runs.**
+> **Everyone is building the private version of agent memory. We're building the one where my verified fix makes *your first run* cheap.**
+
+Replay's unit of output is a bug report and their run count is one. Ours is a verified fix-pattern, and our metric only exists across runs — **and across organizations**, which is the part the published work has not done.
+
+## ⚠️ Three collisions found — read before writing any copy
+
+**1. Prior art on the core mechanism is published, with numbers. Do not claim novelty on "remembering verified fixes."**
+- **EvoRepair** (arXiv 2605.30105): verified repair trajectories → markdown + vectors → similarity retrieval → **−41.58% cost**. Our architecture, published.
+- **Meta Experience Graphs** (arXiv 2606.29823): executable artifacts with objective rewards, cross-session retrieval, **"10× faster convergence at 52% lower token cost per valid solution."** Our headline, with production numbers.
+- **"Compounding engineering"** (Klaassen / Shipper, Every) is an established brand shipped as a Claude Code plugin.
+
+Every one of them is **private and single-org**. That is the gap, and it is the only one we should claim.
+
+**2. Senso collision — do not lead with the corpus.** "Publish verified knowledge that agents cite" is Senso's whole business; `cited.md` is literally their Citeables surface, and `Codeables` is the developer version. Pitching the corpus as our differentiator is pitching a sponsor's product back at them. Publishing is a **byproduct**, not the thesis.
+
+**3. Pioneer collision — do not sell the cost curve on its own.** Pioneer's Adaptive Inference mines production traces, auto-trains specialist small models and promotes them behind the same URL — "cost per task declines" is a claim they can make. The distinction is sharp and you should say it exactly this way:
+> **"Pioneer makes every call cheaper. We delete the call."**
+
+**Guild caveat:** the one-button "optimize this workspace" and the 87% figure were demoed on stage but appear nowhere in their public material — their shipped product is measurement (Insights Dashboard: a human reads a chart and edits the agent). Ask Corey or Tamao directly before positioning against it. Either way `evolve()` stays our *second* claim.
 
 Say "QA tool" and you are competing with a sponsor whose CEO is judging, and losing. Say "the memory layer that makes QA compound" and Replay becomes your input, not your rival.
 
@@ -49,6 +68,9 @@ Anyone can cache LLM output. What makes the corpus trustworthy is that every pat
 ---
 
 ## Rehearsed answers
+
+**"Meta's Experience Graphs paper already reports 52% lower token cost from cross-session verified-experience reuse. Aren't you re-implementing a published result?"** *(the strongest objection available — expect it from Paige or the Mercor/Nvidia judges)*
+> Yes, and I'd point at EvoRepair too — −41.58% on the same idea. Both are single-org. Meta's graph lives inside Meta; EvoRepair's is per-repo. The economics only get interesting when the corpus crosses company lines — my fix for a common dependency bug should make *your* first run cheap, not just my second. That's a distribution and trust problem: verification gating, provenance, dedup. Not a retrieval problem. That's the part nobody has shipped, and it's what the second app in that demo was showing.
 
 **"Isn't this just Replay QA?"**
 > Replay is inside it — we're one of their consumers, and the demo you just watched calls their API live. What they don't do is remember. Every Replay run starts from zero; that's the flat line on the chart. We keep the verified fixes and reuse them, which is why our line bends. Different unit of output, different metric.
