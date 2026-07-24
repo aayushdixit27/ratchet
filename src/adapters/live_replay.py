@@ -36,6 +36,31 @@ DEFAULT_BASE = "https://qa.replay.io"
 OPEN_STATUSES = ("open", "reopened")
 
 
+def _analysis_text(analysis) -> str:
+    """Flatten Replay's analysis field to embeddable text.
+
+    Observed live: a dict {'chain': [{'text': ...}, ...]}. Also accepts a plain
+    string, a dict with 'text', or anything else (JSON-dumped, truncated) —
+    the field is too important to lose to a shape change.
+    """
+    if not analysis:
+        return ""
+    if isinstance(analysis, str):
+        return analysis.strip()
+    if isinstance(analysis, dict):
+        chain = analysis.get("chain")
+        if isinstance(chain, list):
+            texts = [str(step.get("text", "")).strip() for step in chain
+                     if isinstance(step, dict)]
+            joined = "\n".join(t for t in texts if t)
+            if joined:
+                return joined
+        if analysis.get("text"):
+            return str(analysis["text"]).strip()
+    import json as _json
+    return _json.dumps(analysis)[:1500]
+
+
 class ReplayQA(Degradable):
     def __init__(self):
         self._fixture = FixtureQA()
@@ -114,7 +139,14 @@ class ReplayQA(Degradable):
         return {"Authorization": f"Bearer {self._key}"}
 
     def _ensure_project(self, target_url: str) -> str:
-        """One Replay project per target URL, cached across runs."""
+        """One Replay project per target URL, cached across runs.
+
+        REPLAY_PROJECT_ID (B-006) beats everything: re-exploration is the
+        slowest thing in the stack and must never happen mid-demo.
+        """
+        pinned = env("REPLAY_PROJECT_ID")
+        if pinned:
+            return pinned
         try:
             cached = json.loads(self._project_file.read_text())
             if cached.get("target_url") == target_url and cached.get("id"):
@@ -126,8 +158,11 @@ class ReplayQA(Degradable):
             payload["use_reverse_proxy"] = True
         created = request_json(f"{self._base}/api/v1/projects", method="POST",
                                payload=payload, headers=self._headers)
-        project_id = (created.get("exploration_id") or created.get("id")
-                      or created.get("project_id"))
+        # Real responses carry BOTH "id" (proj-..., what /projects/{id}/* wants)
+        # and "exploration_id" (expl-..., the exploration just started). The
+        # project id must win — learned from a live call, not the spec summary.
+        project_id = (created.get("id") or created.get("project_id")
+                      or created.get("exploration_id"))
         if not project_id:
             raise ValueError(f"no project id in response: {str(created)[:200]}")
         self._project_file.write_text(json.dumps({
@@ -181,8 +216,10 @@ class ReplayQA(Degradable):
                 pass  # list-level fields are still usable
 
         # analysis is the root-cause trace — the string we embed, so it matters
-        # most. Pad thin analyses with expected/actual, never invent content.
-        analysis = (detail.get("analysis") or "").strip()
+        # most. Live shape (observed 12:22): a dict with a 'chain' of
+        # {text: ...} reasoning steps. Pad thin analyses with expected/actual,
+        # never invent content.
+        analysis = _analysis_text(detail.get("analysis"))
         parts = [analysis]
         if len(analysis) < 80:
             for key in ("expected_behavior", "actual_behavior"):
@@ -191,9 +228,12 @@ class ReplayQA(Degradable):
                     parts.append(f"{key.replace('_', ' ')}: {val}")
         root_cause = "\n".join(p for p in parts if p) or detail.get("title", bug_id)
 
-        repro = detail.get("reproduction_steps") or []
+        repro = detail.get("reproduction_steps") or []   # None on live bugs sometimes
         if isinstance(repro, str):
             repro = [s.strip() for s in repro.splitlines() if s.strip()]
+        elif isinstance(repro, list):
+            repro = [str(s.get("text", s)) if isinstance(s, dict) else str(s)
+                     for s in repro]
 
         return Bug(
             id=bug_id,
@@ -210,5 +250,9 @@ class ReplayQA(Degradable):
                 "replay_recording_id": detail.get("replay_recording_id"),
                 "polish_category": detail.get("polish_category"),
                 "description": detail.get("description"),
+                # Replay's own judge already assessed this bug — free evidence.
+                "judge_approved": (detail.get("judge_assessment") or {}).get("approved"),
+                "journey_name": detail.get("journey_name"),
+                "discovered_at": detail.get("discovered_at"),
             },
         )

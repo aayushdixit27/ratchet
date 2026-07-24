@@ -1,0 +1,45 @@
+{
+  "project_id": "proj-ratchet-mrzbmsos",
+  "fetched_at": "2026-07-24T12:25",
+  "source": "replay-live verified",
+  "bugs": [
+    {
+      "id": "bug-mrzbq4us-w9k6",
+      "title": "Toast overlay #toast covers and intercepts #btn-settings button",
+      "root_cause": "The #toast overlay with position:fixed and z-index:90 renders at rect (1068,14,1266,56), directly over the #btn-settings button at rect (1177,14,1258,52). Because the toast has higher z-index and is painted on top, document.elementFromPoint at the overlap centroid (1218,33) returns #toast instead of the button, making the Settings button unclickable while the toast is visible.",
+      "repro": [],
+      "bug_class": "glitches",
+      "raw": {
+        "source": "replay-live",
+        "provenance": "replay-qa",
+        "severity": "medium",
+        "status": "open",
+        "replay_recording_id": "8e28a71c-f027-49db-936b-bc0c6d1d2aab",
+        "polish_category": "glitches",
+        "description": "A welcome-back toast notification (position: fixed, z-index: 90) overlaps the Settings button in the top-right area, covering it entirely and intercepting clicks so the user cannot interact with Settings while the toast is visible.",
+        "judge_approved": true,
+        "journey_name": "Load the main page",
+        "discovered_at": "2026-07-24T19:19:04.667Z"
+      }
+    },
+    {
+      "id": "bug-mrzbpqy5-cmda",
+      "title": "Tab buttons with role=\"tab\" never set aria-selected, violating WCAG 4.1.2",
+      "root_cause": "The filter buttons use role=\"tab\" inside a role=\"tablist\" section, establishing them as ARIA tabs that require aria-selected per the WAI-ARIA tab pattern.\nEvaluating all three tab buttons at the end of the recording confirms none have aria-selected set \u2014 all return null/false.\nThe source code shows the click handler only toggles 'is-active' CSS class and never sets aria-selected, confirming the attribute is never managed programmatically.",
+      "repro": [],
+      "bug_class": "accessibility",
+      "raw": {
+        "source": "replay-live",
+        "provenance": "replay-qa",
+        "severity": "high",
+        "status": "open",
+        "replay_recording_id": "8e28a71c-f027-49db-936b-bc0c6d1d2aab",
+        "polish_category": "accessibility",
+        "description": "On route /tasker-fixture/, filter buttons use role=\"tab\" inside a role=\"tablist\" container. The active tab (\"All\") has a visual \"is-active\" class but no aria-selected attribute is ever set on any tab. Screen readers and other assistive technology cannot determine which tab is selected, violating WCAG 4.1.2 (Name, Role, Value).",
+        "judge_approved": true,
+        "journey_name": "Load the main page",
+        "discovered_at": "2026-07-24T19:18:46.645Z"
+      }
+    }
+  ]
+}
