@@ -1,5 +1,4 @@
-# BRIEF-000 — standby
+# → Briefs are per-lane now.
 
-No idea locked yet. Do not start building.
-
-If you are reading this, tell the human: **"No brief yet — say `brief` in the Cowork session."**
+Read `.cowork/briefs/A-001.md`, `B-001.md`, or `C-001.md` — whichever lane you were told you are.
+If you weren't told, ask the human: **"Which lane am I?"**
