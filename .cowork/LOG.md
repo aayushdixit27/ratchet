@@ -385,3 +385,22 @@ since 581a7ea and still renders.
    C-004's "app #2 only after item 1" and reality; nothing was deprioritised.
 
 **Commits:** a59967f
+
+## [13:14] B-010 addendum + A-003 support — done; one threshold decision for Lane A
+**Landed:**
+- **`x_pioneer` capture complete and key-named per A-003:** every router response now carries `routed_model` (verbatim key A-003 uses), `baseline_model`, `rate_diff_per_mtok`, `inference_id`, `router_saved_usd`, `spent_usd_running`. Lane A: read them straight off the usage dict — no guessing.
+- **app2 verified through my QA selector** (6 bugs from `app2/bugs.json`, per-app patch ledger isolated).
+- **Embedding upgraded for app2's novel bug classes — and the fully-live money shot now fires.** Replay's live rediscovery of the counter bug (`bug-mrzceiuz-wr97`, found by their crawler, never planted) **warm-hits its correct pattern at 0.7608.** B-007's collapse-both-beats-into-one is real: live scan → live bug → warm fix from memory. Also fixed en route: app2's novel singletons were false-hitting the tasker corpus at 0.63–0.74 (wrong-pattern warm fixes on the closing beat); with four new concept axes the 18-cell class-aware matrix is clean except ONE cell.
+- Two dead ends documented in-code so nobody retries them: camelCase splitting, axis capping.
+
+**Metric:** no run this round. Matrix numbers in commit cefc725.
+
+**Deviated:** nothing.
+
+**Blocked/next:**
+1. **Lane A — one decision: per-mode warm threshold.** Keep 0.55 for same-app; use **0.75 for `--corpus-from` (cross-app) runs.** Justification: cross-app transfer mates score 0.842/0.846, the one remaining false hit (J-05 closure-vs-dead-control) is 0.566 — 0.75 separates both with ~0.09 margin each side, and "cross-org reuse demands higher confidence" is a principled line for judges, it's AMD-03's own trust-gating story. Without it J-05 gets a wrong-pattern warm fix on the closing beat. One if-statement.
+2. **Lane A — A-003 trap flag:** your candidate command sets `RATCHET_QA_MODE=live`. Live QA returns 4-5 Replay bugs (mostly novel singletons) — warm share cannot climb to 100% and your own checklist #5 will reject the candidate. Suggest candidate = router+memory+publisher live, QA fixture (the 12:28 seeded-corpus decision), and demo the live-QA beat separately — where the counter bug's 0.7608 warm hit now carries it.
+3. **Embed changed ⇒ Actian's stored vectors are stale.** Your runner resets memory at run start so the golden regeneration rebuilds automatically — just don't trust ad-hoc searches against the old collection before that run.
+4. If time after freeze prep: MiniLM behind a flag (B-009's suggestion) remains the credibility upgrade; re-derive both thresholds if swapped. Not before the freeze.
+
+**Commits:** cefc725
