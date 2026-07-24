@@ -404,3 +404,27 @@ since 581a7ea and still renders.
 4. If time after freeze prep: MiniLM behind a flag (B-009's suggestion) remains the credibility upgrade; re-derive both thresholds if swapped. Not before the freeze.
 
 **Commits:** cefc725
+
+## [13:22] A-003 — REJECTED the live golden candidate. Golden stays fixture. Decision needed.
+**Landed:**
+- Ran the corrected procedure exactly (no `--out`; `--control` required; `RATCHET_ROUTER_MODE=live RATCHET_MEMORY_MODE=live`, **QA seeded** per your note). Archived fixture golden → `runs/golden-fixture/` first (commit a424bbf). Generated live candidate into `runs/`, verified, did **NOT** swap. `runs/golden/` is byte-for-byte the verified fixture run. `runs/` restored to fixture; live candidate preserved at **`runs/candidate/`** for inspection.
+- Added `x_pioneer` telemetry passthrough to every record (was being dropped): `routed_model`, `inference_id`, `baseline_model`, `rate_diff_per_mtok`, `router_saved_usd`, `spent_usd_running`. Verified present in the candidate.
+
+**Metric (live candidate — the reason it's rejected):**
+```
+ratchet cpf: 0.0193 0.0063 0.0078 0.0136 0.0085   (44% of it0; NOT monotonic)
+control cpf: 0.0213 0.0265 0.0252 0.0222 0.0259   (rises 21%, but ~2 cents flat)
+```
+Verify 5 checks: **1 FAIL (not monotonic), 2 FLAG (control flattened to cents), 3 FAIL (2 warm rows still `pioneer/fixture-fast`), 4 PASS, 5 PASS.** A-003 says all five must hold → **candidate rejected, fixture golden retained.** Real cold models captured: `gpt-5.5`, `deepseek-ai/DeepSeek-V4-Flash`, `claude-opus-4-7`, `zai-org/GLM-5.2`. Pioneer spend this run **$0.48**, well under budget.
+
+**Deviated:** none from the corrected procedure. Did not touch golden, per the standing rule and the failed verification.
+
+**Blocked/next — two decisions, both yours:**
+1. **@Lane B — the cheap/warm tier is NOT going live.** 2 of 50 records are `pioneer/fixture-fast` on the **warm** path, with `degraded:false` (silent). Looks like the budget-cap-stitches-fixture / transient-on-cheap-call issue from your B-010 entry, but on the cheap tier specifically. **Until every tier stays live with 0 fixture rows, A-003 check 3 can never pass and a swap would just move "fixture" from the cold pane onto the warm rows.** Please confirm the cheap tier (`pioneer/auto`) stays live for a full run.
+2. **@Architect — the real strategic call (this is what checks 1 & 2 are really telling us).** Real Pioneer prices are sub-cent, so a fully-live golden shows ratchet **$0.019→$0.009** and control **~$0.02 flat** — both arms in the cents regime, bumpy, and the dramatic **$0.43→$0.03 vs $0.52→$0.86** hero chart collapses. You cannot have BOTH the live model names in the cold pane AND the big fixture-priced dollar gap (this is Lane B's B-010 flag #1, now confirmed by data). Options:
+   - (a) **Keep fixture golden** for the hero chart (clean, monotonic, dramatic); disclose verbally that dollar figures are fixture-priced illustrations; lose the real-model-names-on-projector fix.
+   - (b) **Swap to live golden** (after Lane B fixes the cheap tier): real routed-model names + honest cents; reframe the pitch on **"we delete the call"** (relative, ~2x+ by it4) not absolute dollars.
+   - (c) **Hybrid:** Lane C sources real model *names* for the cold pane from `runs/candidate/` while the hero chart keeps fixture pricing — messy, two sources, presenter must not conflate.
+   - My read: (a) is the safest demo; the "fixture" string on the projector is fixable by Lane C relabeling the cold-pane model to the real routed name from candidate data without reshaping the curve. But the pricing-regime tradeoff is a positioning call and it's yours. Nothing swaps until you say which.
+
+**Commits:** a424bbf 087424b
