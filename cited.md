@@ -8,7 +8,7 @@ Iteration N is cheaper than N-1 because of the rows on this page.
 <!-- pattern:b7a3887a7811 -->
 ## `b7a3887a7811` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.774+00:00 (6× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.673+00:00 (6× re-verified)
 Learned on **tasker** (acme) at iteration 3 · reused **6×**
 
 **Fix strategy:**
@@ -35,7 +35,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.774+00:00",
+  "verified_at": "2026-07-24T21:37:31.673+00:00",
   "verification_count": 6,
   "born_at_iteration": 3,
   "saved_usd": 0.0,
@@ -69,7 +69,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:6c94eae3b140 -->
 ## `6c94eae3b140` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.771+00:00 (5× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.658+00:00 (5× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **5×**
 
 **Fix strategy:**
@@ -96,7 +96,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.771+00:00",
+  "verified_at": "2026-07-24T21:37:31.658+00:00",
   "verification_count": 5,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -108,7 +108,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:4f2912a15908 -->
 ## `4f2912a15908` — counter-off-by-one (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.786+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.724+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **2×**
 
 **Fix strategy:**
@@ -135,7 +135,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.786+00:00",
+  "verified_at": "2026-07-24T21:37:31.724+00:00",
   "verification_count": 2,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -147,64 +147,14 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:9fa805fa7e62 -->
 ## `9fa805fa7e62` — filter-state-lost-on-mutation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:33:42.921+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.637+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **2×**
 
 **Fix strategy:**
 
-```diff
-+function syncFilterChips() {
-+  document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
-+    chip.classList.toggle('is-active', chip.dataset.filter === activeFilter);
-+  });
-+}
-+
-+function setActiveFilter(filter) {
-+  activeFilter = filter;
-+  syncFilterChips();
-+  render();
-+}
-
- function addTask() {
-   // existing task creation logic...
-
--  activeFilter = 'all';
--  render();
-+  setActiveFilter('all');
- }
-
- function toggleTask(id) {
-   // existing task toggle logic...
-
--  activeFilter = 'all';
--  render();
-+  setActiveFilter('all');
- }
-
--document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
--  chip.addEventListener('click', () => {
--    activeFilter = chip.dataset.filter;
--    render();
--  });
--});
-+document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
-+  chip.addEventListener('click', () => {
-+    setActiveFilter(chip.dataset.filter);
-+  });
-+});
-```
-
-If `render()` rebuilds or replaces the filter chips, call `syncFilterChips()` at the end of `render()` as well:
-
-```diff
- function render() {
-   // existing render logic...
-+
-+  syncFilterChips();
- }
-```
-
-This keeps the UI chip state synchronized whenever `activeFilter` is changed programmatically by `addTask()` or `toggleTask()`.
+STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
+CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
+VERIFY: reopen with a second record and assert the fields are empty.
 
 **Code hint:** `addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync`
 
@@ -214,59 +164,9 @@ This keeps the UI chip state synchronized whenever `activeFilter` is changed pro
 {
   "sig": "9fa805fa7e62",
   "bug_class": "filter-state-lost-on-mutation",
-  "strategy": "```diff
-+function syncFilterChips() {
-+  document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
-+    chip.classList.toggle('is-active', chip.dataset.filter === activeFilter);
-+  });
-+}
-+
-+function setActiveFilter(filter) {
-+  activeFilter = filter;
-+  syncFilterChips();
-+  render();
-+}
-
- function addTask() {
-   // existing task creation logic...
-
--  activeFilter = 'all';
--  render();
-+  setActiveFilter('all');
- }
-
- function toggleTask(id) {
-   // existing task toggle logic...
-
--  activeFilter = 'all';
--  render();
-+  setActiveFilter('all');
- }
-
--document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
--  chip.addEventListener('click', () => {
--    activeFilter = chip.dataset.filter;
--    render();
--  });
--});
-+document.querySelectorAll('.chip[data-filter]').forEach((chip) => {
-+  chip.addEventListener('click', () => {
-+    setActiveFilter(chip.dataset.filter);
-+  });
-+});
-```
-
-If `render()` rebuilds or replaces the filter chips, call `syncFilterChips()` at the end of `render()` as well:
-
-```diff
- function render() {
-   // existing render logic...
-+
-+  syncFilterChips();
- }
-```
-
-This keeps the UI chip state synchronized whenever `activeFilter` is changed programmatically by `addTask()` or `toggleTask()`.",
+  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
+CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
+VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync",
   "verified": true,
   "uses": 2,
@@ -274,7 +174,7 @@ This keeps the UI chip state synchronized whenever `activeFilter` is changed pro
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:33:42.921+00:00",
+  "verified_at": "2026-07-24T21:37:31.637+00:00",
   "verification_count": 2,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -286,38 +186,16 @@ This keeps the UI chip state synchronized whenever `activeFilter` is changed pro
 <!-- pattern:7e406ab2999c -->
 ## `7e406ab2999c` — missing-preventdefault (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:33:25.542+00:00 (2× re-verified)
-Learned on **tasker** (acme) at iteration 1 · reused **2×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.718+00:00 (4× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **4×**
 
 **Fix strategy:**
 
-```diff
-diff --git a/src/app.js b/src/app.js
---- a/src/app.js
-+++ b/src/app.js
-@@ -1,10 +1,13 @@
- function addTask() {
--  const title = document.querySelector('#new-task').value;
-+  const newTaskInput = document.querySelector('#new-task');
-+  const title = newTaskInput.value.trim();
- 
--  if (title.length === 0) {
-+  // Reject empty or whitespace-only task titles.
-+  if (title.length === 0) {
-+    newTaskInput.value = '';
-     return;
-   }
- 
--  tasks.push({ title });
-+  tasks.push({ title });
- 
-   renderTasks();
- }
-```
+STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
+CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
+VERIFY: reopen with a second record and assert the fields are empty.
 
-This fixes the missing input validation by trimming the `#new-task` value before checking its length, preventing whitespace-only tasks from being added and ensuring stored task titles do not include leading/trailing whitespace.
-
-**Code hint:** `addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim`
+**Code hint:** `edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere`
 
 <details><summary>machine-readable</summary>
 
@@ -325,41 +203,19 @@ This fixes the missing input validation by trimming the `#new-task` value before
 {
   "sig": "7e406ab2999c",
   "bug_class": "missing-preventdefault",
-  "strategy": "```diff
-diff --git a/src/app.js b/src/app.js
---- a/src/app.js
-+++ b/src/app.js
-@@ -1,10 +1,13 @@
- function addTask() {
--  const title = document.querySelector('#new-task').value;
-+  const newTaskInput = document.querySelector('#new-task');
-+  const title = newTaskInput.value.trim();
- 
--  if (title.length === 0) {
-+  // Reject empty or whitespace-only task titles.
-+  if (title.length === 0) {
-+    newTaskInput.value = '';
-     return;
-   }
- 
--  tasks.push({ title });
-+  tasks.push({ title });
- 
-   renderTasks();
- }
-```
-
-This fixes the missing input validation by trimming the `#new-task` value before checking its length, preventing whitespace-only tasks from being added and ensuring stored task titles do not include leading/trailing whitespace.",
-  "code_hint": "addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim",
+  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
+CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
+VERIFY: reopen with a second record and assert the fields are empty.",
+  "code_hint": "edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere",
   "verified": true,
-  "uses": 2,
+  "uses": 4,
   "score": 0.9,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:33:25.542+00:00",
-  "verification_count": 2,
-  "born_at_iteration": 1,
+  "verified_at": "2026-07-24T21:37:31.718+00:00",
+  "verification_count": 4,
+  "born_at_iteration": 4,
   "saved_usd": 0.0,
   "origin_app": "tasker",
   "origin_org": "acme"
@@ -369,7 +225,7 @@ This fixes the missing input validation by trimming the `#new-task` value before
 <!-- pattern:0dddda0faee2 -->
 ## `0dddda0faee2` — dead-control (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.783+00:00 (3× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.713+00:00 (3× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **3×**
 
 **Fix strategy:**
@@ -396,7 +252,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.783+00:00",
+  "verified_at": "2026-07-24T21:37:31.713+00:00",
   "verification_count": 3,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -408,7 +264,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:a1735b95f51d -->
 ## `a1735b95f51d` — missing-input-validation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:05:21.776+00:00 (3× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.683+00:00 (3× re-verified)
 Learned on **tasker** (acme) at iteration 3 · reused **3×**
 
 **Fix strategy:**
@@ -435,7 +291,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:05:21.776+00:00",
+  "verified_at": "2026-07-24T21:37:31.683+00:00",
   "verification_count": 3,
   "born_at_iteration": 3,
   "saved_usd": 0.0,
