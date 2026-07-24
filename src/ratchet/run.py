@@ -36,6 +36,7 @@ import argparse
 import json
 import os
 import random
+from collections import Counter
 from datetime import datetime, timezone
 
 from . import providers
@@ -118,6 +119,47 @@ def _derive_strategy(text: str, bug) -> str:
     if text:
         return text
     return f"Fix strategy for {bug.bug_class}: reset/guard the reported behaviour, then re-verify."
+
+
+def _primary_model(models) -> str:
+    """The model to show in the cold pane — the most-used real (non-fixture) model
+    across a cold reasoning chain's calls."""
+    real = [m for m in models if m and "fixture" not in str(m)]
+    pool = real or [m for m in models if m]
+    return Counter(pool).most_common(1)[0][0] if pool else "unknown"
+
+
+def _telem_from(usages) -> dict:
+    """Aggregate Pioneer's per-call x_pioneer telemetry across a (multi-call) cold
+    chain: sum the router savings, collect every inference_id (the audit trail a
+    judge can check), keep the last baseline/rate."""
+    saved = 0.0
+    any_saved = False
+    inf_ids = []
+    spent = baseline = rate = req = None
+    for u in usages:
+        rs = u.get("router_saved_usd")
+        if rs is not None:
+            saved += float(rs)
+            any_saved = True
+        if u.get("inference_id"):
+            inf_ids.append(u["inference_id"])
+        if u.get("spent_usd_running") is not None:
+            spent = u["spent_usd_running"]
+        if u.get("baseline_model"):
+            baseline = u["baseline_model"]
+        if u.get("rate_diff_per_mtok"):
+            rate = u["rate_diff_per_mtok"]
+        if u.get("requested_model"):
+            req = u["requested_model"]
+    return {
+        "router_saved_usd": round(saved, 6) if any_saved else None,
+        "inference_ids": inf_ids or None,
+        "spent_usd_running": spent,
+        "baseline_model": baseline,
+        "rate_diff_per_mtok": rate,
+        "requested_model": req,
+    }
 
 
 # --- bug arrival: seeded draw from a fixed class distribution ------------------
@@ -263,23 +305,54 @@ def run_arm(
             while attempt < MAX_ATTEMPTS and not verified:
                 attempt += 1
                 if warm:
+                    # WARM: one retrieval call — apply the stored, already-verified
+                    # pattern. This is the call we "delete" relative to the cold path.
                     text, usage = router.complete(
                         f"Reuse pattern {pattern_id} for {bug.bug_class}", "cheap")
+                    calls = 1
+                    cost = float(usage.get("cost_usd", 0.0))
+                    tin = int(usage.get("prompt_tokens", 0))
+                    tout = int(usage.get("completion_tokens", 0))
+                    models = [usage.get("model", "unknown")]
+                    telem = _telem_from([usage])
                     strategy = top[0].strategy
                     code_hint = top[0].code_hint
                 else:
-                    text, usage = router.complete(
-                        f"Root-cause and fix: {bug.root_cause}\nselector={bug.selector}", "strong")
-                    strategy = _derive_strategy(text, bug)
-                    code_hint = rc_key(bug.root_cause)
-                    for step in pol.cold_path_steps:  # trace for evolve() — no extra cost
+                    # COLD: genuine multi-step reasoning — ONE real model call per
+                    # cold step (localize, hypothesize, synthesize, self-review). The
+                    # agent literally reasons from scratch. This is why calls-per-fix
+                    # separates 4 -> 1 on LIVE data with real model names, not just in
+                    # fixture — llm_calls counts real complete() calls, not vendor
+                    # sub-call metadata, so it means the same thing in both modes.
+                    step_list = pol.cold_path_steps or ["reason"]
+                    calls = 0
+                    cost = 0.0
+                    tin = tout = 0
+                    usages = []
+                    models = []
+                    text = ""
+                    for step in step_list:
+                        stext, su = router.complete(
+                            f"[{step}] root_cause={bug.root_cause}\n"
+                            f"selector={bug.selector}\nclass={bug.bug_class}", "strong")
+                        calls += 1
+                        cost += float(su.get("cost_usd", 0.0))
+                        tin += int(su.get("prompt_tokens", 0))
+                        tout += int(su.get("completion_tokens", 0))
+                        usages.append(su)
+                        models.append(su.get("model", "unknown"))
+                        if step == "synthesize_patch" or not text:
+                            text = stext
                         _append_jsonl(TRACE_PATH, {
                             "iteration": it, "bug_id": bug.id, "arm": arm,
                             "step": step, "output": _step_output(step, bug),
+                            "model": su.get("model"),
                         })
+                    telem = _telem_from(usages)
+                    strategy = _derive_strategy(text, bug)
+                    code_hint = rc_key(bug.root_cause)
 
-                calls = int(usage.get("calls", usage.get("llm_calls", 1)))
-                cost = float(usage.get("cost_usd", 0.0))
+                model = _primary_model(models)
                 if path == "cold":
                     cold_costs.setdefault(bug.bug_class, []).append(cost)
                 cc = cold_costs.get(bug.bug_class) or [cost]
@@ -296,8 +369,7 @@ def run_arm(
                     "bug_id": bug.id, "bug_class": bug.bug_class, "sig": sig,
                     "path": path, "attempt": attempt, "max_attempts": MAX_ATTEMPTS,
                     "llm_calls": calls, "steps": calls,
-                    "tokens_in": int(usage.get("prompt_tokens", 0)),
-                    "tokens_out": int(usage.get("completion_tokens", 0)),
+                    "tokens_in": tin, "tokens_out": tout,
                     "cost_usd": round(cost, 6), "saved_usd": saved_usd,
                     "wall_ms": 800 * calls,  # modelled, deterministic
                     "verified": bool(verified), "memory_hit": warm,
@@ -305,19 +377,16 @@ def run_arm(
                     "pattern_id": pattern_id, "uses": prior_uses + 1 if warm else None,
                     "degraded": any(getattr(a, "degraded", False)
                                     for a in (qa, memory, router, publisher)),
-                    "model": usage.get("model", "unknown"),
+                    "model": model,
+                    "cold_models": sorted(set(models)) if path == "cold" else None,
                     "discovered_by": arm, "root_cause_source": source,
                     "born_at_iteration": it, "corpus_from": corpus_from,
                 }
-                # Pioneer router telemetry passthrough (present only in live router
-                # mode). `model` already carries the routed model; also surface it as
-                # routed_model and pass the audit/savings fields the dashboard wants.
-                if usage.get("model") and "fixture" not in str(usage.get("model")):
-                    record["routed_model"] = usage.get("model")
-                for _k in ("requested_model", "baseline_model", "rate_diff_per_mtok",
-                           "router_saved_usd", "inference_id", "spent_usd_running"):
-                    if usage.get(_k) is not None:
-                        record[_k] = usage[_k]
+                if model and "fixture" not in str(model):
+                    record["routed_model"] = model
+                for _k, _v in telem.items():
+                    if _v is not None:
+                        record[_k] = _v
                 _append_jsonl(jsonl_path, record)
 
             if verified:
@@ -397,6 +466,8 @@ def main(argv=None) -> int:
                     help="enable the slow loop (self-rewriting policy.yaml); off by default")
     ap.add_argument("--demo", action="store_true",
                     help="rehearsed offline replay: fixture mode, 5 iterations, both arms")
+    ap.add_argument("--offline", action="store_true",
+                    help="force ALL adapters to fixture, overriding any live modes in .env")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args(argv)
 
@@ -404,23 +475,48 @@ def main(argv=None) -> int:
         args.mode = "fixture"
         args.iterations = 5
         args.control = True
+        args.offline = True  # the dead-wifi path must NEVER touch the network
+
+    # Force true offline BEFORE any adapter import (which auto-loads .env). .env
+    # never overrides an existing env var, so setting these here wins — otherwise
+    # `.env`'s RATCHET_*_MODE=live would silently make an offline run go live.
+    # Only EXPLICIT --offline/--demo does this; `--mode fixture` alone still honours
+    # per-adapter live overrides from .env (the "one live integration at a time" dev
+    # path and how the live candidate is generated).
+    if args.offline:
+        for _k in ("RATCHET_MODE", "RATCHET_QA_MODE", "RATCHET_MEMORY_MODE",
+                   "RATCHET_ROUTER_MODE", "RATCHET_PUBLISHER_MODE", "RATCHET_TRACER_MODE"):
+            os.environ[_k] = "fixture"
+        args.mode = "fixture"
+
+    # Point Lane B's QA at the right app's bug source (tasker vs app2). Set before
+    # any adapter import so FixtureQA picks it up.
+    os.environ["RATCHET_TARGET_APP"] = args.target
 
     verbose = not args.quiet
     common = dict(iterations=args.iterations, url=args.url, mode=args.mode,
                   seed=args.seed, bugs_per_iter=args.bugs_per_iter,
                   target=args.target, corpus_from=args.corpus_from, verbose=verbose)
 
+    # Tasker writes the canonical ratchet/control files; any other target (app2)
+    # writes to its own files so it never clobbers Tasker's golden data.
+    if args.target == "tasker":
+        ratchet_path, control_path = RATCHET_JSONL, CONTROL_JSONL
+    else:
+        ratchet_path = os.path.join(RUNS_DIR, f"{args.target}.jsonl")
+        control_path = os.path.join(RUNS_DIR, f"{args.target}-control.jsonl")
+
     if args.no_memory:
         _print_summary(run_arm(use_memory=False, arm="control",
-                               jsonl_path=CONTROL_JSONL, do_evolve=False, **common))
+                               jsonl_path=control_path, do_evolve=False, **common))
         return 0
 
     _print_summary(run_arm(use_memory=True, arm="ratchet",
-                           jsonl_path=RATCHET_JSONL, do_evolve=args.evolve, **common))
+                           jsonl_path=ratchet_path, do_evolve=args.evolve, **common))
 
     if args.control:
         _print_summary(run_arm(use_memory=False, arm="control",
-                               jsonl_path=CONTROL_JSONL, do_evolve=False, **common))
+                               jsonl_path=control_path, do_evolve=False, **common))
     return 0
 
 
