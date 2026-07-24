@@ -1,0 +1,491 @@
+00:00:00,080 --> 00:00:25,980 [Speaker 0]
+And things have certainly changed over the last four years. We've had the pleasure of working with this community and seeing through this evolution. Uh, so really excited for today and, and thank you for participating. I just read a, uh, a report this morning. Tokens processed globally have gone from two point two trillion in Q1 two thousand and twenty-two to thirty-eight quadrillion in Q1 two thousand and twenty-six. 
+
+00:00:27,240 --> 00:00:31,720 [Speaker 0]
+The demand for inference has grown seventeen thousand X. 
+
+00:00:32,759 --> 00:01:30,160 [Speaker 0]
+Okay, just let that sit for a second. And we're just at the beginning. Okay, uh, we've been actually this theme of self, self-improvement, self-evolving. We've actually been waiting for the moment to see true RSI, and we're in the beginning phases of that. Super exciting. So I know a lot of you are thinking about loops and goals and all these things. So truly, the, the, the theme of self-evolving and self-improvement is one that we want to set the foundation for in today's event. So I would really encourage you to kind of like push the bar on self, self-- how these agents self-evolve. And hopefully, your project evolves beyond today. I really want to, uh, we've been talking to like a, a ton of top-tier VCs about, uh, sponsoring these events, a16z being one of them. So look out for that later this year. And I believe that we're very close to actually seeing a project that gets funded into a company in a one-day hackathon. 
+
+00:01:30,160 --> 00:01:30,420 [Speaker 1]
+Yeah. 
+
+00:01:30,420 --> 00:03:22,360 [Speaker 0]
+So maybe that'll be today. And I want to support every one of you in doing that. Um, and, uh, let's learn together. Uh, this is a community where I've seen incredible companies, um, get created out of and funded, um, and really excited to have, have, uh, have you guys involved. So, uh, I'm just gonna do a ten-minute intro, and then we're gonna have some amazing sponsors come to the stage to just share kind of what they offer today. And, uh, and then we'll hack. Like we'll get, we'll get to the point. Uh, so again, I'm Soorab Barwani, co-founder and CEO of Senso. Uh, we are a knowledge base for agents, uh, one of the sponsors of today's event. Uh, and we have incredible sponsors that, um, are providing credits and prizes and all sorts of good stuff that you'll hear about. So thank you to the sponsors. Uh, I know you're all here, and I'm excited to see kind of what you, what you have to say on the stage and what you have to offer. Uh, so schedule, we're gonna do-- right now, we're doing kickoff and sponsor presentations. We won't take a lot of your time because we want to get to hacking. So I, I think that by eleven you guys will be hacking, and that'll go all the way until four thirty when project submission is. So, uh, with coding agents, that should be plenty of time. Uh, and, uh, one PM we'll do lunch. Uh, we'll have pizza come in, and then seven PM we'll be, be the award ceremony. Judging will occur in the back rooms, and you guys will have plenty of time to network during that time, uh, between four thirty and, uh, and about six. Uh, so, um, so, you know, plenty of time to network, but hacking is, is the-- you'll have plenty of time for that. Housekeeping rules, um, share access to power. Uh, don't let your fellow hacker run out of any juice. Um, keep name tags on, uh, you know, so you can walk in and out freely. You're welcome to go in and out, but please keep your name, name tags on. Uh, respect the space and each other. So, um, really would appreciate DG seven one seven for sponsoring this. Please give them a round of applause. 
+
+00:03:23,440 --> 00:04:31,880 [Speaker 0]
+[clapping] Thank you. Awesome. All right, here's the challenge statement. Take a picture of this. Uh, we'll have it up throughout the day, but, uh, I mean, it's pretty simple. Build agents that evolve. So ship an autonomous agent that self-evolves in a continuous loop to achieve a goal. Uh, your agent sh-- needs to demonstrate retention and improvement as the agent evolves in loops. Uh, publish, monitor, orchestrate, transact. That's all on the table, and grounded in real sources. Uh, so we want to see, uh, this agent, uh, grounded and, and improving in a, in a cyclical loop. Uh, we've seen, uh, uh, we've seen participants in the past publishing, uh, content for agents on the web, uh, and enabling transactions through X four O two, MPP. Um, and that's been very exciting to us because the emergence of how the web is transforming is becoming real and exciting, and there's more agents on the internet than humans now. Uh, and so what you can do, um, surpasses our imagination. So I'm, I'm looking to see you guys push the bar on what's possible. So that is the challenge statement. 
+
+00:04:33,360 --> 00:05:33,820 [Speaker 0]
+Judging criteria. Again, take a picture of this. Uh, we want to see true demonstrations of self-improvement using real-time data without manual intervention. Uh, the idea is very important. We are building for impact. We want to see projects that can get funded, turn into real companies, and most importantly, demonstrate how it can help like large groups of people or organizations. Technical implementation. Because our judges are mostly technical, they'll be looking for things that shock and awe them and surprise them. Uh, tool use. Did you use at least three sponsor tools? We realize that, um, you know, you may use other tools, but just, uh, try to leverage three sponsor tools. It'll work in your favor with judging. If you use two, it's fine, but do your best to use three. And then I would really encourage in the presentation, uh, do a demo. Don't, don't, don't even bother with slides. Um, you have three minutes and just show what you've built. Uh, and the more impactful your demo is, uh, the judges truly resonate with that. 
+
+00:05:35,660 --> 00:06:16,160 [Speaker 0]
+We're gonna use Devpost, uh, for project submissions. That's four thirty. And, uh, we'll give you a heads-up an hour in advance of when, uh, submissions are, you know, coming due. Uh, so at three thirty we'll do an announcement. At four we'll do an announcement. Uh, you must select each sponsor prize you want to be considered for. Uh, max four people per team. Uh, and if you have any questions about anything, Andy's over there. He's my guy. Uh, and he can answer anything for you throughout the day. I would encourage you to also, uh, access the Discord where every sponsor has a specific channel where you can ask them specific questions about credits or questions about their tools and services.
+
+00:06:17,924 --> 00:06:26,764 [Speaker 2]
+All right. So we're gonna get into sponsor presentations right now. Uh, we have a few, and I'm gonna call you up one by one. Just get ready to plug in and, uh, 
+
+00:06:28,144 --> 00:06:42,104 [Speaker 2]
+let me pull from there. So number one, first, uh, I'd like to invite Brian from Replay, uh, to the stage. Welcome, Brian, and we're excited to see your presentation. [audience applauding] 
+
+00:06:42,104 --> 00:07:04,864 [Speaker 3]
+Hey, everyone. 
+
+00:07:13,164 --> 00:07:13,364 [Speaker 3]
+Okay. 
+
+00:07:15,364 --> 00:07:38,004 [Speaker 3]
+Hi. Hi. Um, so yeah, uh, we're, um... I'm the CEO at Replay. I'm Brian Hackett. Um, you know, we have just launched a tool, um, Replay QA, which is to essentially drop into a tour on AI-built web apps. You know, the essential idea is that, you know, you can just feed it a URL of an app you're building, and it just gives you back, you know, a bunch of bug reports, you know, detailed, actionable ones that your agent can use to actually fix these events. 
+
+00:07:39,224 --> 00:08:15,844 [Speaker 3]
+Um, this is an ex-- I'm just gonna do a quick demo just to show, you know, what the tool can do. Um, this is, you know, an app that I built with Lovable. Um, you know, just like an, a basic issue tracker. Um, you know, it has a lot of bugs. A lot of things are not really working in it. I mean, things like, you know, it's like this X button doesn't work. You know, this doesn't work. You know, lots of, lots of stuff in here is not really working very well. Um, what we can do with, with Replay QA is feed it in, you know, just feed it, you know, sorry, feed the app URL into the QA site, and it just produces these bug reports. Um, what it will do is go through and explore the app. Um, I can show a video here. 
+
+00:08:17,744 --> 00:08:59,344 [Speaker 3]
+You know, essentially, it's just going to try to understand the app. You know, it feeds-- needs very little context. You can feed it design documents, things like that, that are describing how it's supposed to work. But, um, you know, it doesn't really need, uh, too much hand-holding at all. And once it's done, you know, it starts to produce, you know, it starts to understand how the app is supposed to work. You know, it tries to map out, like, where the user flows, and then it goes and tests each of them. Tries to see, you know, things that aren't working, um, that are, that aren't working right. And, and we can see up here, like, it had like a list of, like, I think, twenty or so bugs that it found. But, you know, for each of these bugs, what it wants to do is, you know, produce, you know, something, some, you know, some real information that will help the agent actually fix the issue. I think with this one button that where the, 
+
+00:09:00,984 --> 00:09:01,204 [Speaker 3]
+uh, 
+
+00:09:02,644 --> 00:09:27,984 [Speaker 3]
+this... The X button. Yes, this is the one we're looking at earlier. Um, yeah. So with the X button that doesn't work, you know, it, it's not just saying, "Hey, the X button doesn't work," but it can go and produce, like, an actual detailed root cause, you know, pointing out the issue in the app. In this case, it's, it's like a React, um, you know, so it's a React-related issue. Um, and what you can do though is you can take, like, all these bug reports and just copy them, just feed them to the agent. 
+
+00:09:29,724 --> 00:09:49,104 [Speaker 3]
+And, um, and when I was able to do that with this, with this, um, issue tracker, you know, it just fixes things. You know, it's just we can go here, we can click, you know, this works, you know, all these other things work. I mean, it just-- it's able to, you know, improve the app, you know, considerably with very little effort, you know, on the developer's part. Um, the tool is, you know... 
+
+00:09:52,064 --> 00:10:17,044 [Speaker 3]
+I think the, um... Let's see. I should have rehearsed this. Um, yeah, this, this is not something that you have to actually use the UI for. You know, it's designed to be, you know, in- easily integrated into a coding agent. You know, you don't have to use-- you can just, um, use the REST API. You could use an MCP API. You know, the site just kind of provides all the information you need to be able to use it. Um, and we just love to be able to see, you know, like, what can you do to, um... 
+
+00:10:18,144 --> 00:10:23,184 [Speaker 3]
+You know, what can you do with this during the course of the competition? I think that for me, um... 
+
+00:10:27,344 --> 00:10:27,824 [Speaker 3]
+I think, yeah. 
+
+00:10:29,684 --> 00:10:30,804 [Speaker 3]
+I'm just really-- Oh, go ahead. 
+
+00:10:30,804 --> 00:10:31,764 [Speaker 2]
+I have a question. 
+
+00:10:31,764 --> 00:10:31,773 [Speaker 3]
+Sure. 
+
+00:10:31,773 --> 00:10:36,204 [Speaker 2]
+So, um, nowadays, I was, uh... As a content developer, I use Script Type- 
+
+00:10:36,204 --> 00:10:36,414 [Speaker 3]
+Mm-hmm 
+
+00:10:36,414 --> 00:11:05,104 [Speaker 2]
+... blocks to automatically comment. And can-- like, a lot of times you can really fix the bug really well. So I'm curious how, uh, from my understanding, like, Replay is more for like, let's say, manual QA testing on the front, let's say, front end to see if a button works or not. How, how are those two, two compliment? Because one is while doing code review pre-deployment, and this one seems to be more like post-deployment, um- 
+
+00:11:05,104 --> 00:11:26,664 [Speaker 3]
+That's right. Yeah. I mean, they're highly-- it's highly complementary with tools like Draptile, you know, CodeRapid, and Codgo. You know, essentially the difference is that with these, uh, static code review tools, they are looking at the PRs. They're looking to figure out, you know... So it's like they're looking for bugs in the code itself. Um, with QA, what it's doing is it's testing the app actually af-after it has been deployed, actually seeing like, "Hey, does the app actually work? Can we actually test this in the way in which a user would?" 
+
+00:11:26,664 --> 00:11:26,674 [Speaker 2]
+Mm-hmm. 
+
+00:11:26,674 --> 00:11:29,024 [Speaker 3]
+And, you know, see if, you know, uncover any issues that come up. 
+
+00:11:29,024 --> 00:11:35,444 [Speaker 2]
+And from your experience, what kind of apps benefit most from, um, Replay QA? 
+
+00:11:35,444 --> 00:11:48,504 [Speaker 3]
+Uh, mostly using it on like internal apps, SaaS apps, you know, things like that. I think, um, you know, it's just as, you know, as amazing as agents are, like, what I'm really interested in seeing is like, what can you do, you know, to build apps that help people, you know, you know, get through their work more easily- 
+
+00:11:48,504 --> 00:11:48,514 [Speaker 2]
+Mm-hmm 
+
+00:11:48,514 --> 00:11:53,414 [Speaker 3]
+... be able to manage their job, be able to, you know, you know, do everything that you wanna do, you know, during the course of the day. 
+
+00:11:53,414 --> 00:11:53,464 [Speaker 2]
+Yeah. 
+
+00:11:53,464 --> 00:12:03,324 [Speaker 3]
+And, um, I think it's, you know, it-- uh, essentially like, you know, having automated QA that can be built on top of that lets you, um, lets you speed that process up even further. 
+
+00:12:03,324 --> 00:12:09,804 [Speaker 2]
+Yeah. Like, uh, 'cause at the front end, I spend a lot of time doing manual QAs to make sure everything rolls smoothly. 
+
+00:12:11,284 --> 00:12:11,394 [Speaker 3]
+Uh-huh. 
+
+00:12:11,394 --> 00:12:11,724 [Speaker 2]
+So basically. 
+
+00:12:11,724 --> 00:12:13,564 [Speaker 3]
+That's right. Yeah. It's just, I mean, like, for 
+
+00:12:14,704 --> 00:12:22,140 [Speaker 3]
+as fast as it needs to build now, it's still, QA is still largely a manual process, and we're trying to automate that as much as we can. 
+
+00:12:22,140 --> 00:12:48,840 [Speaker 3]
+Yeah, sure. Oh, yeah. And so, um, you know, we have a few prizes, I think, for, um, for using Replay QA. I think it was like fifteen hundred, a thousand and five hundred. Um, essentially what we're trying to look for is looking for some great web apps they're able to build and integrate with your agents. I think especially interested in seeing like, are you able to, you know, build agents that are able to like understand how users are actually engaging with an application and be able to improve it based on the results and being able to like have, you know, like QA mixed in with that is just make that that much easier. 
+
+00:12:51,560 --> 00:12:52,680 [Speaker 3]
+Yeah. Thanks, everyone. 
+
+00:12:52,680 --> 00:12:54,640 [Speaker 2]
+[clapping] Thank you so much. 
+
+00:12:54,640 --> 00:13:01,720 [Speaker 4]
+Brian. All right, next up, can we get Corey from Guild AI, uh, to stage? 
+
+00:13:10,260 --> 00:13:21,500 [Speaker 5]
+Is this working now? Oh, there it goes. Okay, can you hear me? All right, great. Give me one second. 
+
+00:13:43,040 --> 00:14:03,540 [Speaker 5]
+All right, great. Okay, everybody, uh, thank you for coming out. My name is Corey. I'm the head of developer relations at Guild AI. We're the control plane for AI agents. I will explain what that means in just a moment. First, uh, I want everybody to stop talking to your neighbor, take your phone out, and scan that QR code. Take you ten seconds. 
+
+00:14:09,640 --> 00:14:21,520 [Speaker 5]
+All right, that's going to take you to the homepage for the Guild app. Want you guys to log in. You can use GitHub, Google, email, whatever works better for you. Uh, this will allow you to get started quickly and kind of follow along as we go through here. 
+
+00:14:23,120 --> 00:14:51,740 [Speaker 5]
+All right, so we're just going to jump straight into the demo. Uh, we have an agent called Log Triage, which ties into New Relic, and it's, uh, it's reporting on the bugs that are-- that are occurring in production. The agent then evaluates those bugs a-and originally submitted, uh, suggestions for fixes. Later on, it evolved into a process where it actually sends PRs themselves. Thanks to my colleague Dwayne over here and his hard work on that. So thank you, Dwayne. 
+
+00:14:53,960 --> 00:14:55,140 [Speaker 5]
+So this is what happened. 
+
+00:14:57,000 --> 00:14:57,100 [Speaker 5]
+Um, 
+
+00:14:59,520 --> 00:15:10,180 [Speaker 5]
+the triage agent was great, but it was also very expensive. As you can see, it was costing, you know, two hundred-- two dollars and twenty cents per run. It was running hundreds of times a day. That was unsustainable. 
+
+00:15:11,460 --> 00:15:16,040 [Speaker 5]
+But we have agents that can work on agents, so we set the agents to work. 
+
+00:15:17,060 --> 00:15:17,340 [Speaker 5]
+And 
+
+00:15:18,400 --> 00:15:32,820 [Speaker 5]
+what the agents found is that a lot of the steps that originally were all running through the LLM, a lot of them are actually rather deterministic, so they can be replaced with coded agents to do the same thing every single time. That cut cost by eighty-seven percent. 
+
+00:15:34,680 --> 00:16:05,320 [Speaker 5]
+Let me say that again. That cut cost by eighty-seven percent. This is a real-world example of why self-healing agents are so important, right? What you start with in the beginning, you just, you know, you're doing it quick, you're getting it out the door. It's not going to be the final version. The final version should look something closer to like this. So when the agents went through, some of the things ca-- they came up with was it, it identified this particular prompt, which you see this, this was the original prompt that was used. 
+
+00:16:06,520 --> 00:16:09,940 [Speaker 5]
+All of that was replaced by nine fields in a deterministic agent. 
+
+00:16:09,940 --> 00:16:10,220 [Speaker 3]
+Nice. 
+
+00:16:11,520 --> 00:16:11,939 [Speaker 5]
+Simple. 
+
+00:16:13,800 --> 00:16:19,000 [Speaker 5]
+So cut down all that token usage and increased the speed at which they operate. We can see here 
+
+00:16:20,560 --> 00:16:37,070 [Speaker 5]
+these are the Slack digests o-of the, uh, the agent's runs on the, the same log set. One cost a dollar thirty-two with sixty-four calls, one cost twenty cents with thirteen calls. And if we scroll through them, we'll see that they have basically the same, 
+
+00:16:38,080 --> 00:16:39,749 [Speaker 5]
+same problems and the same solutions, 
+
+00:16:41,920 --> 00:16:43,140 [Speaker 5]
+but at a fraction of the cost. 
+
+00:16:45,200 --> 00:16:49,940 [Speaker 5]
+So, as I said, we went from an average of two dollars and twenty cents to twenty-eight cents per run. 
+
+00:16:52,840 --> 00:16:54,540 [Speaker 5]
+All right, so what we tried. 
+
+00:16:55,980 --> 00:17:26,480 [Speaker 5]
+We ran evals on various ways to dedupe the agents using, uh, various models, found the ones that broke evals and ignored those. So th-this is an important step in any iteration. You want to make sure that your, your evals are set ahead of time. You know what success looks like. Otherwise, agents are going to... They're just going to do what they're told, right? Even supposed reasoning models aren't really reasoning. They're just following instructions. So make sure the instructions are clear on what you expect the agent to do. 
+
+00:17:28,520 --> 00:17:37,520 [Speaker 5]
+The lesson here is to build it fast as an LLM agent and then iterate from there, okay? Do not let perfect be the enemy of the good. Just 
+
+00:17:38,560 --> 00:17:41,180 [Speaker 5]
+get it done and then iterate and improve over time. 
+
+00:17:43,100 --> 00:18:01,820 [Speaker 5]
+And in Guild, it's super simple. The builder agent works, and then press one button to optimize this workspace. It's... If you're-- If you follow the instructions, you log in, you'll, you'll see it there in any workspace you create, and it'll just walk you through, and the agents will do everything for you. All right, that's the demo. Let's, let's go on. 
+
+00:18:03,220 --> 00:18:11,260 [Speaker 5]
+Here are some suggestions. So this is another opportunity for your, your phones. This time it's optional. You don't have to get them out. But these are some suggestions for things you might want to build today. 
+
+00:18:13,180 --> 00:18:24,576 [Speaker 5]
+I've done a lot of these hackathons myself, both in the audience and on stage, and sometimes just coming up with the idea takes half the time. So we want to save you some time and just get you started. 
+
+00:18:24,576 --> 00:18:24,936 [Speaker 5]
+Great. 
+
+00:18:26,476 --> 00:18:26,816 [Speaker 5]
+All right, 
+
+00:18:28,136 --> 00:18:29,196 [Speaker 5]
+who wants some prizes? 
+
+00:18:30,875 --> 00:18:30,915 [Speaker 6]
+[cheering] 
+
+00:18:30,916 --> 00:18:54,076 [Speaker 5]
+All right. So Guild is a little different from most of the sponsors here today. We are in open beta, which means we are not charging for our, our usage right now. You get fifty million tokens when you sign up, and if you run out, if you somehow run out of fifty million tokens in one day, then I will probably want to hire you. Um, but we will give you more tokens. It's not a big deal. 
+
+00:18:54,076 --> 00:18:56,056 [Speaker 0]
+Yeah, chances are [laughing] 
+
+00:18:56,056 --> 00:19:03,216 [Speaker 5]
+[laughing] Um, so instead, we're gonna give out cash, specifically Visa gift cards. 
+
+00:19:04,336 --> 00:19:09,596 [Speaker 5]
+We don't have a third place, but we do have two second places. Both of them will take home five hundred dollars, 
+
+00:19:11,296 --> 00:19:13,396 [Speaker 5]
+and the first place will get a thousand dollars. 
+
+00:19:14,736 --> 00:19:22,256 [Speaker 5]
+Now, because you'll, you'll be in teams most likely, how you split that up, totally up to you. We're just giving you the cards, and you work it out amongst yourselves. 
+
+00:19:24,116 --> 00:19:30,316 [Speaker 5]
+All right. I wanna know what you're building, both here and later. So please connect with me on LinkedIn. 
+
+00:19:31,426 --> 00:19:33,456 [Speaker 5]
+Uh, you can join our Discord on the, the far, 
+
+00:19:34,516 --> 00:19:46,676 [Speaker 5]
+far right there. And then in the middle is the... That's the same QR code from the beginning. So if this is the first time, this is your chance to sign up for an account now. Are we not? Got, got one minute? Two minutes? 
+
+00:19:46,676 --> 00:19:47,136 [Speaker 0]
+One minute. 
+
+00:19:47,136 --> 00:19:52,396 [Speaker 5]
+One minute. We got one minute, so anybody has one minute worth, worth of questions, I'll answer them. 
+
+00:19:54,736 --> 00:19:56,056 [Speaker 5]
+All right. Oh, yes. 
+
+00:19:56,056 --> 00:19:58,636 [Speaker 7]
+Uh, what's the best use case you've seen so far? 
+
+00:19:58,636 --> 00:20:05,436 [Speaker 5]
+What's the best use case I've seen so far? Uh, well, not to toot my own horn, but it's the one that I built, which is our docs agent- 
+
+00:20:05,436 --> 00:20:06,196 [Speaker 7]
+[laughs] 
+
+00:20:06,196 --> 00:20:09,416 [Speaker 5]
+... uh, which a, a video of that is available on YouTube now. But essentially, 
+
+00:20:10,836 --> 00:20:36,336 [Speaker 5]
+uh, like I said, I, I run developer relations. I am developer relations, which means I'm also all the technical writers, and I don't have time to do all of that, and I don't have the budget to hire a technical writer. So I, I created one, and the agent runs off of PRs in GitHub. It analyzes them, looks for changes to the documentation based on whether it's a public-facing change or not, uh, uses Miniflies API to create that change. It submits a PR to GitHub and has a human review. 
+
+00:20:37,656 --> 00:20:48,236 [Speaker 5]
+It, it has worked flawlessly and has improved our docs significantly. They do not fall behind anymore. Even though we're pushing out literally dozens of PRs a day, the docs stay up to date, and they stay fresh. 
+
+00:20:50,436 --> 00:20:56,756 [Speaker 5]
+All right. Thank you so much, everybody. Uh, we'll be right over here all day if you have any questions or need any help. [clapping] 
+
+00:20:56,756 --> 00:21:06,376 [Speaker 0]
+Thank you, Joe. Next up, uh, Siam from Actian, uh, followed by Kelton from Pioneer. Give it up for Siam. 
+
+00:21:08,396 --> 00:21:09,476 [Speaker 0]
+[clapping] 
+
+00:21:09,476 --> 00:21:10,656 [Speaker 6]
+[clapping] 
+
+00:21:25,136 --> 00:21:25,616 [Speaker 8]
+Hi, guys. 
+
+00:21:27,816 --> 00:21:28,496 [Speaker 8]
+Hi, guys. 
+
+00:21:30,316 --> 00:21:30,765 [Speaker 8]
+There you go. 
+
+00:21:32,356 --> 00:21:33,956 [Speaker 8]
+Hello, guys. Um, 
+
+00:21:35,276 --> 00:21:36,056 [Speaker 8]
+how is it going? 
+
+00:21:37,196 --> 00:21:40,276 [Speaker 8]
+Just a second. 
+
+00:21:43,836 --> 00:21:44,596 [Speaker 8]
+Sorry about this. 
+
+00:21:58,376 --> 00:22:02,056 [Speaker 8]
+My apologies. I think I'll be taking two minutes of my six minutes, 
+
+00:22:03,336 --> 00:22:04,436 [Speaker 8]
+uh, time. 
+
+00:22:08,476 --> 00:22:34,456 [Speaker 8]
+[clears throat] [coughs] [sighs] 
+
+00:22:36,316 --> 00:22:36,536 [Speaker 8]
+Cool. 
+
+00:22:38,156 --> 00:23:07,616 [Speaker 8]
+Um, my name is Siam. Um, sorry for the, the initial waste. Um, I'm here-- I'm gonna keep it really simple and short. It's a simple concept to understand. I'm here representing Actian. And, um, the claim is simple. In this day when the next model upgrade is always around the corner, and it's getting smarter and smarter, my claim is that [clears throat] your agents 
+
+00:23:08,676 --> 00:23:11,096 [Speaker 8]
+don't always need a smarter model, 
+
+00:23:12,836 --> 00:23:17,046 [Speaker 8]
+but a persistent memory, so that it can gain experience, it can learn 
+
+00:23:18,156 --> 00:23:20,456 [Speaker 8]
+from its mistakes, what it did, what it tried, 
+
+00:23:21,656 --> 00:23:27,096 [Speaker 8]
+and take from that instead of just having a new context window every single time. Um, 
+
+00:23:28,796 --> 00:23:29,396 [Speaker 8]
+the... 
+
+00:23:31,276 --> 00:23:50,396 [Speaker 8]
+What we're providing is, um, a vector database. It's lightweight, it's portable. That's Actian's offer to you. And I think that for today's hackathon, for today's event, it sort of fits in perfectly, uh, in the stack. It's simply a retrieval layer, and you put it, 
+
+00:23:52,176 --> 00:24:00,456 [Speaker 8]
+um, in your stack and use it however you want. It's only a retrieval layer. Um, it's off cloud. Um, 
+
+00:24:01,676 --> 00:24:03,036 [Speaker 8]
+so it's private. It's 
+
+00:24:04,436 --> 00:24:16,256 [Speaker 8]
+remote. You can use it remotely. You can use it, um... Basically, you control your data however you want. So for the claim, it's today's agents, the failure state is, 
+
+00:24:17,416 --> 00:24:27,584 [Speaker 8]
+um, the, the, the failure mode is state, not intelligence nowadays. Um, agents repeat the same work. If you have multiple agents, they're 
+
+00:24:27,584 --> 00:24:37,864 [Speaker 8]
+Doing the same thing over and over again, it's, it's almost as if like you're tell-telling the agent, make a better car, get better at making a car. But every agent, every time is just reinventing the wheel, 
+
+00:24:38,984 --> 00:24:42,384 [Speaker 8]
+and that, that's very lossy. So 
+
+00:24:43,624 --> 00:24:53,384 [Speaker 8]
+if-- So this is, um, a small sort of, um, loop you can see. And given today's sponsors, um, 
+
+00:24:54,464 --> 00:25:35,044 [Speaker 8]
+DeepMind, Guild AI, Replay, Axion, and Pioneer, uh, this is what a sort of a flow could look like. DeepMind does the reasoning, um, Guild AI governs, um, Replay who is here, um, basically verifies and fixes. Axion is a layer that is persistent. You do your searches, you retrieve the information that is correct, and your agent, instead of, um, doing three passes, it's now doing one because it's semantically finding what has worked in the past, and you just go from there. Um, again, this is a possible flow. 
+
+00:25:36,164 --> 00:25:43,624 [Speaker 8]
+So there is a small demo. It's not entirely live, but it's sort of giving a, 
+
+00:25:45,084 --> 00:25:49,624 [Speaker 8]
+uh, a small demo where I'll just run this [clears throat] and 
+
+00:25:51,764 --> 00:26:09,484 [Speaker 8]
+using Playwright, it's, it's finding errors, it's finding a fix, and then it's choosing that this is important and storing it. And for the next pass, it just semantically searches for, uh, um, a fix that worked, and then it just goes straight to it. 
+
+00:26:10,684 --> 00:26:12,084 [Speaker 8]
+As you can see, it's about 
+
+00:26:13,644 --> 00:26:29,564 [Speaker 8]
+sixty-seven percent or, um, instead of three steps, it's now doing one step only because of experience which comes from memory, which comes from the vector database that you could use, um, for your agent and for your, 
+
+00:26:30,824 --> 00:26:43,104 [Speaker 8]
+um, challenge build. Uh, speaking of, we have our own track. It's pretty open-ended. Um, actually, I'll give you this. You can scan. This will give you the full guide, 
+
+00:26:44,204 --> 00:26:49,084 [Speaker 8]
+um, and the link to the vector database and the trials, the 
+
+00:26:50,264 --> 00:26:57,924 [Speaker 8]
+documentation. It's quite easy implementation. Um, for today, it's three winners, five hundred, three hundred, two hundred. 
+
+00:26:58,944 --> 00:27:04,044 [Speaker 8]
+And again, like I said, it's only the retrieval layer. How you use it is entirely up to you. 
+
+00:27:05,224 --> 00:27:17,204 [Speaker 8]
+Um, just make sure that it is a thoughtful part of your application and not just an a-- uh, not just added after the, after the fact as a second thought. Um, 
+
+00:27:18,864 --> 00:27:43,244 [Speaker 8]
+we-- I am-- I'm gonna be at the table right at the back. Please come grab some free, free merchandise, socks, um, beanies. It's kinda cold out there. And, um, we are having a virtual, um, event which again the guide will take you to if anyone's interested in continuing to build past what, you know, the eight hours gives us today. Thank you. Um, 
+
+00:27:44,404 --> 00:27:51,904 [Speaker 8]
+all good? Thank you. And sorry about the first one minute. [audience applauding] 
+
+00:27:51,904 --> 00:27:53,984 [Speaker 0]
+Thank you, Kim. Next up, Kelton from Pioneer, 
+
+00:27:55,444 --> 00:27:58,924 [Speaker 0]
+followed by Oprah at Band, uh, and then we're gonna start hacking. 
+
+00:28:08,864 --> 00:28:11,544 [Speaker 8]
+Hello, everyone. [clears throat] Can you hear me? 
+
+00:28:13,444 --> 00:28:20,934 [Speaker 8]
+Hello? Hello? 
+
+00:28:24,664 --> 00:28:25,554 [Speaker 0]
+There it is. 
+
+00:28:25,554 --> 00:28:26,944 [Speaker 8]
+Yeah, just, uh, 
+
+00:28:33,264 --> 00:30:17,104 [Speaker 8]
+waiting for the... I can do it. Yeah, sorry about that. Well, we're gonna switch with another speaker. 
+
+00:30:18,664 --> 00:30:19,114 [Speaker 8]
+Yeah. I'll call back later. Yeah. 
+
+00:30:19,114 --> 00:30:24,204 [Speaker 0]
+Uh, can we get Oprah from Band here, uh, to go first, and then, um, Kelton will come back. 
+
+00:30:25,484 --> 00:30:25,724 [Speaker 9]
+All right
+
+00:31:21,734 --> 00:33:05,174 [Speaker 10]
+[background chatter] 
+
+00:34:02,774 --> 00:35:10,634 [Speaker 7]
+All right. 
+
+00:35:11,754 --> 00:35:44,754 [Speaker 7]
+Technical challenges. Let's build agents, but the technical challenges take a little bit of time. So hi, everyone. I'm Ofer from, uh, BEN. Um, I'll try to make this quick because it took like five minutes just fixing this. Uh, so what is BEN? We, we believe that the future, uh, is agent to agent. So everybody's building agents, whether with any of the other pr- uh, providers and sponsors here. There's a lot of good technology, but agents don't wanna be in isolation. They talk to each other, right? So today, a lot of how we connect agents is kind of through humans. 
+
+00:35:45,814 --> 00:36:37,586 [Speaker 7]
+Um, but what we're building is this, we call the agentic mesh, where agents can just very quickly talk to each other. Um, so yeah, so, you know, a little bit of why that's necessary. We all talk to each other all the time. Now we're in this stage where humans talk to agents, get a response, and that's, that's the main interaction mode. We're moving to this AI to AI that's gonna scale up to hundreds and thousands of agents talking to each other all the time, doing work for us. Um, so a couple of use cases to get you maybe inspired also for this hackathon. Um, a very common use case, uh, is what we call the dev squad, is a lot of agents that are-- have different roles, but they mentioned as a team of coding agents. One could be a developer, one could be, uh, QA, one could be frontend, one could be backend. They all have different roles, different skills, and they can all collaborate on a project like humans do, um 
+
+00:36:37,586 --> 00:38:26,346 [Speaker 7]
+Today, uh, you can imagine customer support where a front-end customer support agent collaborates with other internal company, uh, agents to do different parts of, um, what it needs to do. Um, and, and you can see other ways. So there's a lot of different use cases when you start thinking about agents working together. A good tip is how do we solve problems today with a-- humans working together? How can we sort of, um, imitate that? Um, so Band is really an API-based, uh, platform. Uh, to work with us, we have a, a free tier. I'll talk about this in a little bit. So you can, uh, sign up, get an API key. Uh, and essentially, we have in the SDK, um, connections to a bunch of different... You can see here a bunch of different, uh, agent building platforms. There's actually more than shown here. We just didn't have enough space. I think there's like twelve or fifteen of those. Uh, so it's really easy to add, uh, sort of a few lines of code per your agent platform to onboard it to the platform. And then, uh, you sort of speak-- the agents speak in a chat room. So it kinda looks, um... Sorry. It kinda looks like this. It's actually literally like a, a chat room-based interface. You can see we have different chat rooms here. Um, and then the agents talk to each other, they mention each other. Um, and by mentioning another agent, that agent gets, gets the message, it gets-- starts to work something. So now humans can also participate, which allows you to do human-in-loop. So that's kind of how it works. Uh, you can see that later on. Um, we also have... So I mentioned the, the mentions, which is how you trigger an agent, um, to, to send them a message. Uh, there's a, you know, context that happens in a room. You can see after the fact what happened, what are- what are all the handoffs between the agents, which is really cool too. Um, 
+
+00:38:27,546 --> 00:39:55,506 [Speaker 7]
+so kind of the, the atoms of working this. Discovery of agents. You can find agents that exist on the platform, so they can find each other through the rooms. You can talk to them, mention them, uh, et cetera. Okay. Um, so for this hackathon, uh, we have a prize for you guys, uh, for meaningful use of Band, the best project using Band, uh, for one thousand dollars. Um, and I wanna share a couple of resources. We have a free plan, as I mentioned. Um, but if you need the, the t- the pro tier of our product, it's available too for, uh, for this hackathon with this code. Uh, it gives you just more, more agents, more volume if you, you really need it for your project. Here's the documentation. We have a hacker guide that's also published in the resources. And, uh, I'll be here, uh, to ask questions. I'll be in the back. If you, uh, if I'm not available, you can find me. You can also try our Discord server, which has places where you can ask questions, and there's people, uh, watching that as well. Um, one last thing before I leave. Uh, this is not necessarily something for this hackathon, but I thought it was cool and, and wanted to share with you guys. Um, we recently heard about the DevSquad use case a lot. People wanted to work with Cloud Code, multiple Cloud Codes, Cloud Code and Codex. So we created this thing called Jam. Jam is a way to onboard any Cloud Code session you have or Codex onto Band automatically, and then you can sort of say things like, "Hey," 
+
+00:39:56,566 --> 00:40:11,686 [Speaker 7]
+you can define different instances of Cloud Code, different, uh, uh, skills that they have, different instructions they have, and they can collaborate together very quickly. So it's Band specifically for coding agents to work together. So you can try it out today or later. Um, 
+
+00:40:13,066 --> 00:40:30,546 [Speaker 7]
+and that's it. Um, so here's our QR code for our product. Uh, this is me. We do have another-- If you're interested in the space of multi-agent systems, we have a meetup actually next Thursday in San Francisco, so you can, uh, look at the link here as well. And thank you very much. Happy hacking, everyone. 
+
+00:40:30,546 --> 00:40:41,125 [Speaker 0]
+Thank you, Omri. [clapping] All right, finally, Kalden from Pioneer. Uh, I think, uh, you're last, and then we'll do a couple of announcements and get started with hacking by latest eleven. 
+
+00:41:02,046 --> 00:43:24,778 [Speaker 11]
+All right. Hello, everyone. Uh, thank you for, for waiting. Uh, I'm Kalden. I'm a member of, uh, technical staff at Fastino. Uh, we're a AI lab with local in the Bay Area. Uh, Fastino stands for fast innovation. Um, and what we do is basically, um, like we're trying to find the Pareto frontier of models. And one way we do that is like train our own small LLM model as well as, um, agentic post-training. This is just a, a team of, um, a, a picture of our team at the, the Giants Game. And here are some of the, the publications we have, um, around, uh, training like small models as well as post-training. Um, and actually, uh, uh, we have-- I, I have my colleague here, Uzi, who built like these, this whole like model family. So if you're interested about that, feel free to talk to him. Um, and the other way is like we're trying to scale and automate like our training expertise with an, an agent. And this is just some numbers, uh, of like the agent automatically improving, uh, models on, on a set of benchmarks. Uh, so how it works is like, yeah, the, the auto research style, uh, of like, uh, given production data continuously fine-tuning in, in the background and running experiments. Um, and in a way, we're also like a, a self-evolving, um, offering in that like we, uh, we're an inference provider that automatically improves your model for you. Um, so but this like process kind of like takes time to pay off, obviously. Uh, as like enterprises post market fit, they might have like fixed usage patterns for their like model cost, and that's what-- where, um, as those like workloads come in the train model and then Switch from maybe a frontier model to a smaller model that's actually cheaper and more accurate as well. Uh, what's-- what might be more applicable in this hackathon is actually the, the model router, which is another way we're, um, finding like, you know, model, the later frontier of these models. Um, so with this basically, um, the simplest way you can use it is just to plug it into your, your coding agents, um, or your, your end application. So we, we also have like the library like doc doing, um, and we use like this for our coding internal. Um, just to, to show you as well, like this is our like actual 
+
+00:43:26,538 --> 00:44:47,338 [Speaker 11]
+like in-internal like usage, and you can see like we saved a bunch of money, um, across the models like, like we use. So here in this hackathon, how would you like use us? You basically just sign up on agent.hirer.ai and use this, um, promo code. Um, so just go to like the, the billing page and, and like click Get Pro and I'll fill this in, you'll get it. Um, basically our track is that, um, it's like pretty flexible. Just build whatever you think is, is cool, a compelling application with our inference, solving a real use case. Uh, we have a mix of frontier models and, uh, open source models for you to, to choose. And we're interested in see, uh, how much you can save with like the, the model router as well. Uh, so again, like the simplest way is just use it for your coding agents. And another way to show this is, for example, we have like a, a benchmark, and you can use us and see if you can get a good, uh, accuracy in that benchmark with the lowest cost. So it adds like this like cost dimension to different benchmarks. So yeah, like really, uh, excited to, to see what you guys are gonna build and feel free to get creative with this. Like if you think you can build a better model training agent or self-evolving router than us, uh, feel free to, to do that as well. Yeah, thank you. 
+
+00:44:47,338 --> 00:44:51,298 [Speaker 0]
+[clapping] Thank you. 
+
+00:44:54,678 --> 00:44:57,478 [Speaker 0]
+Just a few more minutes everyone, and we will get started. 
+
+00:47:08,958 --> 00:47:52,598 [Speaker 0]
+Seem to be running into some technical difficulties. 
+
+00:47:55,078 --> 00:48:19,978 [Speaker 0]
+All right, everyone. Uh, sorry for the delay. Uh, just one more sponsor that is Senso. Uh, I want to introduce you to Context OS. Uh, it's a programmable knowledge base for agents with, uh, endpoints to create a self-improving loop to push content on the web, make it discoverable by agents and, you know, continue to improve using the knowledge base. So, uh, we got some incredible, uh, 
+
+00:48:21,378 --> 00:48:31,058 [Speaker 0]
+beyond what we thought, uh, in past hackathons, so I'm excited to see what you build here. docs.senso.ai. Uh, we have a CLI, just give it to your agent and excited to see what you build. 
+
+00:48:32,358 --> 00:48:33,338 [Speaker 0]
+Feel free to take a picture. 
+
+00:48:34,498 --> 00:48:53,698 [Speaker 0]
+docs.senso.ai. Uh, prizes, uh, we'll do two thousand, one thousand, five hundred, um, and each-- everyone gets a hundred dollars in credit for signing up. Uh, so that's, uh, a little bit about us. Uh, give it up for the sponsors. [clapping] 
+
+00:48:56,718 --> 00:49:21,928 [Speaker 0]
+Perfect. Now it's time to build. Uh, this is the moment you guys have been waiting for. Uh, I'm gonna put this up on the screen and leave it up for five minutes. Take a picture. Your project submissions are on Devpost. Discord is where you can ask all the sponsors all the questions you want. Uh, Andy, who is not here, he's around, but ask him questions if you need anything, if you can't get it answered on Discord. And have fun, everyone. Get to hacking and excited to see what you-
