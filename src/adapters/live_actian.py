@@ -82,6 +82,21 @@ class ActianMemory(Degradable):
         except Exception as e:
             self._degrade(f"upsert failed — {type(e).__name__}: {e}")
 
+    def all(self) -> list[Pattern]:
+        """Everything remembered — the mirror is authoritative for display."""
+        return self._fixture.all()
+
+    def reset(self) -> None:
+        """Clean slate between demo runs — available in every mode."""
+        self._fixture.reset()
+        if self.degraded:
+            return
+        try:
+            self._client.collections.delete(self._collection)
+        except Exception:
+            pass  # best-effort; the mirror is already clear
+        self._connect()
+
     # -- internals ---------------------------------------------------------
     def _connect(self) -> None:
         try:
