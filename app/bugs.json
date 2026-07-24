@@ -1,0 +1,144 @@
+{
+  "fixture": "tasker",
+  "version": 1,
+  "note": "Ground truth for FixtureQA and scoring. Not shown during the demo.",
+  "shared_class": "modal-state-not-reset",
+  "shared_class_count": 3,
+  "total": 8,
+  "bugs": [
+    {
+      "id": "BUG-01",
+      "class": "modal-state-not-reset",
+      "severity": "high",
+      "selectors": ["#modal-edit", "#edit-title", "[data-close=\"modal-edit\"]"],
+      "symptom": "Editing a task, cancelling, then opening Edit on a different task shows the first task's abandoned draft. Saving overwrites the second task with the first task's text.",
+      "repro": [
+        "Click Edit on 'Review pull request #412'",
+        "Change the Title field to 'ZZZ'",
+        "Click Cancel",
+        "Click Edit on 'Renew the TLS certificate'",
+        "Observe: Title reads 'ZZZ' instead of 'Renew the TLS certificate'"
+      ],
+      "root_cause": "openEdit() seeds editDraft with `editDraft = editDraft || {...}`, so it is only initialised when null. closeModal() only toggles the .hidden class and never nulls editDraft; only saveEdit() clears it.",
+      "fix_strategy": "reset-modal-owned-state-on-close",
+      "file": "app/app.js",
+      "symbol": "openEdit / closeModal"
+    },
+    {
+      "id": "BUG-02",
+      "class": "modal-state-not-reset",
+      "severity": "medium",
+      "selectors": ["#modal-settings", "#set-confirm", "#set-compact", "#set-name", "[data-close=\"modal-settings\"]"],
+      "symptom": "Discarded settings changes reappear on reopen, so the settings UI disagrees with persisted state.",
+      "repro": [
+        "Click Settings",
+        "Untick 'Ask before deleting a task' and change Display name",
+        "Click Cancel",
+        "Click Settings again",
+        "Observe: the discarded values are shown as though saved"
+      ],
+      "root_cause": "openSettings() seeds settingsDraft with `settingsDraft = settingsDraft || {...}`. The close path never nulls settingsDraft, so the stale draft shadows the real settings object on reopen.",
+      "fix_strategy": "reset-modal-owned-state-on-close",
+      "file": "app/app.js",
+      "symbol": "openSettings / closeModal"
+    },
+    {
+      "id": "BUG-03",
+      "class": "modal-state-not-reset",
+      "severity": "critical",
+      "selectors": ["#modal-confirm", "#confirm-text", "#btn-confirm-delete", "[data-close=\"modal-confirm\"]"],
+      "symptom": "After cancelling one delete confirmation, the next delete confirmation names the previous task and deletes the wrong task on confirm. Data loss.",
+      "repro": [
+        "Click Delete on 'Draft the Q3 release notes'",
+        "Click Cancel",
+        "Click Delete on 'Renew the TLS certificate'",
+        "Observe: dialog reads 'Delete \"Draft the Q3 release notes\"?'",
+        "Click Delete — the wrong task is removed"
+      ],
+      "root_cause": "requestDelete() seeds pendingDelete with `pendingDelete = pendingDelete || {id, title}`. Cancelling closes the dialog without nulling pendingDelete, so the stale target survives into the next confirmation.",
+      "fix_strategy": "reset-modal-owned-state-on-close",
+      "file": "app/app.js",
+      "symbol": "requestDelete / closeModal"
+    },
+    {
+      "id": "BUG-04",
+      "class": "counter-off-by-one",
+      "severity": "low",
+      "selectors": ["#counter"],
+      "symptom": "The remaining-tasks counter is always one lower than the true count, and reads '-1 tasks remaining' when the list is empty.",
+      "repro": [
+        "Observe the counter with 3 incomplete tasks — it reads '2 tasks remaining'",
+        "Complete every task — it reads '-1 tasks remaining'"
+      ],
+      "root_cause": "render() computes `tasks.filter(t => !t.done).length - 1`. The -1 compensated for a pinned 'inbox' row that was removed from the markup; the compensation was left behind.",
+      "fix_strategy": "remove-stale-offset",
+      "file": "app/app.js",
+      "symbol": "render"
+    },
+    {
+      "id": "BUG-05",
+      "class": "filter-state-lost-on-mutation",
+      "severity": "medium",
+      "selectors": [".chip[data-filter]", "#task-list"],
+      "symptom": "Selecting a filter then adding or completing a task silently reverts the list to 'All' while the selected chip stays highlighted.",
+      "repro": [
+        "Click the 'Done' filter chip",
+        "Tick the checkbox on any task",
+        "Observe: all tasks are listed again, but 'Done' still looks selected"
+      ],
+      "root_cause": "addTask() and toggleTask() both assign `activeFilter = 'all'` before render() so the mutated task is guaranteed visible, but neither updates the .is-active chip class. Control and state desync.",
+      "fix_strategy": "preserve-view-state-across-mutation",
+      "file": "app/app.js",
+      "symbol": "addTask / toggleTask"
+    },
+    {
+      "id": "BUG-06",
+      "class": "missing-preventdefault",
+      "severity": "high",
+      "selectors": ["#edit-form", "#edit-title"],
+      "symptom": "Pressing Enter while editing a task title reloads the whole page and silently discards the edit.",
+      "repro": [
+        "Click Edit on any task",
+        "Type in the Title field",
+        "Press Enter",
+        "Observe: full page navigation, edit lost"
+      ],
+      "root_cause": "#edit-form is a real <form> containing exactly one implicit-submission-blocking field and no submit listener, so Enter triggers native GET submission to the same URL. No preventDefault anywhere.",
+      "fix_strategy": "intercept-native-form-submit",
+      "file": "app/index.html",
+      "symbol": "#edit-form"
+    },
+    {
+      "id": "BUG-07",
+      "class": "dead-control",
+      "severity": "medium",
+      "selectors": ["#toast-close", "#toast"],
+      "symptom": "The toast notification's × button does nothing; the toast never dismisses and overlaps the Settings button.",
+      "repro": [
+        "Load the page — the welcome toast appears top-right",
+        "Click the × on the toast",
+        "Observe: nothing happens, ever"
+      ],
+      "root_cause": "init() binds the click listener to $('#toast-dismiss'), an id that does not exist in the markup (the button is #toast-close). The `if (toastX)` guard swallows the miss silently.",
+      "fix_strategy": "bind-handler-to-correct-selector",
+      "file": "app/app.js",
+      "symbol": "init"
+    },
+    {
+      "id": "BUG-08",
+      "class": "missing-input-validation",
+      "severity": "low",
+      "selectors": ["#new-task", "#btn-add"],
+      "symptom": "Whitespace-only input creates blank task rows, repeatable indefinitely.",
+      "repro": [
+        "Type a single space into the new-task input",
+        "Click 'Add task'",
+        "Observe: an empty task row is created and persisted"
+      ],
+      "root_cause": "addTask() guards on `title.length === 0` rather than `title.trim().length === 0`, so whitespace-only input passes validation and is stored verbatim.",
+      "fix_strategy": "trim-and-validate-input",
+      "file": "app/app.js",
+      "symbol": "addTask"
+    }
+  ]
+}

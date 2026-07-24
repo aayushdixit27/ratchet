@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasker — lightweight task tracker</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="toast" class="toast hidden" role="status">
+  <span id="toast-msg">Welcome back.</span>
+  <button id="toast-close" class="toast-x" aria-label="Dismiss notification">&times;</button>
+</div>
+
+<header class="topbar">
+  <h1>Tasker</h1>
+  <button id="btn-settings" class="btn btn-ghost">Settings</button>
+</header>
+
+<main class="wrap">
+
+  <section class="add-row">
+    <input id="new-task" type="text" placeholder="What needs doing?" autocomplete="off" aria-label="New task title">
+    <button id="btn-add" class="btn btn-primary">Add task</button>
+  </section>
+
+  <section class="filters" role="tablist" aria-label="Filter tasks">
+    <button class="chip is-active" data-filter="all" role="tab">All</button>
+    <button class="chip" data-filter="active" role="tab">Active</button>
+    <button class="chip" data-filter="done" role="tab">Done</button>
+    <span id="counter" class="counter">0 tasks remaining</span>
+  </section>
+
+  <ul id="task-list" class="task-list"></ul>
+
+  <p id="empty" class="empty hidden">Nothing here yet.</p>
+
+</main>
+
+<!-- ── Edit task modal ─────────────────────────────────────────── -->
+<div id="modal-edit" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="edit-title-h">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="edit-title-h">Edit task</h2>
+      <button class="modal-x" data-close="modal-edit" aria-label="Close">&times;</button>
+    </div>
+    <form id="edit-form" class="modal-body">
+      <label for="edit-title">Title</label>
+      <input id="edit-title" type="text" autocomplete="off">
+
+      <label for="edit-notes">Notes</label>
+      <textarea id="edit-notes" rows="3"></textarea>
+
+      <label for="edit-priority">Priority</label>
+      <select id="edit-priority">
+        <option value="low">Low</option>
+        <option value="normal">Normal</option>
+        <option value="high">High</option>
+      </select>
+    </form>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close="modal-edit">Cancel</button>
+      <button id="btn-save-edit" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Settings modal ──────────────────────────────────────────── -->
+<div id="modal-settings" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settings-h">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="settings-h">Settings</h2>
+      <button class="modal-x" data-close="modal-settings" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label class="row-check">
+        <input id="set-confirm" type="checkbox"> Ask before deleting a task
+      </label>
+      <label class="row-check">
+        <input id="set-compact" type="checkbox"> Compact list density
+      </label>
+      <label for="set-name">Display name</label>
+      <input id="set-name" type="text" autocomplete="off">
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close="modal-settings">Cancel</button>
+      <button id="btn-save-settings" class="btn btn-primary">Save settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Confirm delete modal ────────────────────────────────────── -->
+<div id="modal-confirm" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-h">
+  <div class="modal-card modal-sm">
+    <div class="modal-head">
+      <h2 id="confirm-h">Delete task</h2>
+      <button class="modal-x" data-close="modal-confirm" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p id="confirm-text">Delete this task?</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close="modal-confirm">Cancel</button>
+      <button id="btn-confirm-delete" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
