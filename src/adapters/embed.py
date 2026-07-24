@@ -114,7 +114,11 @@ _CONCEPTS: dict[str, set[str]] = {
         "recalculate", "recalculated", "memo", "memoised", "memoized", "cached",
         "cache", "invalidate", "invalidated", "invalidation", "computed",
         "snapshot", "sync", "synced", "desync", "upstream", "source", "truth",
-        "render", "rerender", "rendering", "asymmetric", "display", "displays",
+        # NOTE: 'asymmetric' was here briefly — lifted from one bug's root
+        # cause, i.e. instance vocabulary. Ablation showed it load-bearing
+        # nowhere, so it is gone: every word on these axes must describe the
+        # CLASS, or the axes stop being defensible.
+        "render", "rerender", "rendering", "display", "displays",
     },
     "closures": {
         "closure", "closures", "captured", "capture", "captures", "loop",
