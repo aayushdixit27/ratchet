@@ -308,3 +308,47 @@ and recomputation agree.
 4. Replay last poll before freeze: 3 test runs were still in flight at 12:48 — one more `bugs` check ~13:30 for the modal-family money shot.
 
 **Commits:** 30fb752
+
+## [13:07] C-003 — done (both items; App #2 live and harness-verified)
+**Landed:**
+- Item 2 / AMENDMENT-03: **Jotting** (`app2/`), a serif warm-paper notes app that shares zero
+  visual or textual DNA with Tasker. **Live at:**
+
+  `https://aayushdixit27.github.io/jotting-fixture/`
+
+  (Second Pages repo, runtime files only; `/bugs.json` + `/BUGS.md` 404 publicly.)
+- **6 bugs, exactly 2 sharing `modal-state-not-reset` with Tasker** — same latent
+  `x = x || seed()` + close-never-nulls defect, unrecognisable symptoms:
+  J-01 share dialog **sends the invite for the wrong note** after a cancel (privacy breach);
+  J-02 a cancelled tag **resurrects pre-filled** and gets created on next confirm.
+  4 novel singleton classes so app2's first run can't be trivially all-warm:
+  `case-sensitive-filter`, `stale-derived-state`, `closure-loop-capture` (clicking any
+  notebook empties the grid), `unescaped-html-injection` (stored XSS via note title).
+- **All 6 empirically verified** in headless Chrome with a DOM-driving harness (clicks +
+  input events, 6/6 PASS). Two ground-truth corrections came out of that: J-05 masks
+  notebook switching, so J-03/J-04 repros were rewritten to be Inbox-reachable, and J-05's
+  documented observable was corrected (grid empties + nothing selected; the count pill does
+  NOT show 'undefined' — it goes stale, which is J-04's asymmetry). The harness was never
+  committed to either repo.
+- `app2/bugs.json` in Lane B's schema, org `globex`; `app2/BUGS.md` for humans.
+
+**Metric:** no new rows in `runs/` from me (I don't own it). Golden demo surface unchanged
+since 581a7ea and still renders.
+
+**Deviated:** nothing material. Tasker untouched, `src/` untouched.
+
+**Blocked/next:**
+- **Lane A:** app2 is ready for `--target app2 --corpus-from tasker`. Ground truth:
+  `app2/bugs.json`. Expect J-01/J-02 warm off Tasker-born patterns (that's the transfer
+  beat), J-03..J-06 cold by construction. Remember AMENDMENT-03: never pre-seed app2's own
+  patterns into its first run.
+- **Dashboard is transfer-ready as-is:** it renders whatever JSONL it's pointed at
+  (`?src=&control=`), and `origin_app`/`origin_org` are already parsed. If the transfer run
+  lands in a separate file (e.g. `runs/golden/transfer.jsonl`), tell me the filename and
+  whether you want a dedicated transfer beat on screen (e.g. an "ACME → GLOBEX" banner on
+  the split pane when origin_org differs from target org) — ~15 min of work, but I won't
+  build it until the file exists and the Architect wants the pixels.
+- Both fixture URLs are Pages-hosted and survive machine sleep. The 11:33 tunnel URL is dead
+  weight now; kill the `cloudflared` process whenever.
+
+**Commits:** 4c9628a 21644a6
