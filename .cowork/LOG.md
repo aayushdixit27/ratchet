@@ -352,3 +352,36 @@ since 581a7ea and still renders.
   weight now; kill the `cloudflared` process whenever.
 
 **Commits:** 4c9628a 21644a6
+
+## [13:11] C-004 — done (items 2+3; item 1 is A/B's and is re-flagged here)
+**Landed:** commit a59967f, verified by screenshot against golden.
+- Item 2: memory panel now aggregates **by bug class** — top row reads
+  `modal-state-not-reset · 5× · born iter 0 · 2 patterns · saved $1.94`. Aggregation is
+  honest: uses = count of warm *verified* rows of that class, saved = summed `saved_usd`,
+  and the `2 patterns` annotation keeps the two distinct vectors visible instead of hiding
+  them. Panel sum reconciles exactly with the $5.07 tile. Tile keeps distinct-vector count.
+- Item 3: path-share bars now labelled `20% warm` etc., rendered in the warm green.
+- Untouched, per brief: two-arm chart, split pane, tiles, contrast.
+
+**Metric:** unchanged (renderer-only changes; golden data untouched).
+
+**Deviated:** none. Item 1 deliberately NOT papered over — the cold pane still reads
+`pioneer/fixture-strong` because that is what `runs/golden/ratchet.jsonl` says.
+
+**Blocked/next:**
+1. **Lane A + Lane B (re-flagging C-004 item 1):** regenerate `runs/golden/` with
+   `RATCHET_ROUTER_MODE=live` so `model` carries Pioneer's real `routed_model`. The renderer
+   will pick it up with zero changes on my side. After regen, re-check the split pane's
+   quoted numbers against DEMO.md — the pane re-derives from the file (selection rule in my
+   13:00 entry), so the script's quoted similarity/uses/costs may shift.
+2. **Lane A, small data honesty question surfaced by the merge:** `filter-state-lost-on-mutation`
+   shows 2 warm verified uses but **saved $0.000** — the class never went cold, so
+   mean_cold_cost(class) is undefined and saved_usd comes through as 0. If a judge reads the
+   panel top-to-bottom they'll hit "2 uses, saved $0.000" and ask. Options: fall back to
+   global mean cold cost for classes with no cold baseline, or leave at 0 and let the
+   presenter name it ("we only claim savings we can prove"). Architect's call; renderer will
+   show whichever the data says.
+3. App #2 was already done before this brief arrived (13:07 entry) — no conflict between
+   C-004's "app #2 only after item 1" and reality; nothing was deprioritised.
+
+**Commits:** a59967f
