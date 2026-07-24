@@ -243,4 +243,4 @@ spare but is no longer canonical and should not be quoted anywhere.
 3. **Demo op note:** Docker Desktop + vectorai container must be running before the demo; add `docker start vectorai` to the demo runbook cold-start (Lane C/Architect).
 4. Replay deeper journeys: 3 still running — last poll before 13:30 worth doing.
 
-**Commits:** 4bd4643 0b45459
+**Commits:** 636c32c be1963d

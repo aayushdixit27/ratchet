@@ -5,26 +5,33 @@
 
 ---
 
-**0:00 – 0:20 · The frame**
-> "Gartner published this a month ago: by 2028, AI coding costs per developer will exceed that developer's salary. Pioneer makes every call cheaper. We delete the call."
-> "Replay finds the bug and hands us the root cause. That's their job, and they're better at it than anything we'd build in five hours. Ours is the part nobody does: remembering. Watch run one, then watch run five."
+**0:00 – 0:25 · Maya** (no screen yet, just talk)
+> "Maya is the only person on a four-person team who cares about QA. There's no QA hire. She ships an AI-built internal tool most Fridays."
+> "She points Replay at the deploy, gets eight root-caused bugs, pastes them into her coding agent, ships."
+> "Next Friday: eight more. Three are the same *kind* of bug she fixed last week, in different modals, wearing different symptoms. She pays full price to rediscover something she already solved."
+> "And she knows. She's thinking *we've fixed this three times now*. Eventually she writes a lint rule, three sprints late."
+> **"Maya is the ratchet. She's doing it by hand, from memory, on top of her actual job. We automated her instinct, and we verify it."**
 
-**0:20 – 1:10 · Run 1, cold — live**
+**0:25 – 0:35 · The turn**
+> "Every team has a Maya, she's the bottleneck, and Gartner says by 2028 AI coding cost per developer will exceed that developer's salary. Pioneer makes every call cheaper. We delete the call."
+
+**0:35 – 1:15 · Run 1, cold — live**
 Replay's actual bug report on screen. Agent reasons from scratch: 4 LLM calls, transcript scrolling, **$0.42, ~90s**. Let it be slow. The slowness is the setup.
 > "First time it's ever seen this. Full price."
 
-**1:10 – 2:00 · Run 5, warm — same bug class, a different modal**
+**1:15 – 1:55 · Run 5, warm — same bug class, a different modal**
 `MEMORY HIT — pattern #3 · modal-state-not-reset · similarity 0.91 · learned at iteration 1 · used 4×`
 One call. **$0.03, ~8s.** Verified by Replay.
 > "Different modal, different selector, same root cause. It didn't think — it remembered. And Replay just confirmed the fix, so the pattern gets stronger."
 
-**2:00 – 2:30 · The counterfactual — the argument**
-Both arms on one chart. Control flat (or rising). Ratchet bending down.
-> "That flat line is Replay plus a coding agent, used exactly the way you'd use it today. Same bugs, same model, memory switched off. That's not a criticism of Replay — it's their output, and it's our input. The difference between the lines is the entire product."
+**1:55 – 2:25 · The counterfactual — and it gets WORSE**
+Both arms on one chart. Ratchet $0.4258 -> $0.0293. Control climbs to $0.8643.
+> "That top line is Maya's Friday. Replay plus a coding agent, used exactly the way you'd use it today. Same bugs, same model, memory off. Not a criticism of Replay: that's their output, and it's our input."
+> "It doesn't go flat. It goes **up** 66%, because it keeps re-failing on classes it's already seen. There's a published result where vulnerabilities rose 37.6% over five unmemoried iterations. We reproduced it by accident. Looping without memory doesn't plateau, it degrades."
 
-**2:30 – 2:50 · THE CLOSER — cross-org transfer (this is now the money shot)**
+**2:25 – 2:50 · THE CLOSER — cross-org transfer (this is now the money shot)**
 Switch to **app #2 — a notes app, different team, Ratchet has never seen it.** Replay finds a bug. First run, first bug: **MEMORY HIT, $0.03.**
-> "This is a different app from a different team. First run it has ever done. It's already cheap — because a fix verified on the other app transferred. Meta published this working inside Meta. EvoRepair published it inside one repo. Everyone built the private version. The economics only get interesting when my verified fix makes *your* first run cheap."
+> "Different app, different team, first run it has ever done, and it's already cheap: a fix verified on the other app transferred. **This is Maya's fix making someone else's first Friday cheap.** Meta published this working inside Meta. EvoRepair published it inside one repo. Everyone built the private version. The economics only get interesting when my verified fix makes *your* first run cheap."
 
 **2:50 – 2:55 · The asset (fast)**
 Open `cited.md`. A pattern entry, citing Replay as the source, with `uses: 4` and `saved: $3.71`.
