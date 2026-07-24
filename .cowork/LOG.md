@@ -75,3 +75,28 @@ renderer. Treat the join as NOT done until someone runs both.
    those trees should commit them.
 
 **Commits:** cdf59ec 0d916df 6d0a93f
+
+## [11:34] B-001 — partial
+**Landed:** All five adapters exist behind one contract and the loop cannot be crashed by any of them.
+- `src/adapters/base.py` — contract shipped verbatim as briefed (committed 10 min in, Lane A unblocked). Added `Degradable` mixin + `usage()` helper so every router reports cost in one shape.
+- Five deterministic fixtures. `RATCHET_MODE=fixture` (default) = **zero network**. Per-adapter override (`RATCHET_MEMORY_MODE=live`) so we can demo one live integration at a time.
+- Five live adapters written: Pioneer, Actian, Replay, Guild, Senso. Every one try/excepts, degrades to its fixture, sets `degraded: true`, never re-raises.
+- **Verified: `RATCHET_MODE=live` with zero API keys behaves byte-identically to fixture mode.** warm=2 cold=1 over 3 iterations in both. That is the wifi-dies insurance and it is real.
+- `FixtureQA` reads Lane C's `app/bugs.json` (their canonical ground truth), seed only as backstop. `Bug.raw` passes their `fix_strategy`/`severity`/`file`/`symbol` through to Lane A.
+- `.env.example` covers all five sponsors with signup instructions per key.
+
+**Metric:** `runs/` is **empty — no JSONL exists yet.** That is Lane A's tree and my brief emitted no metric, so this is not a miss on my part, but nothing is measuring anything yet as of 11:34. What I can evidence instead, from a real run on Lane C's actual bug data: retrieval separation is same-class **0.78–0.80** vs nearest non-match **0.42**. **Lane A: use threshold 0.60.** Cost per fix on the shared class drops **$0.41 cold → $0.03 warm (13x)**.
+
+**Deviated:**
+1. Brief said `FixtureQA` reads `app/BUGS.md`. It now reads **`app/bugs.json`** instead — Lane C wrote both and explicitly names the JSON as machine-readable ground truth. My markdown parser silently returned 3 garbage rows that passed a naive length check; a lenient parser that yields nonsense is worse than falling back, so it's gone and replaced with a structural sanity gate.
+2. Fixture memory scoring was rewritten to use the **same `embed()`+cosine as the live Actian path**. They scored differently before, which would have meant Lane A's threshold silently meant two different things in fixture vs live — we'd have found out on stage.
+3. Fixture `strong` tier reports `calls: 4` per the brief; the live Pioneer path reports actual calls (1 per `complete()`). **Flagging for Lane A:** call-count is not comparable across modes, cost is. If the demo counts calls, decide which one is truth.
+
+**Blocked/next:**
+1. **ZERO live integrations are actually verified, because there are no API keys on this machine — there is no `.env` at all.** This is the single biggest threat to the Tool Use criterion (judges want 3+ working). Nothing I can do in code fixes it. **Needs a human, now:** sign up and paste keys into `.env` for Pioneer (`agent.pioneer.ai` → Billing → Get Pro → event promo code), Guild (`guild.ai`, 50M free tokens), Senso (`docs.senso.ai`, $100 credit), Replay (ask Brian/Discord). The moment a key lands, that adapter goes live with no code change.
+2. **Actian is the thesis and it is the least live.** `pip install actian-vectorai` — the package is **not on public PyPI** (docs are ahead of release); needs Community Edition from actian.com. Also **Docker daemon is down** on this machine and the server is `docker run -p 6574:6574 vectoraidb`. Two human actions: start Docker Desktop, download Community Edition. Adapter is written and waiting.
+3. **Replay + Senso endpoint paths are unverified guesses.** Their REST references are behind signup; doc time-box blew. All paths/fields are `.env`-overridable and parsers accept multiple spellings, so this is a config fix not a code fix — but someone should grab the real paths from the sponsor Discord channels. Senso *auth* is confirmed (`X-API-Key`, `https://apiv2.senso.ai/api/v1`).
+4. **From Lane C:** public URL for the fixture app. Replay cannot reach localhost. Set it as `RATCHET_TARGET_URL`.
+5. **Free intel for the Architect:** the kickoff transcript settles the submission-portal conflict in MISSION.md — the organiser says **Devpost**, 16:30, and you must explicitly select each sponsor prize. Worth confirming in Discord but the ambiguity is probably resolved.
+
+**Commits:** 87deb31 2ac5d1d 66b4b8c 3f5680d 54fa6ee
