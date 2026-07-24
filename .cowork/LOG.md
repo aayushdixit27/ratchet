@@ -290,3 +290,21 @@ and recomputation agree.
   root) — file:// won't fetch; a local server is required. RUNBOOK.md should say this.
 
 **Commits:** 581a7ea
+
+## [13:04] B-010 — done. FOUR SPONSORS LIVE. Two flags need owners.
+**Landed:**
+- **Pioneer live end-to-end.** `pioneer/auto` as cheap (their router routing for real — resolved to gemini-3.1-flash-lite at $0.000005, occasionally opus-class when it judges the prompt needs it), `gpt-5.5` pinned as strong. **Full `x_pioneer` telemetry captured per call:** `inference_id` (audit trail if a judge asks whether calls were real), `routed_model`, `baseline_model`, `rate_diff_per_mtok`, and `router_saved_usd` computed from THEIR rate data — kept separate from `calls_eliminated_saved_usd` per B-010 §3. Price book built live from `/v1/models` (165 models) so routed-model costing is exact.
+- **Two chart-integrity lessons found by running, now baked into the adapter:** (1) the first budget cap (60 calls) tripped mid-run and stitched fixture prices onto live ones — caps are now dollars-first ($5) and sized to never trip on a planned run; (2) ONE transient failure was permanently degrading the router and fixture-pricing everything after it — now retry-once + per-call fallback, permanent degrade only at 3 consecutive failures.
+- **Clean verified live run: it0 $0.0163 → it4 $0.0007 = 4.3% of baseline, 0/21 records degraded.** The real curve is STEEPER than fixture (6.9%) — real warm calls cost fractions of a cent. Curve declines ✅. **Total real spend: ~$0.21** of $40.
+
+**Metric:** `runs/ratchet.jsonl` fully live-priced (models: gpt-5.5, gemini-3.1-flash-lite, claude-opus-4-7 — all real, all logged).
+
+**Deviated:** nothing from B-010. Fixtures untouched, as ordered.
+
+**Blocked/next — both flags are chart integrity, decide before 15:00 freeze:**
+1. **⚠️ ARCHITECT: the two chart lines are now in different price regimes.** Control arm runs on the FIXTURE router by Lane A's design (its 29 records: `pioneer/fixture-strong`, $0.41/fix — no real money spent there, which is good). But ratchet's line is real-priced. A real-priced no-memory control would be ~$0.016/fix flat, not $0.43: **the current chart overstates the gap ~25x.** The honest claim survives without it — real control $0.016 flat vs ratchet $0.016→$0.0007 is still >20x by it4 and still the only line that bends. Options: (a) Lane A runs control live too (+~$0.35/run, budget fine); (b) label the control line "fixture-priced baseline" on the dashboard; (c) leave and disclose verbally. I strongly recommend (a) — it's one flag and the chart becomes unimpeachable.
+2. **Lane A: JSONL passthrough.** My usage dict now carries `inference_id`, `baseline_model`, `rate_diff_per_mtok`, `router_saved_usd`, `spent_usd_running` — your writer drops unknown keys, so none reach `runs/`. The "Pioneer saved $X, then we deleted the call" stacked-savings beat needs `router_saved_usd` + `inference_id` per record minimum.
+3. **Human: switch Pioneer auto-recharge OFF** (console → Billing). $40 credit covers ~150 full runs at current spend; the card should never be touchable.
+4. Replay last poll before freeze: 3 test runs were still in flight at 12:48 — one more `bugs` check ~13:30 for the modal-family money shot.
+
+**Commits:** 30fb752
