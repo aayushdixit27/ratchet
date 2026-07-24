@@ -130,3 +130,35 @@ spare but is no longer canonical and should not be quoted anywhere.
   DEMO.md quotes "similarity 0.91 · learned at iteration 1 · used 4×" verbatim, and I cannot
   render any of that unless it is in the JSONL. Cheapest possible time to add these is now,
   while the emitter is being written.
+
+## [11:49] A-001 + A-002 + AMD-01/02/03 — partial (loop core DONE & joined; cross-org run blocked on B/C)
+**Landed:**
+- **Loop core green on Lane B's real adapters, zero network, deterministic.** `python -m ratchet.run --iterations 5 --mode fixture` runs end-to-end. Fast loop: scan → signature → memory.search → warm(cheap)/cold(strong) → verify → upsert → publish. Imports only from `src.adapters` (get_qa/get_memory/…); my local fixtures deleted — Lane B's are canonical.
+- **The 12:45 ugly-end-to-end gate was met at ~11:35, an hour early.** JSONL flows to `runs/ratchet.jsonl`; verified the dashboard fetches it (HTTP 200 at `../runs/ratchet.jsonl`) and its own aggregation reproduces the hero line. **Join proven over HTTP.**
+- **Two-arm proof (AMD-02):** `--control`/`--no-memory` runs the no-memory baseline to `runs/control.jsonl` (every record tagged `arm`). Control never improves; Ratchet bends. This is the "isn't this just Replay?" answer.
+- **Curve, not step (A-002 #1):** bugs now ARRIVE OVER TIME — each iteration draws k=4 bugs (seed 1729) from the fixed class distribution, so corpus coverage grows and cost/fix descends across all 5 points. Seed + k reported in the summary; distribution not tuned.
+- **Honest failures (A-002 #2):** fixes can fail Replay verification and retry (max 3), one row per attempt; cost/fix = real cost / real verified fixes. Warm fails rarer (6%) than cold (28%). Nothing is 8/8 perfect anymore.
+- **Every field Lane C asked for (11:40 entry) is now in the JSONL:** `arm`, `saved_usd`, `discovered_by`, `born_at_iteration`, and on warm hits `similarity`, `pattern_id`, `uses`. Plus `origin_app`/`origin_org` (tasker=acme) per AMD-03, `attempt`/`max_attempts`, `degraded`, `root_cause_source`.
+- **`--demo`:** fixture, 5 iters, both arms, offline, <1s. Rehearsed replay for dead-wifi.
+- **evolve() (slow loop) built + verified** — it genuinely rewrites `policy.yaml` (promotes `self_review` → deterministic rule) and writes a clean unified diff to `policy_history/`. **Gated behind `--evolve`, parked** per AMD-01 (curve is wow #1). policy.yaml resets to baseline each run so the diff re-derives live.
+- **Cross-org transfer plumbing:** `--target app2 --corpus-from tasker` keeps Tasker's memory and never pre-seeds app2's own corpus. Verified app2's *first* run warm-hits at $0.03 from transferred patterns (mechanism proven).
+
+**Metric:** `runs/ratchet.jsonl` (real, this round):
+`ratchet: it0 $0.426 → it1 $0.239 → it2 $0.234 → it3 $0.030 → it4 $0.029` (= 6.9% of baseline, curve).
+`control: it0 $0.522 → … → it4 $0.864` (flat-to-worse, never learns). $11+ saved across warm hits. Deterministic across two runs (byte-identical modulo timestamps).
+
+**Deviated:**
+- **`warm_threshold` 0.82 → 0.55.** Probed same-class similarity on the real bug data: 0.62–0.90 same-class, cross-class far below; 0.55 reuses a pattern only for its own class, zero cross-class hits observed. (Lane B suggested 0.60 in their 11:34 entry — within noise; either is safe. Say the word and I'll match 0.60 exactly.)
+- **Router usage keys:** my brief's schema said `llm_calls`/`tokens_in`; Lane B's actual `usage()` returns `calls`/`prompt_tokens`. I mapped to Lane B's real shape and emit BOTH names. Per Lane B's 11:34 flag, cost is comparable across modes, call-count is not — the demo should quote **cost**, not calls.
+- **k=4, seed=1729** chosen for a realistic release size that spreads coverage over all 5 iters. Not seed-shopped; reported in every run summary.
+- Committed other lanes'/Architect's in-flight docs (STATE, DEMO, POSITIONING, briefs A-002/AMD-03, cited.md) because builders own 100% of git writes and they were dangling — content untouched.
+
+**Blocked/next (Architect + lanes):**
+1. **Lane C — dashboard must be SERVED OVER HTTP**, not opened as `file://` (browser blocks `fetch()`). `python3 -m http.server` from repo root; dashboard at `/dashboard/`, data at `/runs/`. Flagging because it's a silent demo-killer.
+2. **Lane C — two-line chart + split pane can be built now:** `runs/control.jsonl` exists with `arm`; warm rows carry `similarity`/`pattern_id`/`uses`; memory panel has `saved_usd`/`born_at_iteration`/`origin_org`. Everything DEMO.md quotes verbatim is in the data.
+3. **Lane C — `app2/bugs.json` needed for AMD-03's closing beat** (notes app, 2 shared modal-class + 4 novel). Until it lands, `--target app2` reuses Tasker's catalogue — transfer mechanism works but symptoms aren't distinct yet.
+4. **Lane B — two asks:** (a) extend `Pattern` with provenance fields (`discovered_by`, `root_cause_source`, `verified_by`, `verified_at`, `verification_count`, `born_at_iteration`, `saved_usd`, `origin_app`, `origin_org`); my code sets them the moment they exist, currently skipped (honest). (b) Serve `app2/bugs.json` as a selectable QA source so `--target app2` gets distinct symptoms.
+5. **Lane A next (me):** route app2 output to its own `runs/app2.jsonl` so the closing beat has separate data; wire the real transfer demo once B/C land; unpark `evolve()` as wow #2 on your call (it's proven, curve is proven twice).
+6. **Architect decision:** live sponsor integrations are still fixture-only (no `.env`/keys per Lane B 11:34). Tool-Use criterion wants 3+ live — that's a human/keys blocker, not code.
+
+**Commits:** 7e66ae9 6d19079 4a3cfb5 9ea27f3 bd36a6d
