@@ -99,24 +99,58 @@ class ActianMemory(Degradable):
             )
         except Exception as e:
             self._degrade(f"actian_vectorai SDK not importable ({e}); "
-                          "install Community Edition to go live")
+                          "pip install actian-vectorai-client")
             return
         self._sdk = {"PointStruct": PointStruct}
+
+        import json as _json
+        import time as _time
         try:
             client = VectorAIClient(self._endpoint)
-            client.health_check()
+            if hasattr(client, "connect"):
+                client.connect()   # the `with` form does this; we hold it open
+            # ENGINE_NOT_INITIALIZED is EXPECTED right after container start
+            # (B-009 gotcha #1) — retry with backoff, only a dead connection
+            # degrades.
+            last = None
+            for attempt in range(6):
+                try:
+                    info = client.health_check()
+                    break
+                except Exception as e:
+                    last = e
+                    if "ENGINE_NOT_INITIALIZED" not in str(e) and attempt >= 1:
+                        raise
+                    _time.sleep(1.5 * (attempt + 1))
+            else:
+                raise last or RuntimeError("health_check never succeeded")
+
+            # Filterable payload fields must be declared at creation time —
+            # dynamic index creation is not implemented server-side (gotcha #2).
+            # This SDK build exposes no first-class param, so we pass the
+            # schema through extra_params_json and fall back to a plain
+            # collection (the loop filters client-side today).
+            schema = _json.dumps({"payload_schema": {
+                "verified": "bool", "bug_class": "keyword", "origin_org": "keyword"}})
             try:
-                client.collections.create(
+                client.collections.get_or_create(
+                    self._collection,
+                    vectors_config=VectorParams(size=DIM, distance=Distance.Cosine),
+                    extra_params_json=schema,
+                )
+            except Exception:
+                client.collections.get_or_create(
                     self._collection,
                     vectors_config=VectorParams(size=DIM, distance=Distance.Cosine),
                 )
-            except Exception:
-                pass  # already exists — the common case on re-runs
             self._client = client
-            self.backend = "actian-live"
+            self.backend = f"actian-live({info.get('version', '?')})"
         except Exception as e:
-            self._degrade(f"cannot reach VectorAI DB at {self._endpoint} "
-                          f"({type(e).__name__}: {e}); is `docker run -p 6574:6574 vectoraidb` up?")
+            self._degrade(
+                f"cannot reach VectorAI DB at {self._endpoint} "
+                f"({type(e).__name__}: {e}); is the actian/vectorai container up? "
+                "docker run -d --name vectorai -p 6573-6575:6573-6575 "
+                "-e ACTIAN_VECTORAI_ACCEPT_EULA=YES actian/vectorai:latest")
 
     @staticmethod
     def _to_pattern(payload: dict) -> Pattern | None:
