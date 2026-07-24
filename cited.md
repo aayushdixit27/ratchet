@@ -8,7 +8,7 @@ Iteration N is cheaper than N-1 because of the rows on this page.
 <!-- pattern:b7a3887a7811 -->
 ## `b7a3887a7811` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.673+00:00 (6× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.943+00:00 (6× re-verified)
 Learned on **tasker** (acme) at iteration 3 · reused **6×**
 
 **Fix strategy:**
@@ -35,7 +35,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.673+00:00",
+  "verified_at": "2026-07-24T21:40:51.943+00:00",
   "verification_count": 6,
   "born_at_iteration": 3,
   "saved_usd": 0.0,
@@ -69,7 +69,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:6c94eae3b140 -->
 ## `6c94eae3b140` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.658+00:00 (5× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.940+00:00 (5× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **5×**
 
 **Fix strategy:**
@@ -96,7 +96,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.658+00:00",
+  "verified_at": "2026-07-24T21:40:51.940+00:00",
   "verification_count": 5,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -108,7 +108,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:4f2912a15908 -->
 ## `4f2912a15908` — counter-off-by-one (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.724+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.956+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **2×**
 
 **Fix strategy:**
@@ -135,7 +135,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.724+00:00",
+  "verified_at": "2026-07-24T21:40:51.956+00:00",
   "verification_count": 2,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -147,7 +147,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:9fa805fa7e62 -->
 ## `9fa805fa7e62` — filter-state-lost-on-mutation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.637+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.936+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **2×**
 
 **Fix strategy:**
@@ -174,7 +174,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.637+00:00",
+  "verified_at": "2026-07-24T21:40:51.936+00:00",
   "verification_count": 2,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -186,7 +186,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:7e406ab2999c -->
 ## `7e406ab2999c` — missing-preventdefault (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.718+00:00 (4× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.954+00:00 (4× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **4×**
 
 **Fix strategy:**
@@ -213,7 +213,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.718+00:00",
+  "verified_at": "2026-07-24T21:40:51.954+00:00",
   "verification_count": 4,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -225,7 +225,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:0dddda0faee2 -->
 ## `0dddda0faee2` — dead-control (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.713+00:00 (3× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.952+00:00 (3× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **3×**
 
 **Fix strategy:**
@@ -252,7 +252,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.713+00:00",
+  "verified_at": "2026-07-24T21:40:51.952+00:00",
   "verification_count": 3,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -264,7 +264,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:a1735b95f51d -->
 ## `a1735b95f51d` — missing-input-validation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:37:31.683+00:00 (3× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T21:40:51.945+00:00 (3× re-verified)
 Learned on **tasker** (acme) at iteration 3 · reused **3×**
 
 **Fix strategy:**
@@ -291,7 +291,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T21:37:31.683+00:00",
+  "verified_at": "2026-07-24T21:40:51.945+00:00",
   "verification_count": 3,
   "born_at_iteration": 3,
   "saved_usd": 0.0,

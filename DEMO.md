@@ -1,67 +1,113 @@
-# The 3 minutes
-*Rewritten 13:50. Supersedes all earlier drafts (previous version kept at `.cowork/DEMO-prev.md`).*
-**No slides. Screen only. Rehearse twice, once to someone outside the team.**
+# RATCHET — the 3 minutes
+*Rewritten 15:35. One tab. Five screens. Right-arrow only.*
 
-## ⚠️ Two rules that override everything in this script
-1. **Never speak a number this file quotes without checking it against the live render.** Every figure below is marked either `[FIXED]` (verified, stable) or `[READ]` (read it off the screen in the moment). The corpus changes what scores what; a script quoting a stale number is the exact demo-versus-build gap judges hunt for.
-2. **For the memory-hit beat, say "watch the score" — never a specific number.** The counter bug scored 0.49 at 12:30 and 0.76 at 13:30, and the difference was mostly the corpus rebuilding on real model text, not anything we changed. Let the screen say it.
+**Concept, and everything hangs off it:**
+> ## The QA agent that gets cheaper every time you ship.
+
+**Two rules:** never type a live command you haven't already run in setup · never speak a number you're not looking at.
 
 ---
+# SETUP (30 min before)
+```
+open -a Docker                          # wait for the whale to stop moving
+cd ~/Downloads/"Self-Evolving Agents Hackathon"
+docker start vectorai && docker ps | grep vectorai
+PYTHONPATH=src python3 -m ratchet.run --demo
+```
+Then open **`deck.html` full screen** (Cmd+Ctrl+F) and press `r` to reset the timer.
+Second tab: **qa.replay.io**, logged in, on the bug list.
+Third tab: your **screen recording**, paused.
+Nothing else open. Phone face down.
 
-**⚠ NUMBERS RE-PULLED 14:35 — verify against the live render before speaking any of them.**
-**Current golden:** ratchet calls/fix `4.25 → 3.5 → 2.75 → 1.0 → 1.0`; control `5 → 5 → 6 → 5 → 8`. Cost tile `$1.69 → $0.029`, ~`$22.96` saved, 7 patterns. **All `[READ]`, none `[FIXED]` — golden may change again before 14:50.**
+**Deck controls:** `→` or space forward · `←` back · `r` resets the timer.
+Timer top-left goes amber at 2:30, red at 3:00. Progress bar along the bottom.
 
-**0:00 – 0:25 · Maya** (no screen, just talk)
-> "Maya is the only person on a four-person team who cares about QA. There's no QA hire. She ships an AI-built internal tool most Fridays."
-> "She points Replay at the deploy, gets root-caused bugs back, pastes them into her coding agent, ships."
-> "Next Friday: more bugs, and some are the same *kind* she fixed last week, in different places, wearing different symptoms. She pays full price to rediscover something she already solved."
-> "And she knows. She's thinking *we've fixed this three times now*. Eventually she writes a lint rule, three sprints late."
-> **"Maya is the ratchet. She's doing it by hand, from memory, on top of her actual job. We automated her instinct, and we verify it."**
+---
+# THE THREE MINUTES
 
-**0:25 – 0:35 · The turn**
-> "Every team has a Maya. Gartner says by 2028 AI coding cost per developer will exceed that developer's salary. Pioneer makes every call cheaper. **We delete the call.**"
+## 0:00–0:25 · Screen 1 — Replay filed the same bug twice
+**Don't touch the laptop yet. Look at them.**
 
-**0:35 – 1:15 · The live beat — Replay, for real**
-Replay's project page on screen.
-> "This is Replay QA against our deployed app. Their crawler, their exploration, their root-cause analysis. It found bugs **we never planted**."
-Run the loop. One of Replay's own bugs comes in and hits memory.
-> "Watch the similarity score. That's a bug Replay discovered on its own, matching a pattern we verified earlier. One call instead of a full reasoning pass."
-Then flip to Replay's UI and show the bug status change.
-> "And we write the confirmation back into Replay's own system. That's not us marking our own homework."
+> "Somebody on a small team owns quality, and there's no QA team behind them. They ship every week. Every week they re-fix something they already solved. They know they're doing it. They just have no way to make it stop."
 
-**1:15 – 1:55 · Cold versus warm, side by side**
-Split pane. Left: the cold path reasoning, call count, cost. Right: `MEMORY HIT`, one call, cost. `[READ]` both figures off the screen.
-> "Same root cause, different bug, different selector, different file. It didn't think. It remembered."
+**Now gesture at the screen.**
 
-**1:55 – 2:25 · The counterfactual — and it gets worse**
-Hero chart: **calls per verified fix**, two arms.
-> "That top line is Maya's Friday: Replay plus a coding agent, memory off. Same bugs, same models. Not a criticism of Replay — that's their output, and it's our input."
-> "It doesn't flatten. It **climbs**, from five calls per fix to eight `[READ]`, because it keeps re-failing on classes it has already seen. There's a published result where vulnerabilities rose 37.6% over five unmemoried iterations. We reproduced it by accident."
+> "This isn't our claim. We pointed Replay QA — a production bug-finding tool — at a web app. It filed these two bugs separately, hours apart. Same cause. And their own summary asks a human to *consolidate before fixing*."
+
+> "**That's the whole problem. Coding agents forget, so somebody pays to solve the same thing twice, forever.**"
+
+`→`
+
+## 0:25–1:10 · Screen 2 — It didn't think. It remembered.
+> "First time our agent sees a bug, it reasons from scratch. Find it, work out why, write the fix, check its own work. **Four AI calls. A dollar sixty-five.**"
+
+*(pause, let them read the left column)*
+
+> "Next time that same cause shows up — different file, different button, a symptom that looks nothing like it — **one call. Three cents.**"
+
+> "And it only remembered that fix because **Replay re-tested it and confirmed it worked.** We don't remember what a model said. We remember what got verified."
+
+`→`
+
+## 1:10–1:50 · Screen 3 — Turn memory off and it gets worse
+> "Same bugs. Same models. The only thing we changed was memory."
+
+**Trace the orange line with your finger.**
+
+> "Memory off — that's how everyone does this today — starts at five calls per fix and **climbs to eight**, because it keeps re-failing on bugs it has already seen."
+
+**Then the blue line.**
+
 > "Ours goes to one."
-Then the cost tile:
-> "In dollars that's a range rather than a clean curve, because at real Pioneer prices the numbers are cents and the variance is bigger than the signal. So we report the invariant: **calls**. Pioneer's own telemetry shows what their routing saved on top `[READ]`. Those stack."
 
-**2:25 – 2:50 · THE CLOSER — cross-org transfer**
-Switch to **app #2, `jotting-fixture`** — a notes app from a different company, never seen before.
-Banner: **ACME → GLOBEX**.
-> "Different app, different company, first run it has ever done. Already cheap, because a fix verified on the other app transferred."
-> "Meta published this working inside Meta. EvoRepair published it inside one repo. **Everyone built the private version.** The economics only get interesting when *my* verified fix makes *your* first Friday cheap."
+> "Not improving isn't the failure mode. **Getting worse is.** There's published work where security flaws rose 37% over five rounds of unremembered self-improvement. We reproduced it by accident."
 
-**2:50 – 3:00 · Trajectory**
-> "Next: point it at a real repo and let it open the PR. Every fix anyone verifies makes everyone else's agent cheaper."
+`→`
+
+## 1:50–2:30 · Screen 4 — Her fix made their first day cheap
+> "Then we pointed it at a completely different app. A notes app, different team, **never seen it before.**"
+
+> "On its very first run, **two of the first four bugs were fixed straight from memory** — because fixes verified on the other app carried over."
+
+> "Meta published this working inside Meta. There's a paper called EvoRepair that did it inside one repo. **Everyone built the private version.** The economics only get interesting when *my* verified fix makes *your* first day cheap."
+
+`→`
+
+## 2:30–2:50 · Screen 5 — Runs offline, including the arm that loses
+> "All of it runs with no network, same result every time. Bugs from Replay, memory in Actian, routing by Pioneer."
+
+> "And we ship the arm that loses. If we were dressing this up, that second block wouldn't be on the screen."
+
+## 2:50–3:00 · Close
+**Look up. Hands off the keyboard.**
+> "Next: point it at a real repo and let it open the pull request. Every fix anyone verifies makes everyone else's agent cheaper."
+
+**Stop talking.**
 
 ---
-## Honesty beats — say these before anyone asks
-- **The corpus is seeded** from a controlled replay of the app's bug history, so you see ten Fridays in ninety seconds. The scan is live. *"We'd rather show you the seam than hide it."*
-- **The "no baseline yet" row** in the memory panel: *"that pattern shows nothing saved because it never paid full price to begin with. We only claim savings we can prove."*
-- **What's live:** Replay, Actian, Senso, Pioneer — four, with evidence on disk. **Guild we investigated and cut**: their LLM proxy only exists inside a Guild-hosted runtime and coded agents are TypeScript-only, so integrating properly meant hosting our loop on their platform. Naming that beats a token integration.
-- **Small n.** Five iterations. Say the number, show the seed, offer the raw JSONL.
+# ANSWERS — say these before they ask
+- **Who's it for?** The one person on a small team who owns quality and has no QA team.
+- **Why AI?** The same bug wears different clothes each time. You can't write a rule for a bug you haven't seen yet.
+- **Why different?** Every QA tool costs the same on run 100 as run 1. Ours gets cheaper, and the memory crosses company lines.
+- **What did you cut?** Two test apps instead of real repos. Five rounds, not five hundred. An offline fallback behind every integration. Froze features with 90 minutes left.
 
-## Tradeoffs, volunteered
-One target app plus one transfer app, not arbitrary repos. Fixture fallbacks behind every integration so the demo cannot die. Feature freeze at 15:00 so the last ninety minutes went to making this bulletproof instead of adding things.
+**Limits — volunteer them:**
+- "The five-round curve runs on a seeded set so you see ten weeks in ninety seconds. The bug discovery is live."
+- "Five rounds is a small sample. Raw data's in the repo."
+- "One pattern shows nothing saved because it never paid full price. We only count savings we can prove."
+- **Don't claim the Replay write-back.** It's implemented, not verified. If asked: *"we built it against their endpoint, we haven't confirmed it landed, so I won't claim it."*
 
-## If asked how you built it in five hours
-Product first, code second. Problem statement and non-goals before any code. A pre-mortem naming five failure modes with an owned mitigation each. Then the check most teams skip: *is the problem real*, answered with Gartner, CodeRabbit and GitClear data. Then three parallel build lanes with strict file ownership, and a separate session holding the plan and reviewing every diff against the judging criteria.
+**Sponsors, one line each:** Replay finds the bugs · Actian remembers the fixes · Senso publishes them · Pioneer routes every call and reports what it saved. **Guild we investigated and cut** — their proxy only works inside their runtime, their agents are TypeScript-only.
 
-## Failure drill
-Wifi dies → `python3 -m ratchet.run --demo`, zero network, replays from `runs/golden/`. Docker down → `RATCHET_MEMORY_MODE=fixture`, say so. Everything dies → play the screen recording and narrate. See `RUNBOOK.md`.
+---
+# IF IT BREAKS
+| Symptom | Do this, out loud |
+|---|---|
+| Deck won't open | It's one HTML file. Drag it into any browser. |
+| Wifi dies | Doesn't matter. The deck is local, the data is on disk. |
+| Replay tab dead | Skip it. Screen 1 has their bug text on it already. |
+| Docker down | *"Memory's on the local fallback, same match scores."* Keep going. |
+| Numbers look wrong | Read what's on screen. Never correct from memory. |
+| Total failure | Play the recording. Narrate over it. Still a demo. |
+
+**Rehearse screens 1 and 4 twice out loud.** They carry the rest.

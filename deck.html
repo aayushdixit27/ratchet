@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Ratchet</title>
+<style>
+:root{
+  --plane:#0d0d0d; --surface:#1a1a19;
+  --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,.10);
+  --blue:#3987e5; --orange:#d95926; --good:#0ca30c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--plane);color:var(--ink);
+  font:400 16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+section{position:absolute;inset:0;display:none;padding:64px 80px 80px;
+  flex-direction:column;justify-content:center;animation:in .16s ease-out}
+section.on{display:flex}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:12px}
+h1{font-size:52px;line-height:1.08;font-weight:650;letter-spacing:-.03em;max-width:20ch;
+  margin-bottom:40px}
+h1 em{font-style:normal;color:var(--blue)}
+h1 u{text-decoration:none;color:var(--orange)}
+
+.chrome{position:fixed;z-index:5;font-size:12px;color:var(--muted);
+  font-weight:700;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+#clk{top:22px;left:32px} #bt{top:22px;right:32px}
+#tag{bottom:22px;left:32px;letter-spacing:.02em;font-weight:400;text-transform:none;font-size:13px}
+.rail{position:fixed;left:0;right:0;bottom:0;height:3px;background:var(--grid);z-index:5}
+.rail i{display:block;height:100%;background:var(--blue);transition:width .18s}
+
+/* cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--surface);border:1px solid var(--hair);
+  border-left:3px solid var(--orange);border-radius:0 12px 12px 0;padding:26px 28px}
+.card .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:12px}
+.card p{font-size:18px;line-height:1.5;color:var(--ink2)}
+.card b{color:var(--ink);font-weight:650}
+.under{margin-top:26px;font-size:22px;text-align:center;color:var(--ink2)}
+.under b{color:var(--ink);font-weight:650}
+.tiny{text-align:center;color:var(--muted);margin-top:10px;font-size:15px}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pane{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:28px 30px;min-height:330px;display:flex;flex-direction:column}
+.pane.a{border-left:3px solid var(--orange)}
+.pane.b{border-left:3px solid var(--good)}
+.pane h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.pane.a h3{color:var(--orange)} .pane.b h3{color:var(--good)}
+.pane .meta{font-size:13px;color:var(--muted);margin:6px 0 22px;font-family:ui-monospace,monospace}
+.row{font-family:ui-monospace,monospace;font-size:14px;color:var(--ink2);
+  padding:10px 13px;border:1px solid var(--hair);border-radius:6px;margin-bottom:8px}
+.hit{font-family:ui-monospace,monospace;font-size:15px;color:var(--good);line-height:1.75;
+  border:1px solid rgba(12,163,12,.35);background:rgba(12,163,12,.07);
+  border-radius:8px;padding:18px 20px}
+.big{font-size:60px;font-weight:650;letter-spacing:-.04em;margin-top:auto;line-height:1}
+.a .big{color:var(--orange)} .b .big{color:var(--good)}
+.foot{font-size:13px;color:var(--muted);margin-top:10px;font-variant-numeric:tabular-nums}
+
+svg{width:100%;height:auto;display:block}
+.gl{stroke:var(--grid);stroke-width:1}
+.ax{fill:var(--muted);font-size:15px;font-weight:500}
+.vl{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:34px;margin-top:20px;font-size:16px;color:var(--ink2)}
+.legend span{display:flex;align-items:center;gap:10px}
+.sw{width:24px;height:3px;border-radius:2px}
+
+.flow{display:flex;align-items:center;gap:34px;justify-content:center;margin-bottom:36px}
+.org{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:24px 40px;text-align:center}
+.org .n{font-size:28px;font-weight:650;letter-spacing:-.01em}
+.org .d{font-size:13px;color:var(--muted);margin-top:6px}
+.arw{font-size:30px;color:var(--blue);text-align:center}
+.arw small{display:block;font-size:11px;letter-spacing:.14em;color:var(--muted);
+  text-transform:uppercase;font-weight:700;margin-top:4px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tile{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:26px 28px}
+.tile .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tile .val{font-size:50px;font-weight:650;letter-spacing:-.04em;margin:12px 0 4px}
+.tile .note{font-size:14px;color:var(--muted)}
+
+pre{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:26px 30px;font:400 14px/1.7 ui-monospace,SFMono-Regular,monospace;color:var(--ink2)}
+pre b{color:var(--blue);font-weight:650}
+pre u{color:var(--orange);text-decoration:none;font-weight:650}
+</style></head><body>
+<div class="chrome" id="clk">0:00</div>
+<div class="chrome" id="bt">1 / 5</div>
+<div class="chrome" id="tag">Ratchet — the QA agent that gets cheaper every time you ship</div>
+
+<!-- 1 -->
+<section class="on">
+  <div class="eyebrow">Replay QA found this. We didn't write it.</div>
+  <h1>Replay filed the <u>same bug twice</u>.</h1>
+  <div class="cards">
+    <div class="card"><div class="lab">bug · high · open</div>
+      <p>"Remaining-tasks counter displays <b>one fewer</b> than actual undone count due to <b>stale −1 adjustment</b>."</p></div>
+    <div class="card"><div class="lab">bug · high · open</div>
+      <p>"Task counter shows incorrect tasks-remaining count due to <b>stale −1 adjustment</b> in render function."</p></div>
+  </div>
+  <div class="under">Their own summary asks a human to <b>"consolidate before fixing."</b></div>
+  <div class="tiny">17 journeys · 6 bugs · none of them planted by us</div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="eyebrow">Same cause. Different file, different button, different symptom.</div>
+  <h1>It didn't think. It <em>remembered</em>.</h1>
+  <div class="split">
+    <div class="pane a"><h3>First time it sees this</h3>
+      <div class="meta">reasons from scratch</div>
+      <div class="row">AI call 1 / 4 · find it</div>
+      <div class="row">AI call 2 / 4 · work out why</div>
+      <div class="row">AI call 3 / 4 · write the fix</div>
+      <div class="row">AI call 4 / 4 · check its own work</div>
+      <div class="big">$1.65</div><div class="foot">4 calls · 3.2 seconds</div></div>
+    <div class="pane b"><h3>Next time, anywhere</h3>
+      <div class="meta">recognises the cause, reuses the fix</div>
+      <div class="hit">SEEN THIS BEFORE<br>same cause · match 0.85<br>fix already verified · used 2×</div>
+      <div class="big">$0.03</div><div class="foot">1 call · 0.8 seconds · re-tested by Replay</div></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="eyebrow">Same bugs. Same models. Only memory changed.</div>
+  <h1>Turn memory off and it gets <u>worse</u>.</h1>
+  <svg viewBox="0 0 1200 380" role="img" aria-label="AI calls per fix by round">
+    <g class="gl"><line x1="70" y1="30" x2="1150" y2="30"/><line x1="70" y1="105" x2="1150" y2="105"/>
+      <line x1="70" y1="180" x2="1150" y2="180"/><line x1="70" y1="255" x2="1150" y2="255"/>
+      <line x1="70" y1="310" x2="1150" y2="310" stroke="#383835"/></g>
+    <g class="ax" text-anchor="end"><text x="56" y="35">8</text><text x="56" y="110">6</text>
+      <text x="56" y="185">4</text><text x="56" y="260">2</text><text x="56" y="315">0</text></g>
+    <g class="ax" text-anchor="middle"><text x="130" y="344">round 1</text><text x="375" y="344">2</text>
+      <text x="620" y="344">3</text><text x="865" y="344">4</text><text x="1110" y="344">5</text></g>
+    <polyline fill="none" stroke="#d95926" stroke-width="3.5" stroke-linejoin="round"
+      points="130,142 375,142 620,105 865,142 1110,30"/>
+    <g fill="#d95926"><circle cx="130" cy="142" r="6"/><circle cx="375" cy="142" r="6"/>
+      <circle cx="620" cy="105" r="6"/><circle cx="865" cy="142" r="6"/><circle cx="1110" cy="30" r="8"/></g>
+    <polyline fill="none" stroke="#3987e5" stroke-width="3.5" stroke-linejoin="round"
+      points="130,170 375,199 620,228 865,273 1110,273"/>
+    <g fill="#3987e5"><circle cx="130" cy="170" r="6"/><circle cx="375" cy="199" r="6"/>
+      <circle cx="620" cy="228" r="6"/><circle cx="865" cy="273" r="6"/><circle cx="1110" cy="273" r="8"/></g>
+    <text class="vl" x="1150" y="24" text-anchor="end" fill="#d95926">8 calls</text>
+    <text class="vl" x="1150" y="298" text-anchor="end" fill="#3987e5">1 call</text>
+    <text class="vl" x="130" y="128" text-anchor="middle" fill="#d95926">5</text>
+    <text class="vl" x="130" y="194" text-anchor="middle" fill="#3987e5">4.25</text>
+  </svg>
+  <div class="legend">
+    <span><i class="sw" style="background:#d95926"></i>memory off — what everyone does today</span>
+    <span><i class="sw" style="background:#3987e5"></i>memory on — Ratchet</span>
+    <span style="color:var(--muted)">AI calls per fix</span>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="eyebrow">A different team's app. Never seen before.</div>
+  <h1>Her fix made <em>their</em> first day cheap.</h1>
+  <div class="flow">
+    <div class="org"><div class="n">Team A</div><div class="d">fixes verified here</div></div>
+    <div class="arw">→<small>memory carries over</small></div>
+    <div class="org" style="border-color:rgba(57,135,229,.45)">
+      <div class="n" style="color:var(--blue)">Team B</div><div class="d">a notes app, never seen</div></div>
+  </div>
+  <div class="tiles">
+    <div class="tile"><div class="lab">On its very first run</div>
+      <div class="val" style="color:var(--good)">2 of 4</div><div class="note">bugs fixed straight from memory</div></div>
+    <div class="tile"><div class="lab">Calls each</div>
+      <div class="val">1</div><div class="note">instead of four</div></div>
+    <div class="tile"><div class="lab">Match strength</div>
+      <div class="val">0.84</div><div class="note">same cause, different app</div></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="eyebrow">No network. Same result every time.</div>
+  <h1>Runs offline — including <u>the arm that loses</u>.</h1>
+  <pre>$ python3 -m ratchet.run --demo
+
+  <b>[memory on ]</b> round 1: 1 of 4 from memory   $1.6943 per fix
+  <b>[memory on ]</b> round 3: 3 of 4 from memory   $0.8546 per fix
+  <b>[memory on ]</b> round 5: 4 of 4 from memory   <b>$0.0293 per fix</b>
+
+  <u>[memory off]</u> round 1: 0 of 4 from memory   $2.1049 per fix
+  <u>[memory off]</u> round 3: 0 of 4 from memory   $2.5200 per fix
+  <u>[memory off]</u> round 5: 0 of 4 from memory   <u>$3.3536 per fix</u>
+
+  seed=1729   bugs from Replay QA   memory in Actian   routing by Pioneer</pre>
+</section>
+
+<div class="rail"><i id="rail" style="width:20%"></i></div>
+<script>
+const s=[...document.querySelectorAll('section')];let i=0,t0=Date.now();
+const go=n=>{i=Math.max(0,Math.min(s.length-1,n));s.forEach((x,k)=>x.classList.toggle('on',k===i));
+  bt.textContent=(i+1)+' / '+s.length;rail.style.width=((i+1)/s.length*100)+'%';};
+addEventListener('keydown',e=>{
+  if(['ArrowRight',' ','PageDown','n'].includes(e.key)){e.preventDefault();go(i+1)}
+  if(['ArrowLeft','PageUp','p'].includes(e.key)){e.preventDefault();go(i-1)}
+  if(e.key==='r'){t0=Date.now()}});
+setInterval(()=>{const v=Math.floor((Date.now()-t0)/1000);
+  clk.textContent=Math.floor(v/60)+':'+String(v%60).padStart(2,'0');
+  clk.style.color=v>180?'#d03b3b':v>150?'#fab219':'#898781';},250);
+</script></body></html>

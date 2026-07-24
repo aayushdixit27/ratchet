@@ -2833,3 +2833,307 @@
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 0, "bug_id": "tasker-it0-d3-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d1-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d2-filter-state-lost-on-mutation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "localize", "output": "element .chip[data-filter]", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "hypothesize", "output": "root cause class filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for filter-state-lost-on-mutation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d0-filter-state-lost-on-mutation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-confirm", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d2-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 2, "bug_id": "tasker-it2-d3-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "localize", "output": "element #modal-edit", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "hypothesize", "output": "root cause class modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d0-modal-state-not-reset", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "localize", "output": "element #new-task", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "hypothesize", "output": "root cause class missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-input-validation", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d1-missing-input-validation", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 3, "bug_id": "tasker-it3-d3-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d0-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "localize", "output": "element #toast-close", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "hypothesize", "output": "root cause class dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "synthesize_patch", "output": "apply fix for dead-control", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d1-dead-control", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "localize", "output": "element #edit-form", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "hypothesize", "output": "root cause class missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d2-missing-preventdefault", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "localize", "output": "element #counter", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one", "model": "pioneer/fixture-strong"}
+{"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found", "model": "pioneer/fixture-strong"}
