@@ -185,3 +185,25 @@ spare but is no longer canonical and should not be quoted anywhere.
 4. `.obsidian/` appeared untracked (someone's editor) — left alone, suggest a gitignore line from whoever owns the root .gitignore.
 
 **Commits:** 66d4d2c 8fdff42 7c7445d 5b0e0d1
+
+## [12:28] B-006 — partial (2 sponsors GENUINELY LIVE, 1 billing-blocked, 1 waiting on human)
+**Landed:**
+- **Step 0 done first:** golden fixture run archived to `runs/golden/` (5d010ba) before any live call. `--demo` insurance is committed and will not be overwritten.
+- **REPLAY: GENUINELY LIVE, evidence on disk.** Project `proj-ratchet-mrzbmsos` explored Lane C's deployed app and found **2 real bugs we never seeded** — a toast z-index occlusion and a WCAG `aria-selected` violation — both approved by Replay's own judge. Raw JSON cached at `src/adapters/seeds/replay_bugs_live.json`. `mark_fixed` write-back **verified round-trip live** (PATCH→fixed, GET confirms, reverted to open so the on-stage flip is still available). `REPLAY_PROJECT_ID` pinned in `.env` — the demo never re-explores. Live-shape parse fixes landed: `analysis` arrives as a `{'chain':[{text}]}` dict, `reproduction_steps` can be null, project id is `id` not `exploration_id` — none of that was in the spec summary; all learned from real responses.
+- **SENSO: GENUINELY LIVE, in the loop.** CLI path (v0.11.1), org "ScoutAI", draft mode. Created geo-question prompts programmatically — **one per bug class** after observing live that a shared question id makes every pattern overwrite one document. Two distinct content_ids on file. Full loop ran with `publisher: senso-live(draft)`: **curve identical, $0.4258 → $0.0293** — B-006's regression gate passes.
+- **PIONEER: blocked at billing, code fully verified.** Key authenticates; `/v1/models` returns the real catalogue; real IDs configured (`LiquidAI/LFM2-24B-A2B` cheap at $0.03/M, `claude-sonnet-5` strong); same-model guard armed. Inference returns **403 `card_required`** — the event promo was never applied. **agent.pioneer.ai/billing → "Get Pro" → promo code, 2 minutes, then `RATCHET_ROUTER_MODE=live` just works.** Mid-run degradation fired exactly as designed when the 403 hit.
+- Guild: cancelled per B-005, untouched.
+
+**Metric:** `runs/ratchet.jsonl` regenerated this round with live publisher: it0 $0.4258 → it4 $0.0293 (6.9% of baseline), warm_share 0.25→1.00. Golden copy preserved separately.
+
+**Deviated:**
+- B-006 step 0 said `git add -A`; I staged `runs/golden` targeted — the tree had other lanes' and editor junk that must not ride along.
+- Senso geo-question: brief said "get one from the dashboard"; I created them via `senso prompts create` instead (faster, and scriptable per class). `SENSO_GEO_QUESTION_ID` in `.env` is now only the fallback.
+
+**Blocked/next:**
+1. **⚠️ ARCHITECT DECISION — QA live would flatten the curve today.** Replay has found 2 live bugs so far; they are singletons (glitches, accessibility) with no shared class, so a live-QA loop run has no warm path and the chart goes flat. Exploration is still running (17 test runs in flight) and may yet surface the seeded modal-state family. Options: (a) demo = live Replay scan beat + fixture curve, stated plainly; (b) wait for exploration to find the modal family, re-check at 13:30; (c) hybrid — live bugs merged with fixture catalogue. I recommend (a) with (b) as upside. **Do not flip `RATCHET_QA_MODE=live` for the demo run without choosing.**
+2. **Pioneer promo code** — the 2-minute human errand above unlocks real cost numbers.
+3. **Actian** — still with Yoshi (Docker daemon down, SDK not on PyPI). Adapter ready.
+4. mark_fixed flip on stage: use `bug-mrzbq4us-w9k6` (toast) — currently `open`, one PATCH away.
+
+**Commits:** 5d010ba 095df42 9c41f77 e56ab88
