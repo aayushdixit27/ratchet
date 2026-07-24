@@ -76,6 +76,30 @@ class PioneerRouter(Degradable):
                           "the warm/cold cost gap would be fabricated; refusing")
         else:
             self.backend = "pioneer-live"
+        # Budget guard (B-010): auto-recharge exists on this account, so a
+        # runaway loop against real inference can charge a card. Hard-cap live
+        # calls per process; past the cap we degrade to fixture, loudly.
+        self._max_calls = int(os.getenv("PIONEER_MAX_CALLS", "400"))
+        self._max_spend = float(os.getenv("PIONEER_MAX_SPEND_USD", "5.0"))
+        self._calls_made = 0
+        self.spent_usd = 0.0
+        self._live_prices: dict[str, tuple[float, float]] = {}
+        if not self.degraded:
+            self._load_prices()
+
+    def _load_prices(self) -> None:
+        """Price book from their live /v1/models — exact cost for whatever
+        model the router resolves to, instead of a stale hand-copied table."""
+        try:
+            body = request_json(f"{self._base}/models",
+                                headers={"Authorization": f"Bearer {self._key}"})
+            for m in body.get("data", []):
+                pin = m.get("input_price_per_million")
+                pout = m.get("output_price_per_million")
+                if m.get("id") and pin is not None and pout is not None:
+                    self._live_prices[m["id"].lower()] = (float(pin), float(pout))
+        except Exception:
+            pass  # static book still covers the common models
 
     def complete(self, prompt: str, tier: Literal["cheap", "strong"]) -> tuple[str, dict]:
         if self.degraded:
@@ -91,15 +115,43 @@ class PioneerRouter(Degradable):
             "stream": False,
             "max_tokens": int(os.getenv("PIONEER_MAX_TOKENS", "1200")),
         }
-        try:
-            body = self._post(payload)
-            return self._parse(body, model, tier)
-        except Exception as e:
-            self._degrade(f"{type(e).__name__}: {e}")
+        # Budget guard. Dollar cap is primary (that's what the card feels);
+        # call cap is the belt-and-braces backstop. Tripping mid-run mixes
+        # fixture and live prices into one curve — a lying chart — so the cap
+        # exists to be high enough to never trip on a planned run, and the
+        # degrade_reason makes any trip impossible to miss in the JSONL.
+        if self.spent_usd >= self._max_spend or self._calls_made >= self._max_calls:
             text, u = self._fixture.complete(prompt, tier)
             u["degraded"] = True
-            u["degrade_reason"] = self.degrade_reason
+            u["degrade_reason"] = (f"budget cap: spent ${self.spent_usd:.4f}/"
+                                   f"{self._max_spend}, calls {self._calls_made}/"
+                                   f"{self._max_calls}")
             return text, u
+        # Transient failures (429s, timeouts on long generations) must cost ONE
+        # call, not the rest of the run: a permanent flip mid-run stitches
+        # fixture prices onto live ones and the curve lies. Observed live at
+        # 12:55 — one it1 failure fixture-priced 3 whole iterations. Retry
+        # once; degrade permanently only after 3 consecutive failures.
+        last_err: Exception | None = None
+        for attempt in range(2):
+            try:
+                body = self._post(payload)
+                self._calls_made += 1
+                self._consec_failures = 0
+                return self._parse(body, model, tier)
+            except Exception as e:
+                last_err = e
+                import time as _t
+                _t.sleep(1.0 * (attempt + 1))
+        self._consec_failures = getattr(self, "_consec_failures", 0) + 1
+        if self._consec_failures >= 3:
+            self._degrade(f"3 consecutive failures, last: "
+                          f"{type(last_err).__name__}: {last_err}")
+        text, u = self._fixture.complete(prompt, tier)
+        u["degraded"] = True
+        u["degrade_reason"] = (f"transient ({self._consec_failures} consec): "
+                               f"{type(last_err).__name__}: {str(last_err)[:160]}")
+        return text, u
 
     # -- internals ---------------------------------------------------------
     def _post(self, payload: dict) -> dict:
@@ -126,28 +178,46 @@ class PioneerRouter(Degradable):
         u = body.get("usage") or {}
         ptok = int(u.get("prompt_tokens") or u.get("input_tokens") or 0)
         ctok = int(u.get("completion_tokens") or u.get("output_tokens") or 0)
-        # The router may serve a different (cheaper) model than we asked for —
-        # report what actually ran, that's the interesting number.
-        served = body.get("model") or requested_model
+
+        # x_pioneer: their router's own telemetry — routed model, the baseline
+        # it avoided, and the rate difference. This is a sponsor's API
+        # validating our cost claim; inference_id is the audit trail.
+        xp = body.get("x_pioneer") or {}
+        savings = xp.get("savings") or {}
+        rate_diff = savings.get("rate_diff_per_mtok") or {}
+        served = (xp.get("routed_model") or body.get("model") or requested_model)
 
         cost = u.get("cost") or u.get("total_cost") or body.get("cost")
         if cost is None:
-            pin, pout = _price_for(served)
+            pin, pout = self._live_prices.get(served.lower()) or _price_for(served)
             cost = (ptok * pin + ctok * pout) / 1_000_000
-            cost_source = "price_book"
+            cost_source = "live_price_book" if served.lower() in self._live_prices else "static_price_book"
         else:
             cost = float(cost)
             cost_source = "api"
+        self.spent_usd += float(cost)
+
+        # Pioneer's saving on THIS call: rate difference × actual tokens.
+        # Kept separate from calls_eliminated_saved_usd (Lane A computes that
+        # from warm hits) — the two savings stack, they don't compete.
+        router_saved_usd = round(
+            (ptok * float(rate_diff.get("input") or 0)
+             + ctok * float(rate_diff.get("output") or 0)) / 1_000_000, 6)
 
         return text, usage(
             calls=1,
             cost_usd=float(cost),
             tier=tier,
-            model=served,
+            model=served,                       # what ACTUALLY ran (B-010 #2)
             prompt_tokens=ptok,
             completion_tokens=ctok,
             backend="pioneer-live",
             requested_model=requested_model,
             routed=served != requested_model,
             cost_source=cost_source,
+            inference_id=xp.get("inference_id"),
+            baseline_model=savings.get("baseline_model"),
+            rate_diff_per_mtok=rate_diff or None,
+            router_saved_usd=router_saved_usd,
+            spent_usd_running=round(self.spent_usd, 6),
         )
