@@ -1,11 +1,24 @@
+# ---- SECRETS — do not remove. .env was accidentally unignored once already. ----
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.json
+
 __pycache__/
 *.pyc
 *.egg-info/
 .ratchet/
 build/
 dist/
+.venv/
+venv/
 
 # junk / OS / git-lock leftovers
 .DS_Store
 **/.DS_Store
 _to_delete/
+notes/raw/*.JPG
+notes/raw/*.PNG
+notes/raw/*.m4a
