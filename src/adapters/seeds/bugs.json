@@ -1,0 +1,103 @@
+{
+  "_comment": "Seed used by FixtureQA when app/BUGS.md (Lane C) is absent or unparseable. 8 bugs; BUG-01/02/03 deliberately share bug_class 'state-not-reset-on-unmount' so memory retention is visible by iteration 3.",
+  "bugs": [
+    {
+      "id": "BUG-01",
+      "title": "Edit Task modal shows the previously edited task's values",
+      "root_cause": "Modal component keeps local form state after unmount; state is initialised once from props and never reset when the dialog is reopened with a different record.",
+      "selector": "#edit-task-modal",
+      "repro": [
+        "Open task 'Buy milk' and click Edit",
+        "Close the modal without saving",
+        "Open task 'Call dentist' and click Edit",
+        "Title field still reads 'Buy milk'"
+      ],
+      "bug_class": "state-not-reset-on-unmount"
+    },
+    {
+      "id": "BUG-02",
+      "title": "Filter drawer keeps stale filter chips after Cancel",
+      "root_cause": "Drawer component keeps local filter state after close; cancelling does not reset the working copy back to the applied filters.",
+      "selector": "#filter-drawer",
+      "repro": [
+        "Open the filter drawer",
+        "Select the 'Urgent' chip",
+        "Click Cancel",
+        "Reopen the drawer — 'Urgent' is still selected"
+      ],
+      "bug_class": "state-not-reset-on-unmount"
+    },
+    {
+      "id": "BUG-03",
+      "title": "Signup wizard step 2 retains input after restarting the flow",
+      "root_cause": "Wizard step component keeps local field state between mounts; restarting the flow remounts the step but the module-level draft object is never cleared.",
+      "selector": "#signup-wizard-step-2",
+      "repro": [
+        "Start signup, fill step 2 with an email",
+        "Abandon the flow and return to the landing page",
+        "Start signup again and advance to step 2",
+        "The old email is pre-filled"
+      ],
+      "bug_class": "state-not-reset-on-unmount"
+    },
+    {
+      "id": "BUG-04",
+      "title": "Deleting a task silently succeeds when the request fails",
+      "root_cause": "Delete handler removes the row optimistically and swallows the rejected fetch promise; no error state is set and no rollback occurs.",
+      "selector": "button[data-action='delete-task']",
+      "repro": [
+        "Throttle the network to offline",
+        "Click Delete on any task",
+        "The row disappears and no error is shown",
+        "Reload — the task is back"
+      ],
+      "bug_class": "unhandled-async-rejection"
+    },
+    {
+      "id": "BUG-05",
+      "title": "Empty task title is accepted and creates an untitled task",
+      "root_cause": "Create form submits without validating the required title field; the submit handler reads the input but never guards on empty string.",
+      "selector": "#new-task-form",
+      "repro": [
+        "Click New Task",
+        "Leave the title blank and press Save",
+        "An empty task row is created"
+      ],
+      "bug_class": "missing-input-validation"
+    },
+    {
+      "id": "BUG-06",
+      "title": "Search input has no accessible name",
+      "root_cause": "Search input relies on placeholder text for its label; there is no associated <label>, aria-label or aria-labelledby, so assistive tech announces it as unlabelled.",
+      "selector": "input[type='search']",
+      "repro": [
+        "Focus the search box with a screen reader active",
+        "The field is announced as 'edit text' with no name"
+      ],
+      "bug_class": "a11y-missing-accessible-name"
+    },
+    {
+      "id": "BUG-07",
+      "title": "Double-clicking Save creates two identical tasks",
+      "root_cause": "Submit handler is not guarded against re-entry; the button stays enabled while the create request is in flight, so two POSTs race.",
+      "selector": "#new-task-form button[type='submit']",
+      "repro": [
+        "Open New Task and enter a title",
+        "Double-click Save quickly",
+        "Two identical tasks appear in the list"
+      ],
+      "bug_class": "double-submit-race"
+    },
+    {
+      "id": "BUG-08",
+      "title": "Settings link in the header returns 404",
+      "root_cause": "Header anchor points at /settings but the route is registered as /app/settings; the link was never updated after the route prefix changed.",
+      "selector": "header a[href='/settings']",
+      "repro": [
+        "Click Settings in the header",
+        "The page renders the 404 view"
+      ],
+      "bug_class": "broken-route-link"
+    }
+  ]
+}
