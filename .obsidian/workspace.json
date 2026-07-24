@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PITCH!!!!!!!!!!!.md",
-                "mode": "source",
+                "file": "DEMO.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PITCH!!!!!!!!!!!"
+              "title": "DEMO"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PITCH!!!!!!!!!!!.md",
+                "file": "DEMO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for PITCH!!!!!!!!!!!"
+              "title": "Backlinks for DEMO"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PITCH!!!!!!!!!!!.md",
+                "file": "DEMO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from PITCH!!!!!!!!!!!"
+              "title": "Outgoing links from DEMO"
             }
           },
           {
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PITCH!!!!!!!!!!!.md",
+                "file": "DEMO.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PITCH!!!!!!!!!!!"
+              "title": "Outline of DEMO"
             }
           }
         ]
@@ -200,20 +200,20 @@
   },
   "active": "8f45a109203685f3",
   "lastOpenFiles": [
+    "runs/router_errors.jsonl",
+    "src/adapters/__pycache__/matrix_check.cpython-313.pyc",
+    "src/adapters/matrix_check.py",
+    "PITCH!!!!!!!!!!!.md",
     "runs/app2.jsonl",
     "runs/candidate/ratchet.jsonl",
     "runs/candidate/control.jsonl",
     "runs/candidate",
     "PRODUCT.md",
-    "PITCH!!!!!!!!!!!.md",
     "runs/golden-fixture/control.jsonl",
     "runs/golden-fixture/ratchet.jsonl",
     "runs/golden-fixture",
     "app2/BUGS.md",
     "app2/bugs.json",
-    "app2/jotting.js",
-    "app2/theme.css",
-    "app2/index.html",
     "RUNBOOK.md",
     "USER-STORY.md",
     "cited.md"

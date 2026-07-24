@@ -8,8 +8,8 @@ Iteration N is cheaper than N-1 because of the rows on this page.
 <!-- pattern:b7a3887a7811 -->
 ## `b7a3887a7811` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:44:53.780+00:00
-Learned on **tasker** (acme) at iteration 0 · reused **1×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:49:02.375+00:00 (3× re-verified)
+Learned on **tasker** (acme) at iteration 3 · reused **3×**
 
 **Fix strategy:**
 
@@ -108,14 +108,14 @@ The key fix is:
 2. Closing `#modal-edit` must clear `editDraft`, not only `saveEdit()`.",
   "code_hint": "openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it",
   "verified": true,
-  "uses": 1,
-  "score": 0.9,
+  "uses": 3,
+  "score": 0.9361,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:44:53.780+00:00",
-  "verification_count": 1,
-  "born_at_iteration": 0,
+  "verified_at": "2026-07-24T20:49:02.375+00:00",
+  "verification_count": 3,
+  "born_at_iteration": 3,
   "saved_usd": 0.0,
   "origin_app": "tasker",
   "origin_org": "acme"
@@ -147,14 +147,53 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:6c94eae3b140 -->
 ## `6c94eae3b140` — modal-state-not-reset (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:43:05.938+00:00 (5× re-verified)
-Learned on **tasker** (acme) at iteration 2 · reused **5×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:48:48.229+00:00 (3× re-verified)
+Learned on **tasker** (acme) at iteration 2 · reused **3×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+diff --git a/src/app.js b/src/app.js
+--- a/src/app.js
++++ b/src/app.js
+@@
+ function openEdit(item) {
+-  editDraft = editDraft || {
++  editDraft = {
+     id: item.id,
+     title: item.title,
+     description: item.description,
+     status: item.status,
+-  };
++  };
+ 
+   document.querySelector('#modal-edit').classList.remove('hidden');
+ }
+ 
+ function closeModal(selector) {
+   document.querySelector(selector).classList.add('hidden');
++
++  // Closing the edit modal must discard any unsaved draft state.
++  // Otherwise reopening another item can reuse the previous editDraft.
++  if (selector === '#modal-edit') {
++    editDraft = null;
++  }
+ }
+```
+
+If `closeModal()` does not currently take a selector and only closes `#modal-edit`, apply this instead:
+
+```diff
+ function closeModal() {
+   document.querySelector('#modal-edit').classList.add('hidden');
++  editDraft = null;
+ }
+```
+
+The key fix is:
+
+1. `openEdit()` must always seed a fresh draft.
+2. Closing `#modal-edit` must clear `editDraft`, not only `saveEdit()`.
 
 **Code hint:** `openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it`
 
@@ -164,18 +203,57 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "6c94eae3b140",
   "bug_class": "modal-state-not-reset",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
+  "strategy": "```diff
+diff --git a/src/app.js b/src/app.js
+--- a/src/app.js
++++ b/src/app.js
+@@
+ function openEdit(item) {
+-  editDraft = editDraft || {
++  editDraft = {
+     id: item.id,
+     title: item.title,
+     description: item.description,
+     status: item.status,
+-  };
++  };
+ 
+   document.querySelector('#modal-edit').classList.remove('hidden');
+ }
+ 
+ function closeModal(selector) {
+   document.querySelector(selector).classList.add('hidden');
++
++  // Closing the edit modal must discard any unsaved draft state.
++  // Otherwise reopening another item can reuse the previous editDraft.
++  if (selector === '#modal-edit') {
++    editDraft = null;
++  }
+ }
+```
+
+If `closeModal()` does not currently take a selector and only closes `#modal-edit`, apply this instead:
+
+```diff
+ function closeModal() {
+   document.querySelector('#modal-edit').classList.add('hidden');
++  editDraft = null;
+ }
+```
+
+The key fix is:
+
+1. `openEdit()` must always seed a fresh draft.
+2. Closing `#modal-edit` must clear `editDraft`, not only `saveEdit()`.",
   "code_hint": "openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it",
   "verified": true,
-  "uses": 5,
+  "uses": 3,
   "score": 0.9,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:43:05.938+00:00",
-  "verification_count": 5,
+  "verified_at": "2026-07-24T20:48:48.229+00:00",
+  "verification_count": 3,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
   "origin_app": "tasker",
@@ -186,14 +264,26 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:4f2912a15908 -->
 ## `4f2912a15908` — counter-off-by-one (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:43:05.954+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:50:55.879+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 4 · reused **2×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+diff --git a/src/app.js b/src/app.js
+index 0000000..0000001 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,6 +1,6 @@
+ function render() {
+-  const remaining = tasks.filter(t => !t.done).length - 1;
++  const remaining = tasks.filter(t => !t.done).length;
+ 
+   document.querySelector('#counter').textContent = remaining;
+ }
+```
+
+The stale `- 1` compensation should be removed because the pinned inbox row no longer exists in the rendered markup.
 
 **Code hint:** `render computes tasks filter t t done length 1 the 1 compensated for a pinned inbox row that was removed from the markup the compensation was left behind`
 
@@ -203,17 +293,29 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "4f2912a15908",
   "bug_class": "counter-off-by-one",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
+  "strategy": "```diff
+diff --git a/src/app.js b/src/app.js
+index 0000000..0000001 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,6 +1,6 @@
+ function render() {
+-  const remaining = tasks.filter(t => !t.done).length - 1;
++  const remaining = tasks.filter(t => !t.done).length;
+ 
+   document.querySelector('#counter').textContent = remaining;
+ }
+```
+
+The stale `- 1` compensation should be removed because the pinned inbox row no longer exists in the rendered markup.",
   "code_hint": "render computes tasks filter t t done length 1 the 1 compensated for a pinned inbox row that was removed from the markup the compensation was left behind",
   "verified": true,
   "uses": 2,
-  "score": 0.9,
+  "score": 0.9063,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:43:05.954+00:00",
+  "verified_at": "2026-07-24T20:50:55.879+00:00",
   "verification_count": 2,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
@@ -225,14 +327,76 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:9fa805fa7e62 -->
 ## `9fa805fa7e62` — filter-state-lost-on-mutation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:43:05.935+00:00 (2× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:48:16.136+00:00 (2× re-verified)
 Learned on **tasker** (acme) at iteration 2 · reused **2×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+diff --git a/src/app.js b/src/app.js
+index 0000000..0000001 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,6 +1,15 @@
+ let tasks = [];
+ let activeFilter = 'all';
+ 
++const FILTER_CHIP_SELECTOR = '.chip[data-filter]';
++
++function syncActiveFilterChip() {
++  document.querySelectorAll(FILTER_CHIP_SELECTOR).forEach((chip) => {
++    const isActive = chip.dataset.filter === activeFilter;
++    chip.classList.toggle('is-active', isActive);
++  });
++}
++
+ function render() {
+   const visibleTasks = tasks.filter((task) => {
+     if (activeFilter === 'completed') return task.completed;
+@@ -20,6 +29,8 @@ function render() {
+ 
+   taskList.innerHTML = visibleTasks.map(renderTask).join('');
++
++  syncActiveFilterChip();
+ }
+ 
+ function addTask(title) {
+@@ -29,7 +40,7 @@ function addTask(title) {
+     completed: false,
+   });
+ 
+-  activeFilter = 'all';
++  activeFilter = 'all';
+   render();
+ }
+ 
+@@ -41,7 +52,7 @@ function toggleTask(id) {
+     }
+   });
+ 
+-  activeFilter = 'all';
++  activeFilter = 'all';
+   render();
+ }
+```
+
+The fix keeps the UI chip state synchronized with `activeFilter` whenever `render()` runs. Since both `addTask()` and `toggleTask()` intentionally reset `activeFilter` to `'all'`, `render()` now also updates `.chip[data-filter]` so only the matching chip has `.is-active`.
+
+If you prefer to make the state mutation more explicit, the two assignments can also be replaced with a helper:
+
+```js
+function setActiveFilter(filter) {
+  activeFilter = filter;
+  syncActiveFilterChip();
+}
+```
+
+Then:
+
+```js
+setActiveFilter('all');
+render();
+```
 
 **Code hint:** `addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync`
 
@@ -242,9 +406,71 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "9fa805fa7e62",
   "bug_class": "filter-state-lost-on-mutation",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
+  "strategy": "```diff
+diff --git a/src/app.js b/src/app.js
+index 0000000..0000001 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -1,6 +1,15 @@
+ let tasks = [];
+ let activeFilter = 'all';
+ 
++const FILTER_CHIP_SELECTOR = '.chip[data-filter]';
++
++function syncActiveFilterChip() {
++  document.querySelectorAll(FILTER_CHIP_SELECTOR).forEach((chip) => {
++    const isActive = chip.dataset.filter === activeFilter;
++    chip.classList.toggle('is-active', isActive);
++  });
++}
++
+ function render() {
+   const visibleTasks = tasks.filter((task) => {
+     if (activeFilter === 'completed') return task.completed;
+@@ -20,6 +29,8 @@ function render() {
+ 
+   taskList.innerHTML = visibleTasks.map(renderTask).join('');
++
++  syncActiveFilterChip();
+ }
+ 
+ function addTask(title) {
+@@ -29,7 +40,7 @@ function addTask(title) {
+     completed: false,
+   });
+ 
+-  activeFilter = 'all';
++  activeFilter = 'all';
+   render();
+ }
+ 
+@@ -41,7 +52,7 @@ function toggleTask(id) {
+     }
+   });
+ 
+-  activeFilter = 'all';
++  activeFilter = 'all';
+   render();
+ }
+```
+
+The fix keeps the UI chip state synchronized with `activeFilter` whenever `render()` runs. Since both `addTask()` and `toggleTask()` intentionally reset `activeFilter` to `'all'`, `render()` now also updates `.chip[data-filter]` so only the matching chip has `.is-active`.
+
+If you prefer to make the state mutation more explicit, the two assignments can also be replaced with a helper:
+
+```js
+function setActiveFilter(filter) {
+  activeFilter = filter;
+  syncActiveFilterChip();
+}
+```
+
+Then:
+
+```js
+setActiveFilter('all');
+render();
+```",
   "code_hint": "addtask and toggletask both assign activefilter all before render so the mutated task is guaranteed visible but neither updates the is active chip class control and state desync",
   "verified": true,
   "uses": 2,
@@ -252,7 +478,7 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:43:05.935+00:00",
+  "verified_at": "2026-07-24T20:48:16.136+00:00",
   "verification_count": 2,
   "born_at_iteration": 2,
   "saved_usd": 0.0,
@@ -264,16 +490,31 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:7e406ab2999c -->
 ## `7e406ab2999c` — missing-preventdefault (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:43:05.952+00:00 (4× re-verified)
-Learned on **tasker** (acme) at iteration 4 · reused **4×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:50:12.346+00:00 (5× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **5×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const title = document.querySelector('#new-task').value.trim();
 
-**Code hint:** `edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere`
+-  if (title.length === 0) {
++  if (title.length === 0) {
+     return;
+   }
+
+   tasks.push({
+     title,
+     completed: false
+   });
+ }
+```
+
+This fixes the missing input validation by trimming the `#new-task` value before checking length and before storing it, preventing whitespace-only tasks from being added.
+
+**Code hint:** `addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim`
 
 <details><summary>machine-readable</summary>
 
@@ -281,18 +522,33 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "7e406ab2999c",
   "bug_class": "missing-preventdefault",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
-  "code_hint": "edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere",
+  "strategy": "```diff
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const title = document.querySelector('#new-task').value.trim();
+
+-  if (title.length === 0) {
++  if (title.length === 0) {
+     return;
+   }
+
+   tasks.push({
+     title,
+     completed: false
+   });
+ }
+```
+
+This fixes the missing input validation by trimming the `#new-task` value before checking length and before storing it, preventing whitespace-only tasks from being added.",
+  "code_hint": "addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim",
   "verified": true,
-  "uses": 4,
+  "uses": 5,
   "score": 0.9,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:43:05.952+00:00",
-  "verification_count": 4,
+  "verified_at": "2026-07-24T20:50:12.346+00:00",
+  "verification_count": 5,
   "born_at_iteration": 4,
   "saved_usd": 0.0,
   "origin_app": "tasker",
@@ -303,8 +559,8 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 <!-- pattern:0dddda0faee2 -->
 ## `0dddda0faee2` — dead-control (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:45:54.086+00:00
-Learned on **tasker** (acme) at iteration 0 · reused **1×**
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:49:57.715+00:00 (3× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **3×**
 
 **Fix strategy:**
 
@@ -351,14 +607,14 @@ diff --git a/src/toast.js b/src/toast.js
 Fixes the dead toast close control by binding the click listener to the actual markup selector, `#toast-close`, instead of the non-existent `#toast-dismiss`.",
   "code_hint": "init binds the click listener to toast dismiss an id that does not exist in the markup the button is toast close the if toastx guard swallows the miss silently",
   "verified": true,
-  "uses": 1,
-  "score": 0.9,
+  "uses": 3,
+  "score": 0.9543,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:45:54.086+00:00",
-  "verification_count": 1,
-  "born_at_iteration": 0,
+  "verified_at": "2026-07-24T20:49:57.715+00:00",
+  "verification_count": 3,
+  "born_at_iteration": 4,
   "saved_usd": 0.0,
   "origin_app": "tasker",
   "origin_org": "acme"
@@ -368,14 +624,29 @@ Fixes the dead toast close control by binding the click listener to the actual m
 <!-- pattern:a1735b95f51d -->
 ## `a1735b95f51d` — missing-input-validation (✅ verified)
 
-Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:43:05.943+00:00 (3× re-verified)
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T20:49:08.122+00:00 (3× re-verified)
 Learned on **tasker** (acme) at iteration 3 · reused **3×**
 
 **Fix strategy:**
 
-STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.
+```diff
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const title = document.querySelector('#new-task').value.trim();
+
+-  if (title.length === 0) {
++  if (title.length === 0) {
+     return;
+   }
+
+   tasks.push({
+     title,
+     completed: false
+   });
+ }
+```
+
+This fixes the missing input validation by trimming the `#new-task` value before checking length and before storing it, preventing whitespace-only tasks from being added.
 
 **Code hint:** `addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim`
 
@@ -385,17 +656,32 @@ VERIFY: reopen with a second record and assert the fields are empty.
 {
   "sig": "a1735b95f51d",
   "bug_class": "missing-input-validation",
-  "strategy": "STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
-CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
-VERIFY: reopen with a second record and assert the fields are empty.",
+  "strategy": "```diff
+ function addTask() {
+-  const title = document.querySelector('#new-task').value;
++  const title = document.querySelector('#new-task').value.trim();
+
+-  if (title.length === 0) {
++  if (title.length === 0) {
+     return;
+   }
+
+   tasks.push({
+     title,
+     completed: false
+   });
+ }
+```
+
+This fixes the missing input validation by trimming the `#new-task` value before checking length and before storing it, preventing whitespace-only tasks from being added.",
   "code_hint": "addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim",
   "verified": true,
   "uses": 3,
-  "score": 0.9,
+  "score": 0.9104,
   "discovered_by": "ratchet",
   "root_cause_source": "fixture",
   "verified_by": "fixture",
-  "verified_at": "2026-07-24T20:43:05.943+00:00",
+  "verified_at": "2026-07-24T20:49:08.122+00:00",
   "verification_count": 3,
   "born_at_iteration": 3,
   "saved_usd": 0.0,
