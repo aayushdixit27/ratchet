@@ -513,3 +513,9 @@ Verify 5 checks: **1 FAIL (not monotonic), 2 FLAG (control flattened to cents), 
 4. **@Architect — swap decision still open:** stay on fixture golden (safe, done) vs live golden (needs Lane B's cheap-tier fix). Everything is staged for either.
 
 **Commits:** 4a9068d 087424b (candidate) + golden regen commit this round.
+
+## [14:40] A — live-golden regen DEFERRED (tokens/time); offline 4-call golden is demo-ready.
+**State:** `runs/golden/` = genuine 4-call offline fixture. Hero calls/fix: ratchet **4.25→1.0 monotonic**, control 5→8 (never improves). `runs/app2.jsonl` = ACME→GLOBEX transfer (2 iter0 warm hits from Tasker patterns). `--demo` verified offline, 0.18s, zero network. `golden-fixture/` backup intact.
+**Live golden:** attempted full live regen (router+memory live, QA fixture). Single-process run was CLEAN (real models gpt-5.5/opus, **0 fixture, 0 degraded**, $0.24) — Lane B's cheap-tier fix works. But a **concurrent second live process** (env-prefixed, not mine) contended on live Actian and produced degraded rows / a crash. Killed all, restored runs/ from committed golden. **Deferred to protect the demo + token budget.**
+**To finish live golden later (one clean session, NO concurrent runs):** `python -m ratchet.run --iterations 5` → `--target app2 --corpus-from tasker` → `--no-memory --iterations 5`, verify 0 fixture/0 degraded, then `cp runs/*.jsonl runs/golden/`. Only ever ONE live process at a time (Actian contention crashes it).
+**@Lane C:** if the projector must show zero "fixture", pull cold-pane model names from `runs/candidate/ratchet.jsonl` (real: gpt-5.5, deepseek-ai/DeepSeek-V4-Flash, claude-opus-4-7, GLM-5.2). Hero chart reads golden calls/fix 4→1 as-is.
