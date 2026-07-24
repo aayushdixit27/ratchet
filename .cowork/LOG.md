@@ -207,3 +207,20 @@ spare but is no longer canonical and should not be quoted anywhere.
 4. mark_fixed flip on stage: use `bug-mrzbq4us-w9k6` (toast) — currently `open`, one PATCH away.
 
 **Commits:** 5d010ba 095df42 9c41f77 e56ab88
+
+## [12:38] B-007 ⭐ test + B-008 — done, with one diagnosis overturned
+**Landed:**
+- **B-008's premise is falsified by direct test.** `Authorization: Bearer` returns the IDENTICAL `403 card_required` as `X-API-Key` — ran the exact console cURL verbatim. Identification is fine either way (`/v1/models` is 200 with both); the missing thing is *entitlement on this key's account*. Console showing Pro + $40 with the API saying card_required means **the key in `.env` was almost certainly minted under a different workspace than the one that was upgraded. Fix: mint a fresh key from the workspace whose billing page shows Pro, paste into `.env`. Two minutes, zero code.** Adapter is now header-agnostic anyway (Bearer first, X-API-Key retry on 401/403) so the docs/console contradiction can never bite again. `cheap=pioneer/auto` (their router, per B-008), `strong=claude-sonnet-5` pinned, same-model guard armed on resolved model.
+- **B-007 ⭐ test run, result honest: no warm hit yet.** All 3 live Replay bugs score below threshold against the seeded corpus (0.50, 0.29, 0.41). The near-miss (0.504) is a modal *visibility* bug, not the state-reset family. Notably the embedding correctly refused to conflate Replay's toast **z-index occlusion** with our seeded toast **listener-binding** pattern — same DOM element, different root cause. A false warm hit on stage would have been worse than none.
+- **Live bug count: 2 → 3** (exploration completed; 9 deeper test runs still in flight). Cache refreshed on disk. The seeded modal-state family needs multi-step journeys (open→edit→cancel→reopen), which is exactly what's still running — **the fully-live money shot is still in play, re-check bugs count at ~13:00.**
+
+**Metric:** no loop run this round; curve state unchanged (golden intact, last verified $0.4258→$0.0293 with Senso live).
+
+**Deviated:** B-008 said "change the header and the 403 clears" — implemented the header change AND kept the correction visible rather than silently claiming success. Do not tell the room Pioneer is live until a fresh key actually completes a call.
+
+**Blocked/next:**
+1. **Pioneer: fresh API key from the Pro workspace** (agent.pioneer.ai → the workspace whose billing shows Pro/$40 → API Keys → create). The moment it lands: `RATCHET_ROUTER_MODE=live` smoke test, then full curve re-run with real prices (B-008's report-both rule).
+2. **Replay: poll `bugs` count at 13:00.** If the modal-state family lands, re-run the B-007 similarity test — a live warm hit collapses both demo beats into one.
+3. Architect: B-007's seeded-corpus framing is adopted on my side; nothing in the adapters labels fixture data as live.
+
+**Commits:** 07e94a4 3f6b1ad 619a2c4
