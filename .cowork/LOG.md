@@ -100,3 +100,33 @@ renderer. Treat the join as NOT done until someone runs both.
 5. **Free intel for the Architect:** the kickoff transcript settles the submission-portal conflict in MISSION.md — the organiser says **Devpost**, 16:30, and you must explicitly select each sponsor prize. Worth confirming in Discord but the ambiguity is probably resolved.
 
 **Commits:** 87deb31 2ac5d1d 66b4b8c 3f5680d 54fa6ee
+
+## [11:40] C-001 — URL correction, hosting risk closed
+**Landed:** GitHub Pages came up after an explicit rebuild request (`POST /pages/builds`) —
+the legacy build had wedged. **The canonical public URL is now:**
+
+  `https://aayushdixit27.github.io/tasker-fixture/`
+
+Verified 200 on `/`, `/app.js`, `/styles.css`; renders correctly; and `/BUGS.md` + `/bugs.json`
+both 404, so the answer key is not reachable by anything crawling the app.
+
+**This supersedes the trycloudflare URL in my 11:33 entry — use the Pages one everywhere**
+(submission copy, Lane B's Replay adapter target, DEMO.md). The tunnel is still up as a hot
+spare but is no longer canonical and should not be quoted anywhere.
+
+**Metric:** `runs/` still empty. Nothing has changed on the join since 11:33.
+
+**Deviated:** none.
+
+**Blocked/next:**
+- Hosting decision from my last entry is **closed** — no Architect input needed. Pages is stable
+  and survives my machine sleeping, which the tunnel did not.
+- AMENDMENT-02 read and understood; **not applied**, per its own gate and Yoshi's instruction —
+  it waits until the 12:45 end-to-end join is green. Flagging early so Lane A/B can emit the
+  fields while they're already in that code: the post-gate Lane C work needs `arm`
+  (`"control"`|`"ratchet"`) for the two-line chart, `saved_usd` + `discovered_by` +
+  `born_at_iteration` for the memory panel, and for the split pane at DEMO.md 1:10–2:00 I need
+  the **similarity score and pattern id on warm hits** (`similarity`, `pattern_id`, `uses`) —
+  DEMO.md quotes "similarity 0.91 · learned at iteration 1 · used 4×" verbatim, and I cannot
+  render any of that unless it is in the JSONL. Cheapest possible time to add these is now,
+  while the emitter is being written.
