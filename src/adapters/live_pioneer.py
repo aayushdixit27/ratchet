@@ -130,10 +130,16 @@ class PioneerRouter(Degradable):
         # Transient failures (429s, timeouts on long generations) must cost ONE
         # call, not the rest of the run: a permanent flip mid-run stitches
         # fixture prices onto live ones and the curve lies. Observed live at
-        # 12:55 — one it1 failure fixture-priced 3 whole iterations. Retry
-        # once; degrade permanently only after 3 consecutive failures.
+        # 12:55 — one it1 failure fixture-priced 3 whole iterations. Degrade
+        # permanently only after 3 consecutive failures.
+        #
+        # 13:5x run: 2/15 warm rows still went fixture with 2 attempts and a
+        # 20s socket timeout — pioneer/auto sometimes routes the warm prompt
+        # to opus-class models, and a slow 1200-token generation can outlive
+        # 20s twice. So: 4 attempts, exponential backoff, and a per-call
+        # timeout long enough for a slow frontier generation.
         last_err: Exception | None = None
-        for attempt in range(2):
+        for attempt in range(4):
             try:
                 body = self._post(payload)
                 self._calls_made += 1
@@ -142,16 +148,38 @@ class PioneerRouter(Degradable):
             except Exception as e:
                 last_err = e
                 import time as _t
-                _t.sleep(1.0 * (attempt + 1))
+                _t.sleep(1.0 * 2 ** attempt)   # 1, 2, 4, 8s
         self._consec_failures = getattr(self, "_consec_failures", 0) + 1
         if self._consec_failures >= 3:
             self._degrade(f"3 consecutive failures, last: "
                           f"{type(last_err).__name__}: {last_err}")
+        self._log_router_error(tier, model, last_err)
         text, u = self._fixture.complete(prompt, tier)
         u["degraded"] = True
+        u["requested_model"] = model
         u["degrade_reason"] = (f"transient ({self._consec_failures} consec): "
                                f"{type(last_err).__name__}: {str(last_err)[:160]}")
         return text, u
+
+    def _log_router_error(self, tier: str, model: str, err: Exception | None) -> None:
+        """Every fixture fallback appends WHY to runs/router_errors.jsonl.
+        The run JSONL drops the usage-dict degrade_reason today, so without
+        this line a fixture-priced row is undiagnosable after the fact."""
+        try:
+            import datetime
+            import json as _json
+            import pathlib
+            path = pathlib.Path(__file__).resolve().parents[2] / "runs" / "router_errors.jsonl"
+            with open(path, "a") as f:
+                f.write(_json.dumps({
+                    "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    "tier": tier,
+                    "requested_model": model,
+                    "consec_failures": self._consec_failures,
+                    "error": f"{type(err).__name__}: {str(err)[:300]}" if err else None,
+                }) + "\n")
+        except Exception:
+            pass  # diagnostics must never take down the call path
 
     # -- internals ---------------------------------------------------------
     def _post(self, payload: dict) -> dict:
@@ -160,13 +188,18 @@ class PioneerRouter(Degradable):
         401/403 retry once with the other header before giving up."""
         from .http import HttpError
         url = f"{self._base}/chat/completions"
+        # Inference outlives the 20s default when auto routes to an opus-class
+        # model: give completions their own generous ceiling.
+        timeout = float(os.getenv("PIONEER_TIMEOUT", "75"))
         try:
             return request_json(url, method="POST", payload=payload,
+                                timeout=timeout,
                                 headers={"Authorization": f"Bearer {self._key}"})
         except HttpError as e:
             if e.status not in (401, 403):
                 raise
             return request_json(url, method="POST", payload=payload,
+                                timeout=timeout,
                                 headers={"X-API-Key": self._key})
 
     def _parse(self, body: dict, requested_model: str, tier: str) -> tuple[str, dict]:
