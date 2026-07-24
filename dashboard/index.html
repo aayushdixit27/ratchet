@@ -263,7 +263,13 @@
   'use strict';
 
   var params = new URLSearchParams(location.search);
-  var GOLDEN = params.get('golden') === '1';
+  // DEFAULT IS GOLDEN. --demo and every normal run write to runs/*.jsonl, so
+  // tailing those live would let the wifi-dies fallback overwrite the
+  // projector mid-demo. runs/golden/ is written only by a deliberate archive
+  // step — the display is immune to anything anyone runs. ?live=1 opts back
+  // into tailing runs/ (for development), ?src=/&control=&transfer= override.
+  var LIVE   = params.get('live') === '1';
+  var GOLDEN = !LIVE;
   var BASE   = GOLDEN ? '../runs/golden/' : '../runs/';
   var SRC     = params.get('src')     || BASE + 'ratchet.jsonl';
   var CONTROL = params.get('control') || BASE + 'control.jsonl';
