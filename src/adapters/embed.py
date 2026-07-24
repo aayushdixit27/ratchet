@@ -34,6 +34,10 @@ _STOP = {
 
 
 def _tokens(text: str) -> set[str]:
+    # NOTE: deliberately NOT splitting camelCase identifiers. Tried at 13:12 —
+    # identifiers name the LOCATION (modal, note, button), not the MECHANISM,
+    # and splitting them floods location vocabulary into every vector, blurring
+    # exactly the class boundaries the axes exist to hold apart.
     words = re.findall(r"[a-z0-9]+", text.lower())
     return {w for w in words if w not in _STOP and len(w) > 2}
 
@@ -93,6 +97,37 @@ _CONCEPTS: dict[str, set[str]] = {
         "count", "counter", "counts", "off", "one", "index", "length", "filter",
         "compensated", "arithmetic", "minus", "remaining", "total", "sum",
     },
+    # Added 13:10 after app2 landed: its novel bug classes (case-sensitive
+    # matching, stale derived values, closure-over-loop-variable, HTML
+    # injection) had no axes of their own, so their vectors collapsed onto the
+    # state/filter axes and false-hit the tasker corpus at 0.63-0.74. Giving
+    # each real vocabulary an axis is what keeps 'unseen bug class' and 'seen
+    # bug class in new clothes' distinguishable — the entire transfer claim.
+    "casing": {
+        "case", "cases", "casing", "sensitive", "insensitive", "lowercase",
+        "uppercase", "tolowercase", "touppercase", "normalise", "normalize",
+        "normalized", "exact", "comparison", "compare", "match", "matches",
+        "matching", "equality",
+    },
+    "derived_state": {
+        "derived", "derive", "derives", "recompute", "recomputed", "recomputes",
+        "recalculate", "recalculated", "memo", "memoised", "memoized", "cached",
+        "cache", "invalidate", "invalidated", "invalidation", "computed",
+        "snapshot", "sync", "synced", "desync", "upstream", "source", "truth",
+        "render", "rerender", "rendering", "asymmetric", "display", "displays",
+    },
+    "closures": {
+        "closure", "closures", "captured", "capture", "captures", "loop",
+        "loops", "iteration", "variable", "binding", "bindings", "scope",
+        "scoped", "hoisted", "hoisting", "var", "let", "callback", "callbacks",
+        "reference", "references", "shared", "final",
+    },
+    "injection": {
+        "escape", "escaped", "escaping", "unescaped", "sanitise", "sanitize",
+        "sanitised", "sanitized", "innerhtml", "html", "injection", "inject",
+        "injected", "xss", "markup", "interpreted", "rendered", "raw",
+        "textcontent", "entity", "entities", "script",
+    },
 }
 
 # Small enough to keep Actian's index tiny and fast, big enough that hash
@@ -115,7 +150,9 @@ def embed(text: str) -> list[float]:
     if not toks:
         return vec
 
-    # explicit concept axes
+    # explicit concept axes. (An axis cap was tried at 13:14 to curb
+    # single-axis dominance — it compressed every margin into a 0.55-0.60 band
+    # and made things worse. Sub-linear growth is enough.)
     for name, vocab in _CONCEPTS.items():
         hits = len(toks & vocab)
         if hits:
