@@ -428,3 +428,18 @@ Verify 5 checks: **1 FAIL (not monotonic), 2 FLAG (control flattened to cents), 
    - My read: (a) is the safest demo; the "fixture" string on the projector is fixable by Lane C relabeling the cold-pane model to the real routed name from candidate data without reshaping the curve. But the pricing-regime tradeoff is a positioning call and it's yours. Nothing swaps until you say which.
 
 **Commits:** a424bbf 087424b
+
+## [13:24] ALL-012 Lane B — decision 2 answered with data; footgun killed
+**Q1 — does Tasker separation hold?** **YES.** Recomputed (not asserted): mates **0.7644 / 0.7733 / 0.7733**, max non-mate **0.4314** (was 0.796/0.777/0.790 vs 0.417 at 11:57). Compression ≤0.03, same regime, every decision identical at the 0.55 bar.
+
+**Q2 — what vocabulary, class or instance?** Four new axes — casing, derived_state, closures, injection — all generic class vocabularies (e.g. casing = lowercase/insensitive/normalize...). ONE word was dirty: `asymmetric`, lifted from J-04's own root cause. Ablation showed it load-bearing **nowhere** (counter bug: zero effect; J-04: ±0.03, no decision flip), so it is **deleted** (commit d1c72a4). The axes are now 100% class-level and each one is defensible aloud.
+**The bigger honest finding: I over-attributed the 0.49→0.76 jump in my 13:14 entry.** Controlled re-test on a fixed corpus: my embed changes move the counter bug only **0.34→0.39**. The bulk of the jump came from the **corpus text changing** — the 13:00 live run rebuilt patterns from real gpt-5.5 strategy prose (rich in render/count/display terms) instead of canned fixture text. The retrieval is still real and still correct-class; but it was corpus + embed, not embed alone, and I said otherwise. Corrected here.
+**Consequence for the demo:** the 0.7608 is **corpus-dependent**. Whatever corpus the final golden run builds, Lane A must re-score `bug-mrzceiuz-wr97` against it and include the live-warm-hit beat ONLY if it actually clears the bar on that corpus. Do not script "0.76" — script "watch the score."
+
+**Q3 — was 0.75 chosen on principle or after seeing 0.76?** Timeline from git: same-app 0.55 was derived from tasker margins at 11:57 (before ANY live data existed). Cross-app 0.75 was derived at 13:14 from the app2 margins (transfer mates 0.842/0.846 vs worst false 0.566) — margin-split, ~0.09 clearance each side. **Both are empirically calibrated; neither was adjusted after a demo moment appeared.** Crucially: the counter bug is a SAME-app hit, gated by 0.55 with a 0.21 margin — the 0.75 threshold never touches it. "One hundredth under a hit" dissolves once the two regimes are kept straight; happy to say exactly that to a judge.
+
+**Verdict: no revert needed** — one word deleted, one attribution corrected, everything else survives scrutiny. If the Architect still wants the 0.49-cold honesty beat instead, revert cefc725+d1c72a4 and app2's false-hit protection then rests solely on the 0.75 cross-app threshold (its pre-embed false hits were 0.63–0.74 — margin to 0.75 gets thin at 0.006). My recommendation stands: keep the embed.
+
+**Task 2 — cheap tier "wired to strong only": misdiagnosis, real footgun found and killed.** The offending JSONL was a plain fixture-mode run made WITHOUT `source .env` — cold rows were fixture-strong too, degraded:false throughout. Env loading was manual; the adapter factory now auto-loads repo-root `.env` (stdlib, explicit env wins). Verified from a sterile shell: cheap=**gemini-3.1-flash-lite $0.000005**, memory=actian-live, publisher=senso-live(draft). **Lane A: re-run the candidate; no `fixture` string can now appear unless `.env` itself says fixture.**
+
+**Commits:** 96385b9 124f11a
