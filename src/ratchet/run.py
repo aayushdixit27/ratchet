@@ -309,6 +309,15 @@ def run_arm(
                     "discovered_by": arm, "root_cause_source": source,
                     "born_at_iteration": it, "corpus_from": corpus_from,
                 }
+                # Pioneer router telemetry passthrough (present only in live router
+                # mode). `model` already carries the routed model; also surface it as
+                # routed_model and pass the audit/savings fields the dashboard wants.
+                if usage.get("model") and "fixture" not in str(usage.get("model")):
+                    record["routed_model"] = usage.get("model")
+                for _k in ("requested_model", "baseline_model", "rate_diff_per_mtok",
+                           "router_saved_usd", "inference_id", "spent_usd_running"):
+                    if usage.get(_k) is not None:
+                        record[_k] = usage[_k]
                 _append_jsonl(jsonl_path, record)
 
             if verified:

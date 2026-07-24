@@ -215,6 +215,9 @@ class PioneerRouter(Degradable):
             requested_model=requested_model,
             routed=served != requested_model,
             cost_source=cost_source,
+            # A-003 names these fields verbatim — keep both spellings so Lane A
+            # reads them without guessing ('model' stays the canonical one).
+            routed_model=served,
             inference_id=xp.get("inference_id"),
             baseline_model=savings.get("baseline_model"),
             rate_diff_per_mtok=rate_diff or None,

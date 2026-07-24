@@ -20,7 +20,8 @@ Replay's actual bug report on screen. Agent reasons from scratch: 4 LLM calls, t
 > "First time it's ever seen this. Full price."
 
 **1:15 – 1:55 · Run 5, warm — same bug class, a different modal**
-`MEMORY HIT — pattern #3 · modal-state-not-reset · similarity 0.91 · learned at iteration 1 · used 4×`
+`MEMORY HIT — pattern b7a3887a7811 · modal-state-not-reset · similarity 0.86 · used 2×`
+**⚠ Render these from the JSONL. Do not hardcode.** Real values as of 12:50 are `similarity: 0.8565`, `pattern_id: b7a3887a7811`, `uses: 2`. The 0.91 in an earlier draft of this file was a placeholder I invented before the data existed; if a number on screen doesn't match `runs/golden/ratchet.jsonl`, that is the exact kind of gap judges are told to hunt for.
 One call. **$0.03, ~8s.** Verified by Replay.
 > "Different modal, different selector, same root cause. It didn't think — it remembered. And Replay just confirmed the fix, so the pattern gets stronger."
 
