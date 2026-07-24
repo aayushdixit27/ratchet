@@ -162,3 +162,26 @@ spare but is no longer canonical and should not be quoted anywhere.
 6. **Architect decision:** live sponsor integrations are still fixture-only (no `.env`/keys per Lane B 11:34). Tool-Use criterion wants 3+ live — that's a human/keys blocker, not code.
 
 **Commits:** 7e66ae9 6d19079 4a3cfb5 9ea27f3 bd36a6d
+
+## [12:01] B-002 + AMD-02/03 (Lane B parts) — done
+**Landed:**
+- **Replay rewritten against the real spec** (qa.replay.io, Bearer `lqa_`, project-scoped async flow, field mapping per B-002 — `root_cause <- analysis`, padded with expected/actual when thin, selector never invented). Polling budgeted ~3min then degrades; the loop can never block on Replay.
+- **⭐ `QA.mark_fixed(bug, ok)` on the protocol** — writes our verdict back INTO Replay (PATCH fixed/reopened). `verify()` reads Replay's own status; `reopened` → False so Lane A can demote pattern confidence. Fixture mode: local ledger, un-record supported. Reverse-proxy fallback wired (`REPLAY_USE_REVERSE_PROXY=true`).
+- **Pioneer per real docs:** auth fixed to `X-API-Key`; invented model defaults deleted — cheap/strong must come from a real `/v1/models` listing (curl one-liner in `.env.example`). **If cheap == strong the adapter refuses to go live** — that misconfig fabricates the warm/cold gap, the one lying-chart risk. `PIONEER_ADAPTIVE` flagged as an unverified guess: verify at agent.pioneer.ai/routers or ask Kelton before claiming adaptive routing on stage.
+- **`Pattern` extended** with all AMD-02/03 provenance fields (discovered_by, root_cause_source, verified_by, verified_at, verification_count, born_at_iteration, saved_usd, origin_app, origin_org) — all defaulted + appended, so Lane A's existing construction and persisted `.ratchet` state load unchanged (tested both). ReplayQA stamps `raw.provenance="replay-qa"` so Lane A copies, never guesses.
+- **`get_qa('app2')` / `RATCHET_TARGET_APP=app2`** selects `app2/bugs.json` with a per-app patch ledger (no bleed between apps). Falls back to seed until Lane C lands the file.
+- **`cited.md` now human-legible** (AMD-02): provenance + economics as prose ("has saved $1.17 in avoided reasoning"), JSON folded into `<details>`. Actian round-trips the full dataclass so provenance survives the live DB.
+
+**Metric:** `runs/ratchet.jsonl` fresh at 11:48 (Lane A's round): it0 $0.418 cold → it4 $0.030 warm, sim 0.62 on last row. My changes are upstream of the numbers; nothing in this round regenerated runs/.
+
+**Deviated:**
+- B-002 says `Bug.bug_class <- ours, derived`. Live Replay bugs currently get `bug_class = polish_category or "unclassified"` (prior kept in raw as specified). True derivation belongs to Lane A's signature module, which already keys on root_cause — flag if you want the field left strictly "unclassified" for live bugs.
+- Restored `cited.md` after my test transiently deleted Lane A's committed copy (caught in handoff review, `git checkout` restored — zero content lost).
+
+**Blocked/next:**
+1. **Keys, still.** Everything above is written and tested in degraded mode; ZERO live calls have been made. Replay needs an `lqa_` token, Pioneer needs a key + two real model IDs from `/v1/models`, Senso needs a key, Guild needs a key, Actian needs Docker Desktop started + Community Edition download. Every one is a human errand; every one is a no-code-change flip.
+2. **From Lane C:** `app2/bugs.json` (AMD-03) — my selector is wired and waiting; currently falls back to seed so `--target app2` has non-distinct symptoms. Also still need the public URL for `RATCHET_TARGET_URL`.
+3. **For Lane A:** `reopened` → pattern-confidence demotion is plumbed on my side (verify returns False, status in raw); wiring the demotion into memory scoring is yours if there's time.
+4. `.obsidian/` appeared untracked (someone's editor) — left alone, suggest a gitignore line from whoever owns the root .gitignore.
+
+**Commits:** 66d4d2c 8fdff42 7c7445d 5b0e0d1
