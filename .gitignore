@@ -4,3 +4,8 @@ __pycache__/
 .ratchet/
 build/
 dist/
+
+# junk / OS / git-lock leftovers
+.DS_Store
+**/.DS_Store
+_to_delete/
