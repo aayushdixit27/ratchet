@@ -6,13 +6,20 @@ Iteration N is cheaper than N-1 because of the rows on this page.
 <!-- machine-readable: each pattern is one `## sig` block with a JSON payload -->
 
 <!-- pattern:b7a3887a7811 -->
-## `b7a3887a7811` — modal-state-not-reset
+## `b7a3887a7811` — modal-state-not-reset (✅ verified)
 
-**Verified:** yes · **Reused:** 6x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:14.025+00:00 (6× re-verified)
+Learned on **tasker** (acme) at iteration 3 · reused **6×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -24,9 +31,19 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it",
   "verified": true,
   "uses": 6,
-  "score": 0.9024
+  "score": 0.9024,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:14.025+00:00",
+  "verification_count": 6,
+  "born_at_iteration": 3,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:4594936c757c -->
 ## `4594936c757c` — modal-state-not-reset
 
@@ -50,13 +67,20 @@ VERIFY: reopen with a second record and assert the fields are empty.",
 }
 ```
 <!-- pattern:6c94eae3b140 -->
-## `6c94eae3b140` — modal-state-not-reset
+## `6c94eae3b140` — modal-state-not-reset (✅ verified)
 
-**Verified:** yes · **Reused:** 5x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:13.271+00:00 (5× re-verified)
+Learned on **tasker** (acme) at iteration 2 · reused **5×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -68,17 +92,34 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "openedit seeds editdraft with editdraft editdraft so it is only initialised when null closemodal only toggles the hidden class and never nulls editdraft only saveedit clears it",
   "verified": true,
   "uses": 5,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:13.271+00:00",
+  "verification_count": 5,
+  "born_at_iteration": 2,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:4f2912a15908 -->
-## `4f2912a15908` — counter-off-by-one
+## `4f2912a15908` — counter-off-by-one (✅ verified)
 
-**Verified:** yes · **Reused:** 2x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:16.609+00:00 (2× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **2×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `render computes tasks filter t t done length 1 the 1 compensated for a pinned inbox row that was removed from the markup the compensation was left behind`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -90,17 +131,34 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "render computes tasks filter t t done length 1 the 1 compensated for a pinned inbox row that was removed from the markup the compensation was left behind",
   "verified": true,
   "uses": 2,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:16.609+00:00",
+  "verification_count": 2,
+  "born_at_iteration": 4,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:9fa805fa7e62 -->
-## `9fa805fa7e62` — filter-state-lost-on-mutation
+## `9fa805fa7e62` — filter-state-lost-on-mutation (✅ verified)
 
-**Verified:** yes · **Reused:** 2x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:12.243+00:00 (2× re-verified)
+Learned on **tasker** (acme) at iteration 2 · reused **2×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `init binds the click listener to toast dismiss an id that does not exist in the markup the button is toast close the if toastx guard swallows the miss silently`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -112,17 +170,34 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "init binds the click listener to toast dismiss an id that does not exist in the markup the button is toast close the if toastx guard swallows the miss silently",
   "verified": true,
   "uses": 2,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:12.243+00:00",
+  "verification_count": 2,
+  "born_at_iteration": 2,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:7e406ab2999c -->
-## `7e406ab2999c` — missing-preventdefault
+## `7e406ab2999c` — missing-preventdefault (✅ verified)
 
-**Verified:** yes · **Reused:** 4x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:16.238+00:00 (4× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **4×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -134,17 +209,34 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "edit form is a real form containing exactly one implicit submission blocking field and no submit listener so enter triggers native get submission to the same url no preventdefault anywhere",
   "verified": true,
   "uses": 4,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:16.238+00:00",
+  "verification_count": 4,
+  "born_at_iteration": 4,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:0dddda0faee2 -->
-## `0dddda0faee2` — dead-control
+## `0dddda0faee2` — dead-control (✅ verified)
 
-**Verified:** yes · **Reused:** 3x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:15.873+00:00 (3× re-verified)
+Learned on **tasker** (acme) at iteration 4 · reused **3×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `init binds the click listener to toast dismiss an id that does not exist in the markup the button is toast close the if toastx guard swallows the miss silently`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -156,17 +248,34 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "init binds the click listener to toast dismiss an id that does not exist in the markup the button is toast close the if toastx guard swallows the miss silently",
   "verified": true,
   "uses": 3,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:15.873+00:00",
+  "verification_count": 3,
+  "born_at_iteration": 4,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
 <!-- pattern:a1735b95f51d -->
-## `a1735b95f51d` — missing-input-validation
+## `a1735b95f51d` — missing-input-validation (✅ verified)
 
-**Verified:** yes · **Reused:** 3x
+Discovered by **ratchet** · root cause from **fixture** · fix verified by **fixture** at 2026-07-24T19:22:14.398+00:00 (3× re-verified)
+Learned on **tasker** (acme) at iteration 3 · reused **3×**
+
+**Fix strategy:**
 
 STRATEGY: Reset the component's local state on every open rather than initialising it once. Derive the form values from the record passed in, key the component on the record id so a different record forces a fresh mount, and clear any module-level draft object in the close handler.
 CODE_HINT: key={record.id} on the dialog; useEffect(() => setForm(initial), [record.id]); onClose(() => draft.clear())
 VERIFY: reopen with a second record and assert the fields are empty.
+
+**Code hint:** `addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim`
+
+<details><summary>machine-readable</summary>
 
 ```json
 {
@@ -178,6 +287,85 @@ VERIFY: reopen with a second record and assert the fields are empty.",
   "code_hint": "addtask guards on title length 0 rather than title trim length 0 so whitespace only input passes validation and is stored verbatim",
   "verified": true,
   "uses": 3,
-  "score": 0.9
+  "score": 0.9,
+  "discovered_by": "ratchet",
+  "root_cause_source": "fixture",
+  "verified_by": "fixture",
+  "verified_at": "2026-07-24T19:22:14.398+00:00",
+  "verification_count": 3,
+  "born_at_iteration": 3,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
 }
 ```
+</details>
+<!-- pattern:sig-live-smoke -->
+## `sig-live-smoke` — modal-state-not-reset (✅ verified)
+
+Discovered by **replay-qa** · root cause from **replay-qa** · fix verified by **replay-qa** at 2026-07-24T12:20:00Z
+Learned on **tasker** (acme) at iteration 0 · reused **1×**
+
+**Fix strategy:**
+
+Reset modal scratch state in the dismiss handler so open() always seeds fresh.
+
+**Code hint:** `closeModal(): editDraft = null`
+
+<details><summary>machine-readable</summary>
+
+```json
+{
+  "sig": "sig-live-smoke",
+  "bug_class": "modal-state-not-reset",
+  "strategy": "Reset modal scratch state in the dismiss handler so open() always seeds fresh.",
+  "code_hint": "closeModal(): editDraft = null",
+  "verified": true,
+  "uses": 1,
+  "score": 0.88,
+  "discovered_by": "replay-qa",
+  "root_cause_source": "replay-qa",
+  "verified_by": "replay-qa",
+  "verified_at": "2026-07-24T12:20:00Z",
+  "verification_count": 0,
+  "born_at_iteration": 0,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
+}
+```
+</details>
+
+<!-- pattern:sig-toast-occlusion -->
+## `sig-toast-occlusion` — glitches (✅ verified)
+
+Discovered by **replay-qa** · root cause from **replay-qa** · fix verified by **replay-qa** at 2026-07-24T12:26:00Z
+Learned on **tasker** (acme) at iteration 0 · reused **0×**
+
+**Fix strategy:**
+
+Lower the toast z-index below interactive chrome, or auto-dismiss after timeout; never let passive notifications intercept clicks.
+
+<details><summary>machine-readable</summary>
+
+```json
+{
+  "sig": "sig-toast-occlusion",
+  "bug_class": "glitches",
+  "strategy": "Lower the toast z-index below interactive chrome, or auto-dismiss after timeout; never let passive notifications intercept clicks.",
+  "code_hint": null,
+  "verified": true,
+  "uses": 0,
+  "score": 0.9,
+  "discovered_by": "replay-qa",
+  "root_cause_source": "replay-qa",
+  "verified_by": "replay-qa",
+  "verified_at": "2026-07-24T12:26:00Z",
+  "verification_count": 0,
+  "born_at_iteration": 0,
+  "saved_usd": 0.0,
+  "origin_app": "tasker",
+  "origin_org": "acme"
+}
+```
+</details>

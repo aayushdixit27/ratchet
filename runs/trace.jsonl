@@ -1698,3 +1698,67 @@
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
 {"iteration": 4, "bug_id": "tasker-it4-d3-counter-off-by-one", "arm": "control", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "localize", "output": "element #modal-edit"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "hypothesize", "output": "root cause class modal-state-not-reset"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for modal-state-not-reset"}
+{"iteration": 0, "bug_id": "tasker-it0-d0-modal-state-not-reset", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "localize", "output": "element #toast-close"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "hypothesize", "output": "root cause class dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for dead-control"}
+{"iteration": 0, "bug_id": "tasker-it0-d1-dead-control", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "localize", "output": "element #new-task"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-input-validation"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-input-validation"}
+{"iteration": 0, "bug_id": "tasker-it0-d2-missing-input-validation", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "localize", "output": "element #edit-form"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "hypothesize", "output": "root cause class missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for missing-preventdefault"}
+{"iteration": 1, "bug_id": "tasker-it1-d3-missing-preventdefault", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "localize", "output": "element #counter"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "hypothesize", "output": "root cause class counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "synthesize_patch", "output": "apply fix for counter-off-by-one"}
+{"iteration": 2, "bug_id": "tasker-it2-d1-counter-off-by-one", "arm": "ratchet", "step": "self_review", "output": "approve no issues found"}
